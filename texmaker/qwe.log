@@ -1,0 +1,373 @@
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.9.19)  23 SEP 2014 11:57
+entering extended mode
+**qwe.tex
+(C:\Users\epauned\Documents\GitHub\masterthesis\texmaker\qwe.tex
+LaTeX2e <2011/06/27>
+Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, ar
+abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
+croatian, czech, danish, dutch, esperanto, estonian, farsi, finnish, french, ga
+lician, german, german-x-2013-05-26, greek, gujarati, hindi, hungarian, iceland
+ic, indonesian, interlingua, irish, italian, kannada, kurmanji, latin, latvian,
+ lithuanian, malayalam, marathi, mongolian, mongolianlmc, monogreek, ngerman, n
+german-x-2013-05-26, nynorsk, oriya, panjabi, pinyin, polish, portuguese, roman
+ian, russian, sanskrit, serbian, slovak, slovenian, spanish, swedish, swissgerm
+an, tamil, telugu, turkish, turkmen, ukenglish, ukrainian, uppersorbian, usengl
+ishmax, welsh, loaded.
+(C:\Users\epauned\Documents\GitHub\masterthesis\texmaker\idamasterthesis.cls
+Document Class: idamasterthesis 2011/04/19 LaTeX idamasterthesis class
+(C:\Users\epauned\Documents\GitHub\masterthesis\texmaker\idathesis.cls
+Document Class: idathesis 2005/11/10 LaTeX idathesis class
+("C:\Program Files (x86)\MikTex\tex\latex\base\inputenc.sty"
+Package: inputenc 2008/03/30 v1.1d Input encoding file
+\inpenc@prehook=\toks14
+\inpenc@posthook=\toks15
+
+("C:\Program Files (x86)\MikTex\tex\latex\base\latin1.def"
+File: latin1.def 2008/03/30 v1.1d Input encoding file
+))
+(C:\Users\epauned\Documents\GitHub\masterthesis\texmaker\chngpage.sty
+Package: chngpage 2003/08/10 v1.2 change page layout
+\c@cp@cnt=\count79
+\c@cp@tempcnt=\count80
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\fancyhdr\fancyhdr.sty"
+\fancy@headwidth=\skip41
+\f@ncyO@elh=\skip42
+\f@ncyO@erh=\skip43
+\f@ncyO@olh=\skip44
+\f@ncyO@orh=\skip45
+\f@ncyO@elf=\skip46
+\f@ncyO@erf=\skip47
+\f@ncyO@olf=\skip48
+\f@ncyO@orf=\skip49
+)
+("C:\Program Files (x86)\MikTex\tex\generic\babel\babel.sty"
+Package: babel 2008/07/08 v3.8m The Babel package
+
+*************************************
+* Local config file bblopts.cfg used
+*
+("C:\Program Files (x86)\MikTex\tex\latex\00miktex\bblopts.cfg"
+File: bblopts.cfg 2006/07/31 v1.0 MiKTeX 'babel' configuration
+)
+("C:\Program Files (x86)\MikTex\tex\generic\babel\english.ldf"
+Language: english 2005/03/30 v3.3o English support from the babel system
+
+("C:\Program Files (x86)\MikTex\tex\generic\babel\babel.def"
+File: babel.def 2008/07/08 v3.8m Babel common definitions
+\babel@savecnt=\count81
+\U@D=\dimen102
+)
+\l@canadian = a dialect from \language\l@american 
+\l@australian = a dialect from \language\l@british 
+\l@newzealand = a dialect from \language\l@british 
+))
+("C:\Program Files (x86)\MikTex\tex\latex\graphics\graphicx.sty"
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+
+("C:\Program Files (x86)\MikTex\tex\latex\graphics\keyval.sty"
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks16
+)
+("C:\Program Files (x86)\MikTex\tex\latex\graphics\graphics.sty"
+Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+
+("C:\Program Files (x86)\MikTex\tex\latex\graphics\trig.sty"
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+("C:\Program Files (x86)\MikTex\tex\latex\00miktex\graphics.cfg"
+File: graphics.cfg 2007/01/18 v1.5 graphics configuration of teTeX/TeXLive
+)
+Package graphics Info: Driver file: pdftex.def on input line 91.
+
+("C:\Program Files (x86)\MikTex\tex\latex\pdftex-def\pdftex.def"
+File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
+
+("C:\Program Files (x86)\MikTex\tex\generic\oberdiek\infwarerr.sty"
+Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
+)
+("C:\Program Files (x86)\MikTex\tex\generic\oberdiek\ltxcmds.sty"
+Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
+)
+\Gread@gobject=\count82
+))
+\Gin@req@height=\dimen103
+\Gin@req@width=\dimen104
+)
+("C:\Program Files (x86)\MikTex\tex\latex\amsfonts\amsfonts.sty"
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\@emptytoks=\toks17
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+)
+\c@article=\count83
+
+("C:\Program Files (x86)\MikTex\tex\latex\base\report.cls"
+Document Class: report 2007/10/19 v1.4h Standard LaTeX document class
+("C:\Program Files (x86)\MikTex\tex\latex\base\size10.clo"
+File: size10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count84
+\c@chapter=\count85
+\c@section=\count86
+\c@subsection=\count87
+\c@subsubsection=\count88
+\c@paragraph=\count89
+\c@subparagraph=\count90
+\c@figure=\count91
+\c@table=\count92
+\abovecaptionskip=\skip50
+\belowcaptionskip=\skip51
+\bibindent=\dimen105
+)
+("C:\Program Files (x86)\MikTex\tex\latex\geometry\geometry.sty"
+Package: geometry 2010/09/12 v5.6 Page Geometry
+
+("C:\Program Files (x86)\MikTex\tex\generic\oberdiek\ifpdf.sty"
+Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in PDF mode is detected.
+)
+("C:\Program Files (x86)\MikTex\tex\generic\oberdiek\ifvtex.sty"
+Package: ifvtex 2010/03/01 v1.5 Detect VTeX and its facilities (HO)
+Package ifvtex Info: VTeX not detected.
+)
+("C:\Program Files (x86)\MikTex\tex\generic\ifxetex\ifxetex.sty"
+Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
+)
+\Gm@cnth=\count93
+\Gm@cntv=\count94
+\c@Gm@tempcnt=\count95
+\Gm@bindingoffset=\dimen106
+\Gm@wd@mp=\dimen107
+\Gm@odd@mp=\dimen108
+\Gm@even@mp=\dimen109
+\Gm@layoutwidth=\dimen110
+\Gm@layoutheight=\dimen111
+\Gm@layouthoffset=\dimen112
+\Gm@layoutvoffset=\dimen113
+\Gm@dimlist=\toks18
+
+("C:\Program Files (x86)\MikTex\tex\latex\geometry\geometry.cfg"))
+(C:\Users\epauned\Documents\GitHub\masterthesis\texmaker\crop.sty
+Package: crop 2002/05/14 v1.7 cropmarks (mf)
+\stockwidth=\dimen114
+\stockheight=\dimen115
+\CROP@index=\count96
+\CROP@offset=\count97
+Package crop Info: Local config file crop.cfg used on input line 492.
+
+("C:\Program Files (x86)\MikTex\tex\xelatex\xetexconfig\crop.cfg"))
+Package crop Info: using pdf(la)tex graphics driver on input line 210.
+))
+(C:\Users\epauned\Documents\GitHub\masterthesis\texmaker\qwe.aux)
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 45.
+LaTeX Font Info:    ... okay on input line 45.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 45.
+LaTeX Font Info:    ... okay on input line 45.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 45.
+LaTeX Font Info:    ... okay on input line 45.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 45.
+LaTeX Font Info:    ... okay on input line 45.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 45.
+LaTeX Font Info:    ... okay on input line 45.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 45.
+LaTeX Font Info:    ... okay on input line 45.
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count98
+\scratchdimen=\dimen116
+\scratchbox=\box26
+\nofMPsegments=\count99
+\nofMParguments=\count100
+\everyMPshowfont=\toks19
+\MPscratchCnt=\count101
+\MPscratchDim=\dimen117
+\MPnumerator=\count102
+\makeMPintoPDFobject=\count103
+\everyMPtoPDFconversion=\toks20
+)
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: custom
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: twoside 
+* h-part:(L,W,R)=(56.337pt, 328.62788pt, 84.50557pt)
+* v-part:(T,H,B)=(54.62845pt, 546.29498pt, 81.9427pt)
+* \paperwidth=469.47046pt
+* \paperheight=682.86613pt
+* \textwidth=328.62788pt
+* \textheight=546.29498pt
+* \oddsidemargin=-15.93298pt
+* \evensidemargin=12.23558pt
+* \topmargin=-54.64154pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=10.0pt
+* \footskip=30.0pt
+* \marginparwidth=65.0pt
+* \marginparsep=11.0pt
+* \columnsep=10.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \hoffset=64.0187pt
+* \voffset=81.09035pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidetrue
+* \@mparswitchtrue
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+[-1{C:/Users/epauned/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}
+
+]
+[0
+
+] [1] [2
+
+]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 49.
+ ("C:\Program Files (x86)\MikTex\tex\latex\base\omscmr.fd"
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 49.
+
+Overfull \hbox (6.54292pt too wide) in paragraph at lines 49--49
+\OT1/cmr/m/n/10 GRAM-MING, BLACK STUD-IES, SO-CIO-BI-OL-OGY!.. Are there any QU
+ES-
+ []
+
+[3
+
+] [4
+
+] (C:\Users\epauned\Documents\GitHub\masterthesis\texmaker\qwe.toc
+LaTeX Font Info:    Try loading font information for U+msa on input line 4.
+
+("C:\Program Files (x86)\MikTex\tex\latex\amsfonts\umsa.fd"
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 4.
+
+("C:\Program Files (x86)\MikTex\tex\latex\amsfonts\umsb.fd"
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+))
+\tf@toc=\write3
+ [5
+
+
+] [6
+
+]
+Chapter 1.
+[1
+
+]
+Chapter 2.
+[2
+
+] [3] [4] [5]
+Chapter 3.
+[6
+
+]
+\@filenumb=\write4
+ [7] [8
+
+] <linkuniv_en_vert_blk.pdf, id=58, 240.60088pt x 172.5386pt>
+File: linkuniv_en_vert_blk.pdf Graphic file (type pdf)
+
+<use linkuniv_en_vert_blk.pdf>
+Package pdftex.def Info: linkuniv_en_vert_blk.pdf used on input line 413.
+(pdftex.def)             Requested size: 56.9055pt x 40.8072pt.
+
+Overfull \hbox (261.76398pt too wide) detected at line 413
+[]
+ []
+
+
+Overfull \hbox (358.50284pt too wide) detected at line 413
+[]
+ []
+
+
+Overfull \hbox (91.04834pt too wide) detected at line 413
+[]
+ []
+
+
+Overfull \hbox (187.7872pt too wide) detected at line 413
+[]
+ []
+
+
+Overfull \hbox (358.50284pt too wide) detected at line 413
+[]
+ []
+
+
+Overfull \hbox (187.7872pt too wide) detected at line 413
+[]
+ []
+
+
+Overfull \hbox (358.50284pt too wide) detected at line 413
+[]
+ []
+
+
+Overfull \hbox (358.50284pt too wide) detected at line 413
+[]
+ []
+
+
+Overfull \hbox (358.50284pt too wide) detected at line 413
+[]
+ []
+
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <9> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 413.
+
+Overfull \hbox (44.87495pt too wide) in paragraph at lines 413--413
+[][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 413--413
+
+ []
+
+[9 <C:/Users/epauned/Documents/GitHub/masterthesis/texmaker/linkuniv_en_vert_bl
+k.pdf>] (C:\Users\epauned\Documents\GitHub\masterthesis\texmaker\qwe.aux) ) 
+Here is how much of TeX's memory you used:
+ 2518 strings out of 493921
+ 34254 string characters out of 3146474
+ 112708 words of memory out of 3000000
+ 5773 multiletter control sequences out of 15000+200000
+ 11835 words of font info for 45 fonts, out of 3000000 for 9000
+ 841 hyphenation exceptions out of 8191
+ 40i,11n,47p,717b,241s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/
+Program Files (x86)/MikTex/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Progra
+m Files (x86)/MikTex/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program File
+s (x86)/MikTex/fonts/type1/public/amsfonts/cm/cmbx7.pfb><C:/Program Files (x86)
+/MikTex/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files (x86)/MikTex
+/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files (x86)/MikTex/fonts/
+type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files (x86)/MikTex/fonts/type1/pu
+blic/amsfonts/cm/cmr9.pfb><C:/Program Files (x86)/MikTex/fonts/type1/public/ams
+fonts/cm/cmsl10.pfb><C:/Program Files (x86)/MikTex/fonts/type1/public/amsfonts/
+cm/cmsy10.pfb><C:/Program Files (x86)/MikTex/fonts/type1/public/amsfonts/cm/cms
+y7.pfb><C:/Program Files (x86)/MikTex/fonts/type1/public/amsfonts/cm/cmsy9.pfb>
+<C:/Program Files (x86)/MikTex/fonts/type1/public/amsfonts/symbols/msam7.pfb>
+Output written on qwe.pdf (17 pages, 3320156 bytes).
+PDF statistics:
+ 152 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+
