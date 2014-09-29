@@ -1,0 +1,3 @@
+artikeln beskriver effektiviteten för 2 harq algoritmer.
+http://ieeexplore.ieee.org.e.bibl.liu.se/stamp/stamp.jsp?tp=&arnumber=6692708
+
