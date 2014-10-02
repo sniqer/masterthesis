@@ -2,5 +2,9 @@ artikeln beskriver effektiviteten för 2 harq algoritmer.
 http://ieeexplore.ieee.org.e.bibl.liu.se/stamp/stamp.jsp?tp=&arnumber=6692708
 
 
+
 artikeln beskriver en jämförelse i prestanda mellan Harq 1, 2 och 3  http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=1490770
 
+
+artikeln beskriver hur cnr (typ snr) och delay spread med olika modulationcheman på verkar throughput.
+http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=797134
