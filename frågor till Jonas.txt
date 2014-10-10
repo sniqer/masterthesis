@@ -1,0 +1,7 @@
+Vi har en graf som visar Throughput/SINR/BW. Ska bandwidth vara bandbredden som allokerats 
+eller bandbredden som Resource Blocken tar upp?
+
+Vad vill ni att man visar statistik över, Vi har kommit på Throughput/SINR och Throughput/SINR/BW, en i upplänk en i 
+nedlänk, en när HARQ är på en när HARQ är av. 
+
+Vill ni ha det i logskala?
