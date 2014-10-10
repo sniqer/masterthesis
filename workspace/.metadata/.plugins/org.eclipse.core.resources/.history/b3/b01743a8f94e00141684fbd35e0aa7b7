@@ -1,0 +1,125 @@
+package lteAnalyzer;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class Main {
+
+	
+	//main här anropas der functzioner
+	@SuppressWarnings("resource")
+	public static void main(String[] arg) throws IOException{
+		String[][] lteDataMatrix = new String[1000][31];
+		String[][] temp = new String[31][1000];
+		int[] tbs = new int[1000];
+		String[] tbsstring = new String[1000];
+		float[] pucch = new float[1000];
+		int[] sinr = new int[1000];
+		
+		
+		String line = null;
+		BufferedReader reader = null;
+		int i = 0;
+		
+		//läser cvs file
+		reader = new BufferedReader(new FileReader("C:/Users/epauned/documents/logtool/output.csv"));
+		while ((line = reader.readLine()) != null) {
+			if(i<1000){
+				lteDataMatrix[i] = line.split(",");
+				i++;
+			}
+		}
+		temp = transpose(lteDataMatrix);
+		pucch = convStringArr2FloatArr(temp[19]);
+		sinr = convStringArr2IntArr(temp[21]);
+		tbs =convStringArr2IntArr(temp[14]);
+		printArray(pucch);
+		//removepucchsinr(sinr,pucch);
+		//tbssinr = mapthroughput2sinr(tbs,sinr);
+		
+		//System.out.println(pucch[4]);
+
+		//outputdata = tbspersinr(tbssinr(1:end,1),tbssinr(1:end,2));
+		
+	}
+
+//------------------------------------------------------------------------------------------------
+	public static int[] convStringArr2IntArr(String[] stringArr){
+		int[] out = new int[stringArr.length];
+		for(int i=0;i<stringArr.length;i++){
+			try{
+				out[i] = Integer.parseInt(stringArr[i].trim()); // No more Exception in this line
+				//System.out.println(out[i]);
+			} catch(NumberFormatException e) {
+				out[i] = 0;
+				//System.out.print("feeeel");
+				
+			}
+		}
+		return out;
+	}
+	
+	public static float[] convStringArr2FloatArr(String[] stringArr){
+		float[] out = new float[stringArr.length];
+		for(int i=0;i<stringArr.length;i++){
+			try{
+				out[i] = Float.parseFloat(stringArr[i].trim()); // No more Exception in this line
+				//System.out.println(out[i]);
+			} catch(NumberFormatException e) {
+				out[i] = 0;
+				//System.out.print("feeeel");
+				
+			}
+		}
+		return out;
+	}
+
+
+	
+	public static void printArray(String[] stringArr){
+		for(int i=0;i<stringArr.length;i++){
+			System.out.println(stringArr[i]);
+		}
+	}
+	public static void printArray(float[] stringArr){
+		for(int i=0;i<stringArr.length;i++){
+			System.out.println(stringArr[i]);
+		}
+	}
+	public static void printArray(int[] stringArr){
+		for(int i=0;i<stringArr.length;i++){
+			System.out.println(stringArr[i]);
+		}
+	}
+	
+	public void print2dArray(String[][] stringArr){
+		for(int i=0;i<stringArr.length;i++){
+			for(int j=0;j<stringArr[1].length;j++){
+				System.out.print(stringArr[i][j] + " "); 
+			}
+			System.out.println();
+		}
+	}
+	
+	public static String[][] transpose(String[][] stringArr){
+		String[][] output = new String[stringArr[1].length][stringArr.length];
+		for(int i=0;i<stringArr.length;i++){
+			for(int j=0;j<stringArr[1].length;j++){
+				output[j][i] = stringArr[i][j];
+			}
+		}
+		return output;
+	}
+	public static void removepucchsinr(int[] sinr,float[] pucch){
+		
+		for (int i=0;i<sinr.length;i++){
+			if (pucch[i] != 0.0){
+				sinr[i] = 0;
+			}
+		}
+	}
+	
+	
+}

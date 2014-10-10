@@ -1,0 +1,106 @@
+package lteAnalyzer;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class Main {
+
+	
+	//main här anropas der functzioner
+	@SuppressWarnings("resource")
+	public static void main(String[] arg) throws IOException{
+		String[][] lteDataMatrix = new String[1000][31];
+		String[][] temp = new String[31][1000];
+		int[] tbs = new int[1000];
+		String[] tbsstring = new String[1000];
+		int[] pucch = new int[1000];
+		int[] sinr = new int[1000];
+		
+		
+		String line = null;
+		BufferedReader reader = null;
+		int i = 0;
+		
+		//läser cvs file
+		reader = new BufferedReader(new FileReader("C:/Users/epauned/documents/logtool/output.csv"));
+		while ((line = reader.readLine()) != null) {
+			if(0<i && i<=1000){
+				lteDataMatrix[i-1] = line.split(",");
+				
+			}
+			i++;
+		}
+		System.out.println("hej");
+		temp = transpose(lteDataMatrix);
+		System.out.println("hej");
+		tbsstring = temp[14];
+		System.out.println("hej");
+//		pucch = convStringArr2IntArr(temp[19]);
+//		sinr = convStringArr2IntArr(temp[21]);
+		tbs =convStringArr2IntArr(tbsstring);
+		System.out.println("hej");
+//		sinr = removepucchsinr(sinr,pucch);
+//		tbssinr = mapthroughput2sinr(tbs,sinr);
+//
+//		outputdata = tbspersinr(tbssinr(1:end,1),tbssinr(1:end,2));
+		
+	}
+
+	
+	public static int[] convStringArr2IntArr(String[] stringArr){
+		int[] out = new int[stringArr.length];
+		for(int i=0;i<stringArr.length;i++){
+			try{
+				out[i] = Integer.parseInt(stringArr[i].trim()); // No more Exception in this line
+				System.out.println(out[i]);
+			} catch(NumberFormatException1 e) {
+				out[i] = 0;
+				
+			}
+		}
+		return out;
+	}
+
+
+	
+	public static void printArray(String[] stringArr){
+		for(int i=0;i<stringArr.length;i++){
+			System.out.println(stringArr[i]);
+		}
+	}
+	public static void printArray(int[] stringArr){
+		for(int i=0;i<stringArr.length;i++){
+			System.out.println(stringArr[i]);
+		}
+	}
+	
+	public void print2dArray(String[][] stringArr){
+		for(int i=0;i<stringArr.length;i++){
+			for(int j=0;j<stringArr[1].length;j++){
+				System.out.print(stringArr[i][j] + " "); 
+			}
+			System.out.println();
+		}
+	}
+	
+	public static String[][] transpose(String[][] stringArr){
+		String[][] output = new String[stringArr[1].length][stringArr.length];
+		for(int i=0;i<stringArr.length;i++){
+			for(int j=0;j<stringArr[1].length;j++){
+				output[j][i] = stringArr[i][j];
+			}
+		}
+		return output;
+	}
+	public static int[] removepucchsinr(int[] sinr,int[] pucch){
+		int[] output_sinr = new int[sinr.length];
+		for (int i=0;i<sinr.length;i++){
+			//
+		}
+		return pucch;
+	}
+	
+	
+}

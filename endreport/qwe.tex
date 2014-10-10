@@ -3,10 +3,9 @@
 \author{AUTHOR}
 
 \abstract{%
-\S\ This Master thesis involves developing a lightweight analyser that produce statistics from the communication between a 
-cell phone and a E-UTRAN base station.  
-The analyser tool will produce graphs with information about the correlation between a signals throughput and the interference in the channel that the signal is sent through. 
-From the statistics produced by the analyser tool the testing personal at Ericsson can more easily deduce where interference in signals arises from. 
+\S\ This Master thesis involves developing a lightweight analyser that produce statistics from the communication between a cell phone and a E-UTRAN base station.  
+The analyser tool will produce graphs with information about the correlation between a signal throughput and the interference in the channel that the signal is sent through. 
+From the statistics produced by the analyser tool, the testing personal at Ericsson can more easily deduce where the interference in signals arises from. 
 }
 
 
@@ -18,6 +17,11 @@ From the statistics produced by the analyser tool the testing personal at Ericss
 
 \chapter{Introduction}
 
+\section{background}
+The purpose with this master thesis is to help Long Term Evolution Interoperability Development Testing (LTE IODT) Data analysis. LTE IODT wants to automatically generate analysis of Link Adaptation (LA) and Hybrid Automatic Repeat Request (HARQ) tests where we sweep through Signal to Interference plus Noise Ratio (SINR) for different channel models. The LTE IODT lab test logs give a unique opportunity to look into detailed behavior of link and rank adaptation for both downlink and uplink.
+This is a post-process of LA and HARQ test data and makes analysis by the plugin to logtool to generate SINR/Throughput curves. The output should be recorded and automatically compared with the recommended minimum requirements of the 3GPP standards and Ericsson Research.
+
+\section{problem formulation}
 The purpose of this master thesis is to help LTE IODT Data analysis to see how well the LTE system is performing when the HARQ (Hybrid Automatic Repeat Request)and LA (Link Adaptation) is activated. 
 
 \chapter{Body}

@@ -1,0 +1,6 @@
+trejsar:
+
+en nedlänk med linjärt minskande/ökande av sinr från tex -10 db till 20 db
+en nedlänk med linjärt minskande/ökande av sinr från tex -10 db till 20 db
+
+ovanstående med med och utan HARQ påslaget
