@@ -1,6 +1,19 @@
 \documentclass[cropmarks, frame, english]{idamasterthesis}
 
-\author{AUTHOR}
+\author{Paul Nedstrand \& Razmus Lindgren}
+\titleenglish{Test Data Post-processing and Analysis of LA \& HARQ}
+\titleswedish{Svensken Titel}
+\publicationmonth{PUBMONTH}
+\publicationyear{2015}
+\isbn{ISBN}
+\thesisnumber{THESISNUMBER}
+\thesisyearnumber{THESISYEARNUMBER}
+\dateofpublication{DATEOFPUBLICATION}
+\supervisor{Ola Leifler}
+\examiner{EXAMINER}
+\degreesubject{Engineering}
+\supportedby{SUPPORTEDBY}
+
 
 \abstract{%
 \S\ This Master thesis involves developing a lightweight analyser that produce statistics from the communication between a cell phone and a E-UTRAN base station.  
@@ -17,12 +30,57 @@ From the statistics produced by the analyser tool, the testing personal at Erics
 
 \chapter{Introduction}
 
-\section{background}
-The purpose with this master thesis is to help Long Term Evolution Interoperability Development Testing (LTE IODT) Data analysis. LTE IODT wants to automatically generate analysis of Link Adaptation (LA) and Hybrid Automatic Repeat Request (HARQ) tests where we sweep through Signal to Interference plus Noise Ratio (SINR) for different channel models. The LTE IODT lab test logs give a unique opportunity to look into detailed behavior of link and rank adaptation for both downlink and uplink.
-This is a post-process of LA and HARQ test data and makes analysis by the plugin to logtool to generate SINR/Throughput curves. The output should be recorded and automatically compared with the recommended minimum requirements of the 3GPP standards and Ericsson Research.
+\section{background and Motivation}
+The purpose with this master thesis is to help Long Term Evolution Interoperability Development Testing (LTE IODT) Data analysis. LTE IODT wants to automatically generate analysis of Link Adaptation (LA) and Hybrid Automatic Repeat Request (HARQ) tests where we sweep through Signal to Interference plus Noise Ratio (SINR) for different channel models. The LTE IODT lab test logs gives a unique opportunity to look into detailed behaviour of link and rank adaptation for both downlink and uplink. \newline
+
+
+Ericsson needed a tool for allowing the testers to better analyse the performance in UE-to-eNodeB implementations. The performance in this sense is whether Ericsson and/or their customer had implemented their system according to the minimum criterion of the specification for said implementation or not. To be able to judge where in the implementation the loss of performance had occurred, Ericsson needed a tool to plot the values of signal-variables that are most affected by HARQ and LA, so that their own personnel could use that information to further analyse the algorithms. To be able to plot relevant values for debugging we first had to gain vast knowledge about how LTE, HARQ and LA. \newline
+
+
+The visualization tool which we used in this project was an Ericsson internal Java based project called Logtool. We implemented our program as a plugin project to Logtool. The Logtool project is built upon eclipse framework and we also developed the plugin in eclipse development enviroment. 
+
+
+
+
 
 \section{problem formulation}
-The purpose of this master thesis is to help LTE IODT Data analysis to see how well the LTE system is performing when the HARQ (Hybrid Automatic Repeat Request)and LA (Link Adaptation) is activated. 
+The purpose of this master thesis is to help LTE IODT Data Analysis to see how well the LTE system is performing when the HARQ (Hybrid Automatic Repeat Request)and LA (Link Adaptation) is activated. To perform such an analysis we needed to gather vast knowledge regarding how signals are treated in LTE and how the protocols implemented are constructed.
+
+ 
+
+
+TODO: write about all web pages and libraries which contained information about LTE
+
+
+The output should be recorded and automatically compared with the recommended minimum requirements of the 3GPP standards and Ericsson Research.
+
+\section{Goals and Methodology}
+
+Our task from Ericsson was to develop a lightweight analyzer tool that:
+
+ \begin{itemize} 
+ \item simply produces statistics
+ \item Handle multiple input sources
+ \end{itemize} 
+
+\setlength{\parindent}{0cm} We also had the following criteria: 
+ 
+  \begin{itemize} 
+ \item Study and understand the 3GPP standards and Ericsson Research
+ \item Analyze the data from processing for the final graph
+ \item Evaluate a suitable tool for the processing of data, e.g. MATLAB or other tools
+ \item Capability to correlate the graph to logs in order to facilitate troubleshooting
+\end{itemize}
+
+TODO: write about why and how we did a focus group
+
+\section{Thesis Outline}
+This thesis is divided into the following Parts
+\begin{itemize}
+	\item part 1 we planned stuff here
+	\item part 2 we implemented stuff here
+	\item part 3 we reviewed stuff here
+\end{itemize}
 
 \chapter{Body}
 
