@@ -1,0 +1,475 @@
+package lteAnalyzer;
+
+import java.awt.Color;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.LogAxis;
+import org.jfree.chart.axis.LogarithmicAxis;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.plot.PiePlot;
+import org.jfree.chart.plot.PiePlot3D;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.plot.XYPlot;
+import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.data.general.PieDataset;
+import org.jfree.data.xy.XYDataItem;
+import org.jfree.data.xy.XYDataset;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
+
+
+public class Main {
+	@SuppressWarnings("resource")
+	public static void main(String[] arg) throws IOException{
+		int size = 1400;
+		String[][] lteDataMatrix = new String[size][31];
+		String[] header = new String[31];
+		//String[][] temp = new String[31][1000];
+		
+		int nrOfSinrInd = 45;
+		
+		int[] dLtbs1 		= new int[size];		//transport block size antenna 1
+		int[] dLtbs2 		= new int[size];		//transport block size antenna 2
+		int[] dLtbssum 		= new int[size]; 		//the sum of the Tbs's
+		int[] dLprb 		= new int[size];		//the physical resource blocks
+		int[] uLtbs 		= new int[size];		//transport block size antenna
+		int[] SIB			= new int[size];		//System Information Block, this block we dont want to look at at the moment, delete the data in the sib rows
+		int[] cqi			= new int[size];		//Channel Quality Index
+
+		int[] uLtbssum 		= new int[size]; 		//the sum of the Tbs's
+		int[] uLprb 		= new int[size];		//the physical resource blocks
+		int[] pucch 		= new int[size];		//the physical control channel
+		int[] pusch 		= new int[size];		//the physical shared channel
+		
+		
+		int[] dlSINR 		= new int[size];		//the signal-to-interference-ratio in the channel, over pusch (i think)
+		int[] ulSINR 		= new int[size];		//the signal-to-interference-ratio in the channel, over pucch (i think)
+		int[] frameNr 		= new int[size];		//frame number
+		int[] subFrame 		= new int[size];		//subframe number
+		
+		int frameNrIndex;
+		int subFrameIndex;
+		int SIBIndex;
+		
+		int dLSINRIndex;
+		int dLprbIndex;
+		int uLSINRIndex;
+		int dLtbssumIndex;
+		int uLprbIndex;
+		
+		int uLtbsIndex;
+		int pucchIndex;
+		int puschIndex;
+		int cqiIndex;
+		
+		
+		/*The data to be plotted, first row is bitsperSINR, second is bitsperSINRperhz
+		 * it will go from -15 to 30 dB*/
+		float[][] downlinkData	 		= new float[4][nrOfSinrInd]; 
+		float[][] uplinkData	 		= new float[4][nrOfSinrInd]; 
+		float[][] dLMbitsperSINR 		= new float[2][nrOfSinrInd]; 
+		float[][] dLMbitsperHzperSINR 	= new float[2][nrOfSinrInd]; 
+		float[][] uLMbitsperSINR 		= new float[2][nrOfSinrInd]; 
+		float[][] uLMbitsperHzperSINR 	= new float[2][nrOfSinrInd]; 
+		
+		String line = null;
+		BufferedReader reader = null;
+		int i = 0;
+		
+		//läser cvs file
+		reader = new BufferedReader(new FileReader("C:/Users/epauned/documents/logtool/output23.csv"));
+		while ((line = reader.readLine()) != null) {
+			if(i<size){
+				lteDataMatrix[i] = line.split(",");
+				i++;
+			}
+		}
+		header = lteDataMatrix[0];
+		lteDataMatrix = transpose(lteDataMatrix);
+		
+		printArray(header);
+
+		SIBIndex = findIndex(header, "bbUeRef",0);
+		dLSINRIndex = findIndex(header, "puschSinr",0);
+		uLSINRIndex = findIndex(header, "pucchSinr",0);
+		dLtbssumIndex = findIndex(header, "tbsSum",0);
+		dLprbIndex = findIndex(header, "prb",0);
+
+		uLprbIndex = findIndex(header, "prb",1);
+		uLtbsIndex = findIndex(header, "tbs",0);
+		cqiIndex = findIndex(header, "cqi",0);
+		
+
+		SIB	= interpretLTEdata(lteDataMatrix[SIBIndex]);
+		dlSINR = interpretLTEdata(lteDataMatrix[dLSINRIndex]);
+		
+		dLprb  = interpretLTEdata(lteDataMatrix[dLprbIndex]);
+		dLtbssum = interpretLTEdata(lteDataMatrix[dLtbssumIndex]);
+		uLprb  = interpretLTEdata(lteDataMatrix[uLprbIndex]);
+		uLtbs = interpretLTEdata(lteDataMatrix[uLtbsIndex]);
+		cqi   = interpretLTEdata(lteDataMatrix[cqiIndex]);
+		
+		
+		downlinkData = extractTraceData(dLtbssum,dlSINR,dLprb,SIB,cqi);
+		//uplinkData = extractTraceData(uLtbs,ulSINR,uLprb,SIB,cqi);
+
+		dLMbitsperSINR[0] = downlinkData[0];
+		dLMbitsperSINR[1] = downlinkData[2];
+		
+		dLMbitsperHzperSINR[0] = downlinkData[1];
+		dLMbitsperHzperSINR[1] = downlinkData[3];
+		
+//		uLMbitsperSINR[0] = uplinkData[0];
+//		uLMbitsperSINR[1] = uplinkData[2];
+//		
+//		uLMbitsperHzperSINR[0] = uplinkData[1];
+//		uLMbitsperHzperSINR[1] = uplinkData[3];
+
+
+		logPlot(
+				dLMbitsperSINR,
+				"DL Throughput/SINR",
+				"SINR [dB]",
+				"Throughput, [Mbits/s]");
+		logPlot(
+				dLMbitsperHzperSINR,
+				"DL Throughput/SINR/BW", 
+				"SINR [dB]",
+				"Spectral efficiency, [bits/s/Hz]");
+		
+//		logPlot(
+//				uLMbitsperSINR,
+//				"UL Throughput/SINR",
+//				"SINR [dB]",
+//				"Throughput, [Mbits/s]");
+//		logPlot(
+//				dLMbitsperHzperSINR,
+//				"UL Throughput/SINR/BW", 
+//				"SINR [dB]",
+//				"Spectral efficiency, [bits/s/Hz]");
+//		
+		//printArray(chCap);
+
+	//printArray(sinr);
+	}
+
+//IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+	public static float[][] extractTraceData(int[] tbs,int[] sinr,int prb[], int SIB[], int[] cqi){
+		int avgMbitsperSINR = 0;
+		int avgBitsperSINRperHz = 1;
+		int peakMbitsperSINR = 2;
+		int peakBitsperSINRperHz = 3;
+		int avgCqi = 4;
+		
+		int counter_ind = 0;
+		int acc_tbs_ind = 1;
+		int acc_prb_ind = 2;
+		int max_tbs_ind = 3;
+		int max_prb_ind = 4;
+		int avg_cqi_ind = 5;
+		
+		
+		int count = 0;
+		int cqiCounter = 0;
+		int currentsinr = 0;
+		int currentTbs = 0;
+		int currentBandWidth = 0;
+		int maxTbs = 0;
+		int maxPrb = 0;
+		
+		/*row1 : counter
+		  row2 : average data rate per SINR
+		  row3 : peak data rate per SINR
+		  row4 : average data rate per bandwidth per SINR
+		  row5 : peak data rate per bandwidth per SINR
+		  row6 : average cqi per SINR
+		 */
+		int[][] TBS_SINR_BW = new int [45][5]; 
+		TBS_SINR_BW = init(TBS_SINR_BW);
+		
+		/*row1 : average data rate per SINR
+		  row2 : peak data rate per SINR
+		  row3 : average data rate per bandwidth per SINR
+		  row4 : peak data rate per bandwidffth per SINR
+		  row5 : average cqi per SINR
+		 */
+		float[][]	dataperSinr = new float [4][45];
+		dataperSinr = init(dataperSinr);
+		
+		for(int i=0;i<sinr.length;i++){
+			//we've found legit tbs data, accumulate counter, tbs, bW and see if we have peak data rate.
+			if(SIB[i] != -1 && tbs[i] != 0){//ändrasen!!!
+				currentTbs=currentTbs+tbs[i]; 
+				currentBandWidth = closeValFrInd(prb, i)+currentBandWidth;
+				
+				maxTbs = Math.max(maxTbs, tbs[i]);
+				//maxPrb = Math.max(maxPrb, prb[i]);
+				//System.out.println(" foundBW: " + closeValFrInd(prb, i)+ " foundTBS: " + tbs[i] + " foundTBS: " + maxTbs);
+				count=count+1;
+			}
+			
+
+			//acumulate the legit bandwidth and tbs and put it in TBS_SINR_BW on the sinr index.
+			if (currentsinr != sinr[i] && sinr[i] != 0){
+				 
+				System.out.println(" currentBW: " + currentBandWidth + " currentTBS: " + currentTbs + " maxTbs: " + maxTbs + " sinr " + sinr[i]);
+				TBS_SINR_BW[sinr[i]+15][counter_ind] = TBS_SINR_BW[sinr[i]+15][0]+count; //accumulated Counter
+				TBS_SINR_BW[sinr[i]+15][acc_tbs_ind] = TBS_SINR_BW[sinr[i]+15][1]+currentTbs; //accumulated tbs
+				TBS_SINR_BW[sinr[i]+15][acc_prb_ind] = TBS_SINR_BW[sinr[i]+15][2]+currentBandWidth; //accumulated allocated bandwidth
+				TBS_SINR_BW[sinr[i]+15][max_tbs_ind] = Math.max(TBS_SINR_BW[sinr[i]+15][3], maxTbs); //maximum tbs
+				TBS_SINR_BW[sinr[i]+15][max_prb_ind] = Math.max(TBS_SINR_BW[sinr[i]+15][4], maxPrb);
+				//TBS_SINR_BW[sinr[i]+15][avg_cqi_ind] = Math.max(TBS_SINR_BW[sinr[i]+15][5], maxPrb);d
+
+				
+				currentBandWidth = 0;
+				currentsinr = sinr[i];
+				count = 0;
+				currentTbs = 0;
+				maxTbs = 0;
+			}
+		}
+		
+		//calculate the average throughput/SINR and throughput/SINR/Hz
+		for (int j=0;j<TBS_SINR_BW.length;j++){ 
+			
+			if(TBS_SINR_BW[j][0] != 0){//counter index cannot be 0
+				dataperSinr[avgMbitsperSINR][j] = ((float) TBS_SINR_BW[j][acc_tbs_ind]/TBS_SINR_BW[j][counter_ind]/1000);//divide by thousand, we get Mbits/s/SINR
+				dataperSinr[peakMbitsperSINR][j] = (float) TBS_SINR_BW[j][max_tbs_ind]/1000;  //divide by thousand, we get Mbits/s/SINR
+				
+				//the division by 180 comes from one tbs is 1 ms long, multiply it by 1000 and divide by 180 000 to get bits/s/Hz/SINR
+				dataperSinr[avgBitsperSINRperHz][j] = (float) TBS_SINR_BW[j][acc_tbs_ind]/TBS_SINR_BW[j][acc_prb_ind]/180; //average bits/s/Hz/SINR
+				dataperSinr[peakBitsperSINRperHz][j] = (float) TBS_SINR_BW[j][max_tbs_ind]*TBS_SINR_BW[j][counter_ind]/TBS_SINR_BW[j][acc_prb_ind]/180; //average bits/s/Hz/SINR
+			}
+		}
+		print2dArray(dataperSinr);
+		return dataperSinr;
+	}
+	
+	public static int[] interpretLTEdata(String[] lteData){
+		int[] out = new int[lteData.length];
+		for(int i=0;i<lteData.length;i++){
+			
+			if (lteData[i].contains("64QAM")){
+				out[i] = 64;
+			} else if (lteData[i].contains("16QAM")){
+				out[i] = 16;
+			} else if (lteData[i].contains("QPSK")){
+				out[i] = 4;
+			} else if (lteData[i].contains("SIB") ){
+				//if we have a system information block we will change the modulation and code rate, this we dont want to look at, and we symbolize it with 1.
+				out[i] = -1; 
+			}
+			else {
+				try{
+					out[i] = Integer.parseInt(lteData[i].trim()); // parse the string in ltedata[i] to an integer
+				} catch(Exception e) {
+					out[i] = 0;
+				}
+			}
+		}
+		return out;
+	}
+
+
+	
+	
+
+	public static void printArray(String[] stringArr){
+		for(int i=0;i<stringArr.length;i++){
+			System.out.println(stringArr[i]);
+		}
+	}
+	public static void printArray(double[] stringArr){
+		for(int i=0;i<stringArr.length;i++){
+			System.out.println(stringArr[i]);
+		}
+	}
+	public static void printArray(float[] stringArr){
+		for(int i=0;i<stringArr.length;i++){
+			System.out.println(stringArr[i]);
+		}
+	}
+	public static void printArray(int[] stringArr){
+		for(int i=0;i<stringArr.length;i++){
+			System.out.println(stringArr[i]);
+		}
+	}
+	
+	public static void print2dArray(float[][] outputdata){
+		for(int i=0;i<outputdata.length;i++){
+			for(int j=0;j<outputdata[1].length;j++){
+				System.out.print(outputdata[i][j] + " "); 
+			}
+			System.out.println();
+		}
+	}
+	public static void print2dArray(int[][] intArr){
+		for(int i=0;i<intArr.length;i++){
+			for(int j=0;j<intArr[1].length;j++){
+				System.out.print(intArr[i][j] + " "); 
+			}
+			System.out.println();
+		}
+	}
+	public static void print2dArray(String[][] intArr){
+		for(int i=0;i<intArr.length;i++){
+			for(int j=0;j<intArr[1].length;j++){
+				System.out.print(intArr[i][j] + " "); 
+			}
+			System.out.println();
+		}
+	}
+	
+	public static String[][] transpose(String[][] stringArr){
+		String[][] output = new String[stringArr[1].length][stringArr.length];
+		for(int i=0;i<stringArr.length;i++){
+			for(int j=0;j<stringArr[1].length;j++){
+				output[j][i] = stringArr[i][j];
+			}
+		}
+		return output;
+	}
+	
+	//this function removes data that we dont want to look at from that index in correctvals
+	public static void removeTrashData(int[] correctVals,int[] errorVals){
+		
+		for (int i=0;i<correctVals.length;i++){
+			if (errorVals[i] != 0.0){
+				correctVals[i] = 0;
+			}
+		}
+	}
+	
+	
+
+
+	
+
+	
+
+	public static void logPlot(float[][] outputdata,String header,String Xaxis,String Yaxis){
+
+		XYSeries avgVal 	= new XYSeries("average");
+		XYSeries peakVal 	= new XYSeries("peak");
+		
+		XYDataset xyDataset = new XYSeriesCollection();
+		((XYSeriesCollection) xyDataset).addSeries(avgVal);
+		((XYSeriesCollection) xyDataset).addSeries(peakVal);
+
+		//print2dArray(outputdata);
+        for(int k=0;k<outputdata[0].length;k++){
+        	if(outputdata[0][k] != 0){
+        		avgVal.add(k-15,outputdata[0][k]); //average data values is on row 0
+        	}        	
+        	if(outputdata[1][k] != 0){
+        		peakVal.add(k-15,outputdata[1][k]); //average data values is on row 1
+        	}
+        }
+
+        JFreeChart chart = ChartFactory.createXYLineChart(
+                header, 
+                Xaxis, 
+                Yaxis,
+                xyDataset, 
+                PlotOrientation.VERTICAL, 
+                true, true, false);
+
+        final XYPlot plot = chart.getXYPlot();
+        ChartFrame graphFrame = new ChartFrame("XYLine Chart", chart);
+        graphFrame.setVisible(true);
+        graphFrame.setSize(700, 500); 
+        final NumberAxis domainAxis = new NumberAxis(Xaxis);
+        final NumberAxis rangeAxis = new LogarithmicAxis(Yaxis);
+        plot.setDomainAxis(domainAxis);
+        plot.setRangeAxis(rangeAxis);
+	}
+
+	public static int closeValFrInd(int[] prb,int list_index){
+		int bandWidth = 0;
+		int inc = list_index;
+		int dec = list_index;
+		while(true){
+				if(prb[dec] != 0){
+					bandWidth = prb[dec];
+					break;
+				} else if (prb[inc] != 0){
+					bandWidth = prb[inc];
+					break;
+				}
+				if(dec-1 >= 0){
+					dec--;
+				}
+				if(inc<prb.length){
+					inc++;
+				}
+		}
+		//System.out.println(bandWidth+ " bandwidth");
+		return bandWidth;
+	}
+	
+	public static float[] maxKbps(int bandwidth,int fromSINR,int toSINR){
+		float[] maximum = new float[45];
+		for(int i=fromSINR;i<toSINR;i++){
+			maximum[i-fromSINR] =  (float) (bandwidth*(Math.log(Math.pow(10, (float) i/10)+1)/0.6931));
+		}
+		return maximum;
+	}
+	public static float[] maxKbpspHz(int fromSINR,int toSINR){
+		float[] maxbpspHz = new float[45];
+		for(int i=fromSINR;i<toSINR;i++){
+			maxbpspHz[i-fromSINR] =  (float) (Math.log(Math.pow(10, (float) i/10)+1)/0.6931);
+		}
+		return maxbpspHz;
+	}
+
+	public static int[] init(int[] arr){
+		for(int i=0;i<arr.length;i++){
+				arr[i] = 0;
+		}
+		return arr;
+	}
+	public static float[] init(float[] arr){
+		for(int i=0;i<arr.length;i++){
+				arr[i] = 0;
+		}
+		return arr;
+	}
+	public static int[][] init(int[][] arr){
+		for(int i=0;i<arr.length;i++){
+			for(int j=0;j<arr[0].length;j++){
+				arr[i][j] = 0;
+			}
+		}
+		return arr;
+	}
+	public static float[][] init(float[][] arr){
+		for(int i=0;i<arr.length;i++){
+			for(int j=0;j<arr[0].length;j++){
+				arr[i][j] = 0;
+			}
+		}
+		return arr;
+	}
+	
+	public static int findIndex(String[] header, String headerName,int doublett){
+		int doublettcounter = 0;
+		for(int i=0;i<header.length;i++){
+			//System.out.println(header[i]);
+			if(header[i].contains(headerName)){
+				if (doublett==doublettcounter){
+					return i;
+				} else {
+					doublettcounter++;
+				}
+			}
+		}
+		return -1;
+	}
+}

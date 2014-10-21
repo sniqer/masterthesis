@@ -1,0 +1,51 @@
+package lteAnalyzer;
+
+public class Print {
+
+	public static void printArray(String[] stringArr){
+		for(int i=0;i<stringArr.length;i++){
+			System.out.println(stringArr[i]);
+		}
+	}
+	public static void printArray(double[] stringArr){
+		for(int i=0;i<stringArr.length;i++){
+			System.out.println(stringArr[i]);
+		}
+	}
+	public static void printArray(float[] stringArr){
+		for(int i=0;i<stringArr.length;i++){
+			System.out.println(stringArr[i]);
+		}
+	}
+	public static void printArray(int[] stringArr){
+		for(int i=0;i<stringArr.length;i++){
+			System.out.println(stringArr[i]);
+		}
+	}
+	
+	public static void print2dArray(float[][] outputdata){
+		for(int i=0;i<outputdata.length;i++){
+			for(int j=0;j<outputdata[0].length;j++){
+				System.out.print(outputdata[i][j] + " "); 
+			}
+			System.out.println();
+		}
+	}
+	public static void print2dArray(int[][] intArr){
+		for(int i=0;i<intArr.length;i++){
+			for(int j=0;j<intArr[0].length;j++){
+				System.out.print(intArr[i][j] + " "); 
+			}
+			System.out.println();
+		}
+	}
+	public static void print2dArray(String[][] intArr){
+		for(int i=0;i<intArr.length;i++){
+			for(int j=0;j<intArr[0].length;j++){
+				System.out.print(intArr[i][j] + " "); 
+			}
+			System.out.println();
+		}
+	}
+	
+}

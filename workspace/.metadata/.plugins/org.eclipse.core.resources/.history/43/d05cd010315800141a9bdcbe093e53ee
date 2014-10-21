@@ -1,0 +1,264 @@
+package lteAnalyzer;
+
+public class Calculate {
+	public static float[][] traceData(int[] tbs,int[] sinr,int prb[], int SIB[], int[] cqi, int[] HARQ){
+		
+		//indexes to output array
+		int avgMbitsperSINR = 0;
+		int avgBitsperSINRperHz = 1;
+		int peakMbitsperSINR = 2;
+		int peakBitsperSINRperHz = 3;
+		int avgCqi = 4;
+		int avgBler = 5;
+		
+		//indexes
+		int counter_ind = 0;
+		int acc_tbs_ind = 1;
+		int max_tbs_ind = 3;
+		int acc_prb_ind = 2;
+		int max_prb_ind = 4;
+		int avg_cqi_ind = 5;
+		int cqi_counter_ind = 6;
+		int acc_HARQ_ind	= 7;
+		int HARQ_counter_ind = 8;
+		
+		//values from the inputarrays
+		int counter = 0;
+		int cqiCounter = 0;
+		int currentCqi = 0;
+		int currentsinr = 0;
+		int currentTbs = 0;
+		int currentBandWidth = 0;
+		int maxTbs = 0;
+		int maxPrb = 0;
+		int currentHARQ = 0;
+		int HARQCounter = 0;
+		
+		/*row1 : counter
+		  row2 : average data rate per SINR
+		  row3 : peak data rate per SINR
+		  row4 : average data rate per bandwidth per SINR
+		  row5 : peak data rate per bandwidth per SINR
+		  row6 : average cqi per SINR
+		  row7 : cqiCounter.
+		 */
+		int[][] TBS_SINR_BW = new int [45][7]; 
+		TBS_SINR_BW = init(TBS_SINR_BW);
+		
+		/*row1 : average data rate per SINR
+		  row2 : peak data rate per SINR
+		  row3 : average data rate per bandwidth per SINR
+		  row4 : peak data rate per bandwidffth per SINR
+		  row5 : average cqi per SINR
+		 */
+		float[][]	dataperSinr = new float [5][45];
+		dataperSinr = init(dataperSinr);
+		
+		
+		
+		for(int i=0;i<sinr.length;i++){
+			//we've found legit tbs data, accumulate counter, tbs, bW and see if we have peak data rate.
+			if(SIB[i] != -1 && tbs[i] != 0){
+				currentTbs=currentTbs+tbs[i]; 
+				currentBandWidth = findCloseValFrInd(prb, i)+currentBandWidth;
+				
+				maxTbs = Math.max(maxTbs, tbs[i]);
+				//maxPrb = Math.max(maxPrb, prb[i]);
+				//System.out.println(" foundBW: " + closeValFrInd(prb, i)+ " foundTBS: " + tbs[i] + " foundTBS: " + maxTbs);
+				counter++;
+			}
+			
+			//Yay!!! we've found HARQ ack and nack bits
+			if(HARQ[i] != 0){
+				currentHARQ = currentHARQ + HARQ[i]-1;
+				HARQCounter++;
+			}
+			
+
+			//acumulate the legit bandwidth and tbs and put it in TBS_SINR_BW on the sinr index.
+			if (currentsinr != sinr[i] && sinr[i] != 0){
+				 
+				System.out.println(" currentBW: " + currentBandWidth + " currentTBS: " + currentTbs + " maxTbs: " + maxTbs + " sinr " + sinr[i]);
+				TBS_SINR_BW[sinr[i]+15][counter_ind] = TBS_SINR_BW[sinr[i]+15][0]+counter; //accumulated Counter
+				TBS_SINR_BW[sinr[i]+15][acc_tbs_ind] = TBS_SINR_BW[sinr[i]+15][1]+currentTbs; //accumulated tbs
+				TBS_SINR_BW[sinr[i]+15][acc_prb_ind] = TBS_SINR_BW[sinr[i]+15][2]+currentBandWidth; //accumulated allocated bandwidth
+				TBS_SINR_BW[sinr[i]+15][max_tbs_ind] = Math.max(TBS_SINR_BW[sinr[i]+15][3], maxTbs); //maximum tbs
+				TBS_SINR_BW[sinr[i]+15][max_prb_ind] = Math.max(TBS_SINR_BW[sinr[i]+15][4], maxPrb);
+				
+				currentCqi = findCloseValFrInd(cqi, i) + currentCqi;
+				cqiCounter++;
+				TBS_SINR_BW[sinr[i]+15][avg_cqi_ind] = currentCqi;
+				TBS_SINR_BW[sinr[i]+15][cqi_counter_ind] = cqiCounter;
+
+				TBS_SINR_BW[sinr[i]+15][acc_HARQ_ind]= TBS_SINR_BW[sinr[i]+15][acc_HARQ_ind] + currentHARQ; 
+				TBS_SINR_BW[sinr[i]+15][HARQ_counter_ind]= TBS_SINR_BW[sinr[i]+15][acc_HARQ_ind] + HARQCounter; 
+
+				//reset the accumulated values
+				currentBandWidth = 0;
+				currentsinr = sinr[i];
+				counter = 0;
+				currentTbs = 0;
+				maxTbs = 0;
+				HARQCounter=0;
+				currentHARQ=0;
+			}
+		}
+		
+		//calculate the average throughput/SINR and throughput/SINR/Hz
+		for (int j=0;j<TBS_SINR_BW.length;j++){ 
+			
+			if(TBS_SINR_BW[j][counter_ind] != 0 && TBS_SINR_BW[j][cqi_counter_ind] != 0){ //counter index mustn't be 0, division by zero error
+				dataperSinr[avgMbitsperSINR][j] = ((float) TBS_SINR_BW[j][acc_tbs_ind]/TBS_SINR_BW[j][counter_ind]/1000);//divide by thousand, we get Mbits/s/SINR
+				dataperSinr[peakMbitsperSINR][j] = (float) TBS_SINR_BW[j][max_tbs_ind]/1000;  //divide by thousand, we get Mbits/s/SINR
+				
+				//the division by 180 comes from one tbs is 1 ms long, multiply it by 1000 and divide by 180 000 to get bits/s/Hz/SINR
+				dataperSinr[avgBitsperSINRperHz][j] = (float) TBS_SINR_BW[j][acc_tbs_ind]/TBS_SINR_BW[j][acc_prb_ind]/180; //average bits/s/Hz/SINR
+				dataperSinr[peakBitsperSINRperHz][j] = (float) TBS_SINR_BW[j][max_tbs_ind]*TBS_SINR_BW[j][counter_ind]/TBS_SINR_BW[j][acc_prb_ind]/180; //average bits/s/Hz/SINR
+				dataperSinr[avgCqi][j] = (float) TBS_SINR_BW[j][avg_cqi_ind]/TBS_SINR_BW[j][cqi_counter_ind];
+			}
+		}
+		Print.array2D(dataperSinr);
+		return dataperSinr;
+	}
+	
+	
+	public static float[] avgBpsPerSINR(int[] tbs,int[] sinr,int[] SIB){
+		
+		//indexes
+		int counter_ind = 0;
+		int currentTbs_ind = 1;
+
+		
+		//values from the inputarrays
+		int counter = 0;
+		int currentsinr = 0;
+		int currentTbs = 0;
+		
+		int[][] tempTbsSINR = new int [45][2]; 
+		tempTbsSINR = init(tempTbsSINR);
+		
+		float[]	bpsPerSINR = new float [45];
+		bpsPerSINR = init(bpsPerSINR);
+		
+		
+		for(int i=0;i<sinr.length;i++){
+			//we've found legit tbs data, accumulate counter, tbs, bW and see if we have peak data rate.
+			if(SIB[i] != -1 && tbs[i] != 0){
+				currentTbs=currentTbs+tbs[i]; 
+				counter++;
+			}
+			
+
+			//acumulate the legit bandwidth and tbs and put it in TBS_SINR_BW on the sinr index.
+			if (currentsinr != sinr[i] && sinr[i] != 0){
+				 
+				System.out.println( " currentTBS: " + currentTbs);
+				tempTbsSINR[sinr[i]+15][counter_ind] = tempTbsSINR[sinr[i]+15][0]+counter; //accumulated Counter
+				tempTbsSINR[sinr[i]+15][currentTbs_ind] = tempTbsSINR[sinr[i]+15][1]+currentTbs; //accumulated tbs
+
+				//reset values
+				currentsinr = sinr[i];
+				counter = 0;
+				currentTbs = 0;
+			}
+		}
+		
+		//calculate the average throughput/SINR and throughput/SINR/Hz
+		for (int j=0;j<tempTbsSINR.length;j++){ 
+			System.out.println("komemr hit");
+			if(tempTbsSINR[j][counter_ind] != 0){ //counter index mustn't be 0, division by zero error
+				bpsPerSINR[j] = ((float) tempTbsSINR[j][currentTbs_ind]/tempTbsSINR[j][counter_ind]/1000);//divide by thousand, we get Mbits/s/SINR
+			}
+		}
+		Print.array(bpsPerSINR);
+		return bpsPerSINR;
+	}
+	
+	public static float[] maxBpsPerSINR(int[] tbs,int[] sinr,int[] SIB){
+		
+		//indexes
+		
+		//values from the inputarrays
+		int currentsinr = 0;
+		float currentMaxTbs = 0;
+		
+		float[] tempTbsSINR = new float [45]; 
+		tempTbsSINR = init(tempTbsSINR);
+		
+		float[]	maxBpsPerSINR = new float[45];
+		maxBpsPerSINR = init(maxBpsPerSINR);
+		
+		
+		for(int i=0;i<sinr.length;i++){
+			
+			//we've found legit tbs data, accumulate counter, tbs, bW and see if we have peak data rate.
+			currentMaxTbs = Math.max((float) (tbs[i]/1000), currentMaxTbs);
+			
+
+			if (currentsinr != sinr[i] && sinr[i] != 0){
+				System.out.println( " currentMaxTBS: " + currentMaxTbs);
+				tempTbsSINR[sinr[i]+15] = Math.max(tempTbsSINR[sinr[i]+15], currentMaxTbs); //accumulated tbs
+
+				//reset values
+				currentsinr = sinr[i];
+				currentMaxTbs = 0;
+			}
+		}
+		Print.array(maxBpsPerSINR);
+		return maxBpsPerSINR;
+	}
+	
+	
+	//IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+	public static int[] init(int[] arr){
+		for(int i=0;i<arr.length;i++){
+				arr[i] = 0;
+		}
+		return arr;
+	}
+	public static float[] init(float[] arr){
+		for(int i=0;i<arr.length;i++){
+				arr[i] = 0;
+		}
+		return arr;
+	}
+	public static int[][] init(int[][] arr){
+		for(int i=0;i<arr.length;i++){
+			for(int j=0;j<arr[0].length;j++){
+				arr[i][j] = 0;
+			}
+		}
+		return arr;
+	}
+	public static float[][] init(float[][] arr){
+		for(int i=0;i<arr.length;i++){
+			for(int j=0;j<arr[0].length;j++){
+				arr[i][j] = 0;
+			}
+		}
+		return arr;
+	}
+	
+	public static int findCloseValFrInd(int[] prb,int list_index){
+		int bandWidth = 0;
+		int inc = list_index;
+		int dec = list_index;
+		while(true){
+				if(prb[dec] != 0){
+					bandWidth = prb[dec];
+					break;
+				} else if (prb[inc] != 0){
+					bandWidth = prb[inc];
+					break;
+				}
+				if(dec-1 >= 0){
+					dec--;
+				}
+				if(inc<prb.length){
+					inc++;
+				}
+		}
+		//System.out.println(bandWidth+ " bandwidth");
+		return bandWidth;
+	}
+}

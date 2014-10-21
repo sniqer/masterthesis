@@ -1,0 +1,2 @@
+eclipse.preferences.version=1
+prefWatchExpressions=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\r\n<watchExpressions>\r\n<expression enabled\="true" text\="((float)TBS_SINR_BW[j][1]/TBS_SINR_BW[j][0]/1000)"/>\r\n<expression enabled\="true" text\="tbspersinr[bitsPerSINR][j+15]/TBS_SINR_BW[sinr[j]][2]*1000000"/>\r\n</watchExpressions>\r\n

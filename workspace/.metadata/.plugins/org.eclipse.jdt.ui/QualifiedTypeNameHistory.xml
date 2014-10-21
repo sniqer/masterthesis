@@ -3,4 +3,17 @@
 <fullyQualifiedTypeName name="java.io.BufferedReader"/>
 <fullyQualifiedTypeName name="java.io.FileReader"/>
 <fullyQualifiedTypeName name="java.lang.Integer"/>
+<fullyQualifiedTypeName name="org.jfree.chart.plot.PiePlot"/>
+<fullyQualifiedTypeName name="org.jfree.data.xy.XYSeries"/>
+<fullyQualifiedTypeName name="org.jfree.data.xy.XYSeriesCollection"/>
+<fullyQualifiedTypeName name="org.jfree.data.xy.XYDataset"/>
+<fullyQualifiedTypeName name="org.jfree.chart.plot.PlotOrientation"/>
+<fullyQualifiedTypeName name="org.jfree.chart.ChartFrame"/>
+<fullyQualifiedTypeName name="org.jfree.data.xy.XYDataItem"/>
+<fullyQualifiedTypeName name="java.util.Vector"/>
+<fullyQualifiedTypeName name="org.jfree.chart.axis.LogAxis"/>
+<fullyQualifiedTypeName name="org.jfree.chart.plot.XYPlot"/>
+<fullyQualifiedTypeName name="org.jfree.chart.axis.NumberAxis"/>
+<fullyQualifiedTypeName name="org.jfree.chart.axis.LogarithmicAxis"/>
+<fullyQualifiedTypeName name="java.awt.Color"/>
 </qualifiedTypeNameHistroy>
