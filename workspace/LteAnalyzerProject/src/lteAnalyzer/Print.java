@@ -13,6 +13,7 @@ public class Print {
 		}
 	}
 	public static void array(float[] stringArr){
+		System.out.println("printing!!!!!!");
 		for(int i=0;i<stringArr.length;i++){
 			System.out.println(stringArr[i]);
 		}
@@ -24,9 +25,10 @@ public class Print {
 	}
 	
 	public static void array2D(float[][] outputdata){
-		for(int i=0;i<outputdata.length;i++){
-			for(int j=0;j<outputdata[0].length;j++){
-				System.out.print(outputdata[i][j] + " "); 
+		System.out.println("printing!!!!!!");
+		for(int i=0;i<outputdata[0].length;i++){
+			for(int j=0;j<outputdata.length;j++){
+				System.out.print(outputdata[j][i] + " "); 
 			}
 			System.out.println();
 		}

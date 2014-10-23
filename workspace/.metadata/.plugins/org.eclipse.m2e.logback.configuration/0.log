@@ -80,3 +80,10 @@ Was expecting:
 	at org.apache.lucene.queryParser.QueryParser.TopLevelQuery(QueryParser.java:1226) ~[org.apache.lucene.core_3.5.0.v20120725-1805.jar:3.5.0 1204988 - simon - 2011-11-22 14:46:51]
 	at org.apache.lucene.queryParser.QueryParser.parse(QueryParser.java:206) ~[org.apache.lucene.core_3.5.0.v20120725-1805.jar:3.5.0 1204988 - simon - 2011-11-22 14:46:51]
 	... 63 common frames omitted
+2014-10-23 11:15:18,473 [Start Help Server] INFO  org.eclipse.jetty.server.Server - jetty-8.1.14.v20131031
+2014-10-23 11:15:18,629 [Start Help Server] INFO  o.e.jetty.server.AbstractConnector - Started SelectChannelConnector@127.0.0.1:64735
+2014-10-23 11:15:22,168 [qtp12116215-2305] WARN  o.eclipse.jetty.http.HttpGenerator - Ignoring extra content 
+
+
+
+2014-10-23 15:35:46,772 [Stop Help Server] INFO  o.e.j.server.handler.ContextHandler - stopped o.e.j.s.ServletContextHandler{/help,null}
