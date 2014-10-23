@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.10.17)  21 OCT 2014 09:08
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.10.17)  21 OCT 2014 10:42
 entering extended mode
 **qwe.tex
 (C:\Users\erazlin\git\masterthesis\endreport\qwe.tex
@@ -338,8 +338,8 @@ Underfull \hbox (badness 10000) in paragraph at lines 425--425
 (C:\Users\erazlin\git\masterthesis\endreport\qwe.aux) ) 
 Here is how much of TeX's memory you used:
  2223 strings out of 493921
- 30076 string characters out of 3146473
- 107910 words of memory out of 3000000
+ 30069 string characters out of 3146473
+ 107800 words of memory out of 3000000
  5482 multiletter control sequences out of 15000+200000
  11835 words of font info for 45 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
@@ -350,17 +350,15 @@ MikTex/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Program Files (x86)/MikTex
 /type1/public/amsfonts/cm/cmbx7.pfb><C:/Program Files (x86)/MikTex/fonts/type1/
 public/amsfonts/cm/cmr10.pfb><C:/Program Files (x86)/MikTex/fonts/type1/public/
 amsfonts/cm/cmr12.pfb><C:/Program Files (x86)/MikTex/fonts/type1/public/amsfont
-s/cm/cmr5.pfb><C:/Program Files (x86)/MikTex/fonts/type1/public/amsfonts/cm/cmr
-6.pfb><C:/Program Files (x86)/MikTex/fonts/type1/public/amsfonts/cm/cmr7.pfb><C
-:/Program Files (x86)/MikTex/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Progra
-m Files (x86)/MikTex/fonts/type1/public/amsfonts/cm/cmsl10.pfb><C:/Program File
-s (x86)/MikTex/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86
-)/MikTex/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files (x86)/MikTe
-x/fonts/type1/public/amsfonts/cm/cmsy9.pfb><C:/Program Files (x86)/MikTex/fonts
-/type1/public/amsfonts/symbols/msam7.pfb>
-Output written on qwe.pdf (17 pages, 3340222 bytes).
+s/cm/cmr7.pfb><C:/Program Files (x86)/MikTex/fonts/type1/public/amsfonts/cm/cmr
+9.pfb><C:/Program Files (x86)/MikTex/fonts/type1/public/amsfonts/cm/cmsl10.pfb>
+<C:/Program Files (x86)/MikTex/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Pr
+ogram Files (x86)/MikTex/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program F
+iles (x86)/MikTex/fonts/type1/public/amsfonts/cm/cmsy9.pfb><C:/Program Files (x
+86)/MikTex/fonts/type1/public/amsfonts/symbols/msam7.pfb>
+Output written on qwe.pdf (17 pages, 3321466 bytes).
 PDF statistics:
- 160 PDF objects out of 1000 (max. 8388607)
+ 152 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 
