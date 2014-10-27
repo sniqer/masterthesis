@@ -6,22 +6,23 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="nrSinrVals" key="selection"/>
+		<item value="public" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="private"/>
+			<item value="find"/>
+			<item value="close"/>
 			<item value="nrSinrValInd"/>
 			<item value="nrOfSinrInd"/>
-			<item value="find"/>
 			<item value="remo"/>
 			<item value="-11"/>
 			<item value="------"/>
-			<item value="kommer"/>
-			<item value="sib"/>
 		</list>
 		<list key="replacehistory">
+			<item value="public"/>
 			<item value="nrSinrVals"/>
 			<item value="nrSinrValInd"/>
 			<item value="dataperSinr"/>
