@@ -1,42 +1,52 @@
 package lteAnalyzer;
 
 public class Calculate {
-
 	
 	
-	
-	public static float[] maxBpsPerSINR(int[] tbs,int[] sinr,int[] SIB){
+	public static float[] avgValPerSINR(int[] val, int[] sinr, int[] SIB){
 		
-		//indexes
+		int value_ind = 0;
+		int counter_ind = 1;
 		
-		//values from the inputarrays
-		int currentsinr = 0;
-		float currentMaxTbs = 0;
+		int currentsinr = -1000; //dummydefault value
+		int counter = 0;
+		int currentVal = 0;
 		
-		float[]	maxBpsPerSINR = new float[45];
-		maxBpsPerSINR = init(maxBpsPerSINR);
+		float[][] tempValPerSINR = new float[2][63];
+		tempValPerSINR = BasicCalc.init(tempValPerSINR);
 		
+		float[] valPerSINR = new float[63];
+		valPerSINR = BasicCalc.init(valPerSINR);
 		
 		for(int i=0;i<sinr.length;i++){
 			
-			//we've found legit tbs data, accumulate counter, tbs, bW and see if we have peak data rate.
-			currentMaxTbs = Math.max((float) (tbs[i]/1000), currentMaxTbs);
+
+				//we've found legit tbs data, accumulate counter, tbs, bW and see if we have peak data rate.
+				if(SIB[i] != -1 && val[i] != -1337 ){
+					currentVal=currentVal+val[i]; 
+					counter++;
+				}
 			
-
-			if (currentsinr != sinr[i] && sinr[i] != -1337){
-				//System.out.println( " currentMaxTBS: " + currentMaxTbs);
-				maxBpsPerSINR[sinr[i]+15] = Math.max(maxBpsPerSINR[sinr[i]+15], currentMaxTbs); //accumulated tbs
-
+			if (sinr[i] != -1337&& sinr[i] != -2 && SIB[i] != -1){
+				System.out.println( " currentSinr: " + currentsinr+ " currentVal " + val[i]);
+				tempValPerSINR[value_ind][sinr[i]] = tempValPerSINR[value_ind][sinr[i]] + currentVal; //accumulated cqi
+				tempValPerSINR[counter_ind][sinr[i]] = tempValPerSINR[counter_ind][sinr[i]] + counter;
+				
 				//reset values
 				currentsinr = sinr[i];
-				currentMaxTbs = 0;
+				counter=0;
+				currentVal=0;
+				
 			}
 		}
-		Print.array(maxBpsPerSINR);
-		return maxBpsPerSINR;
+		for(int j=0;j<valPerSINR.length;j++){
+			if (tempValPerSINR[counter_ind][j] > 1)
+				valPerSINR[j] = tempValPerSINR[value_ind][j]/tempValPerSINR[counter_ind][j];
+		}
+			Print.array2D(tempValPerSINR);
+			//Print.array(valPerSINR);
+			return valPerSINR;
 	}
-	
-	
 	
 	
 	
@@ -49,7 +59,7 @@ public class Calculate {
 		float currentPrb = 0;
 		
 		float[]	maxBpsPerSINR = new float[45];
-		maxBpsPerSINR = init(maxBpsPerSINR);
+		maxBpsPerSINR = BasicCalc.init(maxBpsPerSINR);
 		
 		
 		for(int i=0;i<sinr.length;i++){
@@ -57,7 +67,7 @@ public class Calculate {
 			if(SIB[i] != -1 && tbs[i] != -1337){
 				//System.out.println( "foundTBS: " + tbs[i] + " foundPRB: " + findCloseValFrInd(prb,i));
 				currentTbs=currentTbs+tbs[i]; 
-				currentPrb=findCloseValFrInd(prb,i)+currentPrb;
+				currentPrb= BasicCalc.findCloseValFrInd(prb,i)+currentPrb;
 			}
 			
 
@@ -75,94 +85,54 @@ public class Calculate {
 		return maxBpsPerSINR;
 	}
 	
-	
-	
-
-	
-	//behövs nog ej
-	public static float[] blerPerSINR(int[] acksNnacks,int[] sinr){
-		int currentsinr = -1000; //dummydefault value
-		int currentAcks = 0;
-		int ackCounter = 0;
-		int currentBler_ind = 0;
-		int blerCounter_ind = 1;
-		
-		float[][] tempBler = new float[2][45];
-		tempBler = init(tempBler);
-		
-		float[] bler = new float[45];
-		bler = init(bler);
-		Print.array(acksNnacks);
-		for(int i=0;i<sinr.length;i++){
-			
-			if(acksNnacks[i] != -1337){
-				currentAcks = currentAcks + acksNnacks[i];
-				ackCounter = ackCounter + 2;
-			}
-			
-			if (currentsinr != sinr[i] && sinr[i] != -1337){
-				//System.out.println( " currentCqi: " + tempCqiPerSINR[currentCqi_ind][sinr[i]+15]+ " counter: " + tempCqiPerSINR[cqiCounter_ind][sinr[i]+15]);
-				tempBler[currentBler_ind][sinr[i]+15] = tempBler[currentBler_ind][sinr[i]+15] + currentAcks; //accumulated cqi
-				tempBler[blerCounter_ind][sinr[i]+15] = tempBler[blerCounter_ind][sinr[i]+15] + ackCounter;
-				
-				//reset values
-				currentsinr = sinr[i];
-			}
+	//beräknar SINR med hjälp av signalstyrkan och bruset.
+	public static float[] sinrGenerator(int[] puschPwr, int[] puschNoiseIntPwr){
+		float[] sinr = new float[puschPwr.length];
+		for (int i=0; i<puschPwr.length;i++){
+			sinr[i] = (int) puschPwr[i]/BasicCalc.findCloseValFrInd(puschNoiseIntPwr,i);
 		}
-		for(int j=0;j<bler.length;j++){
-			if (tempBler[currentBler_ind][j] != 0 && tempBler[blerCounter_ind][j] != 0 )
-				bler[j] =1-tempBler[currentBler_ind][j]/tempBler[blerCounter_ind][j];
-		}
-			Print.array(bler);
-			return bler;
-		}
-	
-	
-	
-	public static float[] avgValPerSINR(int[] val, int[] sinr, int[] SIB){
-		
-		int value_ind = 0;
-		int counter_ind = 1;
-		
-		int currentsinr = -1000; //dummydefault value
-		int counter = 0;
-		int currentVal = 0;
-		
-		float[][] tempValPerSINR = new float[2][63];
-		tempValPerSINR = init(tempValPerSINR);
-		
-		float[] valPerSINR = new float[63];
-		valPerSINR = init(valPerSINR);
-		
-		for(int i=0;i<sinr.length;i++){
-			
-
-				//we've found legit tbs data, accumulate counter, tbs, bW and see if we have peak data rate.
-				if(SIB[i] != -1 && val[i] != -1337 ){
-					currentVal=currentVal+val[i]; 
-					counter++;
-				}
-			
-			if (sinr[i] != -1337&& sinr[i] != -2 && SIB[i] != -1){
-				//System.out.println( " currentCqi: " + tempCqiPerSINR[currentCqi_ind][sinr[i]+15]+ " counter: " + tempCqiPerSINR[cqiCounter_ind][sinr[i]+15]);
-				tempValPerSINR[value_ind][sinr[i]] = tempValPerSINR[value_ind][sinr[i]] + currentVal; //accumulated cqi
-				tempValPerSINR[counter_ind][sinr[i]] = tempValPerSINR[counter_ind][sinr[i]] + counter;
-				
-				//reset values
-				currentsinr = sinr[i];
-				counter=0;
-				currentVal=0;
-				
-			}
-		}
-		for(int j=0;j<valPerSINR.length;j++){
-			if (tempValPerSINR[counter_ind][j] > 100)
-				valPerSINR[j] = tempValPerSINR[value_ind][j]/tempValPerSINR[counter_ind][j];
-		}
-			Print.array2D(tempValPerSINR);
-			Print.array(valPerSINR);
-			return valPerSINR;
+		return sinr;
 	}
+	
+
+
+	
+	
+
+	
+	public static float[] maxValPerSINR(int[] tbs,int[] sinr,int[] SIB){
+		//indexes
+		
+		//values from the inputarrays
+		int currentsinr = 0;
+		float currentMaxTbs = 0;
+		
+		float[]	maxBpsPerSINR = new float[45];
+		maxBpsPerSINR = BasicCalc.init(maxBpsPerSINR);
+		
+		
+		for(int i=0;i<sinr.length;i++){
+			
+			//we've found legit tbs data, accumulate counter, tbs, bW and see if we have peak data rate.
+			currentMaxTbs = Math.max((float) (tbs[i]), currentMaxTbs);
+			
+
+			if (currentsinr != sinr[i] && sinr[i] != -1337 && sinr[i] != -2){
+				//System.out.println( " currentMaxTBS: " + currentMaxTbs);
+				maxBpsPerSINR[sinr[i]] = Math.max(maxBpsPerSINR[sinr[i]], currentMaxTbs); //accumulated tbs
+
+				//reset values
+				currentsinr = sinr[i];
+				currentMaxTbs = 0;
+			}
+		}
+		Print.array(maxBpsPerSINR);
+		return maxBpsPerSINR;
+	}
+	
+	
+
+	
 	
 	public static float[] avgSINRPerMcs(int[] mcs,int[] sinr, int[] SIB, String ULorDL){
 		
@@ -190,8 +160,8 @@ public class Calculate {
 		}
 
 		
-		tempSinrPerMcs = init(tempSinrPerMcs);
-		sinrPerMcs = init(sinrPerMcs);
+		tempSinrPerMcs = BasicCalc.init(tempSinrPerMcs);
+		sinrPerMcs = BasicCalc.init(sinrPerMcs);
 		
 		
 		for(int i=0;i<sinr.length;i++){
@@ -201,12 +171,12 @@ public class Calculate {
 				counter++;
 			}
 
-			if (currentMcs != mcs[i] && mcs[i] != -1337 && SIB[i] != -1){
+			if (currentMcs != mcs[i] && mcs[i] > 0 && mcs[i] <= 28 && SIB[i] != -1 ){
 				//System.out.println(mcs[i]);
 				System.out.println( " mcs: " + mcs[i] + " current sinr: " + currentSinr + " counter: " + counter);
 				tempSinrPerMcs[mcs[i]][counter_ind] = tempSinrPerMcs[mcs[i]][counter_ind]+counter; //accumulated Counter
 				tempSinrPerMcs[mcs[i]][currentSinr_ind] = tempSinrPerMcs[mcs[i]][currentSinr_ind]+currentSinr; //accumulated Prb
-				System.out.println(currentMcs + " " +tempSinrPerMcs[mcs[i]-1][counter_ind] + " " +  tempSinrPerMcs[mcs[i]][currentSinr_ind]);
+				//System.out.println(currentMcs + " " +tempSinrPerMcs[mcs[i]-1][counter_ind] + " " +  tempSinrPerMcs[mcs[i]][currentSinr_ind]);
 				//reset values
 				currentSinr = 0;
 				counter = 0;
@@ -221,103 +191,5 @@ public class Calculate {
 		}
 		Print.array(sinrPerMcs);
 		return sinrPerMcs;
-	}
-	//IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII BASIC CALULATION FUNCTION IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
-	private static int[] init(int[] arr){
-		for(int i=0;i<arr.length;i++){
-				arr[i] = 0;
-		}
-		return arr;
-	}
-	private static float[] init(float[] arr){
-		for(int i=0;i<arr.length;i++){
-				arr[i] = 0;
-		}
-		return arr;
-	}
-	private static int[][] init(int[][] arr){
-		for(int i=0;i<arr.length;i++){
-			for(int j=0;j<arr[0].length;j++){
-				arr[i][j] = 0;
-			}
-		}
-		return arr;
-	}
-	private static float[][] init(float[][] arr){
-		for(int i=0;i<arr.length;i++){
-			for(int j=0;j<arr[0].length;j++){
-				arr[i][j] = 0;
-			}
-		}
-		return arr;
-	}
-	public static int[] addArrays(int[] arr1, int[] arr2){
-		int[] outArr = new int[Math.min(arr1.length, arr2.length)];
-		for(int i = 0; i < outArr.length; i++){
-			outArr[i] = arr1[i]+arr2[i];
-		}
-		return outArr;
-	}
-	private static int findCloseValFrInd(int[] prb,int list_index){
-		int bandWidth = 0;
-		int inc = list_index;
-		int dec = list_index;
-		while(true){
-				if(prb[dec] != -1337){
-					bandWidth = prb[dec];
-					break;
-				} else if (prb[inc] != -1337){
-					bandWidth = prb[inc];
-					break;
-				}
-				if(dec > 0){
-					dec--;
-				}
-				if(inc<prb.length){
-					inc++;
-				}
-		}
-		//System.out.println(bandWidth+ " bandwidth");
-		return bandWidth;
-	}
-	
-	//tbs is bits sending per ms, divide it by thousand to get it in Mbits/s
-	public static float[] tbs2Mbps(float[] tbs){
-		float[] bps = new float[tbs.length];
-		for(int i=0;i<tbs.length;i++)
-			bps[i] = tbs[i]/1000;
-		
-		return bps;
-	}
-	
-	// 1 prb is 180 khz
-	public static float[] prb2hz(float[] prb){
-		float[] hz = new float[prb.length];
-		for(int i=0;i<prb.length;i++)
-			hz[i] = prb[i]*180000;
-		
-		return hz;
-	}
-	
-	//divide the average Mbit/s/SINR to the average of allocated bandwidth/SINR
-	public static float[] spectralEfficiencyPerSINR(float[] bpsPerSINR, float[] hzPerSINR){
-		float[] specEff = new float[hzPerSINR.length];
-		for(int i=0;i<hzPerSINR.length;i++){
-			if(hzPerSINR[i] != 0){
-				specEff[i] = bpsPerSINR[i]/hzPerSINR[i];
-			} else {
-				specEff[i] = 0;
-			}
-			
-		}
-		return specEff;
-	}
-	
-	public static float[] prefixChanger(float[] in, float prefix){
-		float[] out = new float[in.length];
-		for(int i=0;i<in.length;i++)
-			out[i] = in[i]*prefix;
-		
-		return out;
 	}
 }

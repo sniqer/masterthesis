@@ -35,7 +35,7 @@ public class Main {
 		int cols = 0;
 		
 		//läser cvs file
-		dummyreader = new BufferedReader(new FileReader("C:/Users/epauned/documents/logtool/testingfile.csv"));
+		dummyreader = new BufferedReader(new FileReader("C:/Users/epauned/documents/logtool/burk.csv"));
 		cols = dummyreader.readLine().split(",").length;
 		
 		while ((dummyline = dummyreader.readLine()) != null) {
@@ -66,6 +66,7 @@ public class Main {
 		int[] cqi			= new int[rows];		//Channel Quality Index
 		int[] ri			= new int[rows];
 		int[] HARQ			= new int[rows];		//HARQ ack and nacks
+		int[] bler			= new int[rows];
 
 
 		
@@ -86,6 +87,7 @@ public class Main {
 		
 		float[] dlAvgMcsPerSinr			= new float[nrUlMcsVals];
 		float[] ulAvgMcsPerSinr			= new float[nrDlMcsVals];
+		float[] dlAvgBlerPerSINR		= new float[nrSinrVals];
 		
 
 		
@@ -96,10 +98,9 @@ public class Main {
 		//läser cvs file
 		String[][] lteDataMatrix = new String[rows][cols];
 		String[] header = new String[cols];
-		reader = new BufferedReader(new FileReader("C:/Users/epauned/documents/logtool/testingfile.csv"));
+		reader = new BufferedReader(new FileReader("C:/Users/epauned/documents/logtool/burk.csv"));
 		while ((line = reader.readLine()) != null) {
 			if(i<rows){
-				//System.out.println("kommer hit");
 				lteDataMatrix[i] = line.split(",");
 				i++;
 			} else break;
@@ -112,15 +113,15 @@ public class Main {
 		
 		//indexes
 		int SIBIndex 		= findHeaderIndex(header, "bbUeRef",0);
-		int dLSINRIndex 	= findHeaderIndex(header, "cqi",0);
-		int uLSINRIndex 	= findHeaderIndex(header, "pucchSinr",0);
-		int dLtbssumIndex 	= findHeaderIndex(header, "tbsSum",0);
+		int dLSINRIndex 	= findHeaderIndex(header, "cqi",0); //fulfel!
+		int uLSINRIndex 	= findHeaderIndex(header, "sinr",0);
+		int dLtbssumIndex 	= findHeaderIndex(header, "tbs1",0);
 		int dLprbIndex 		= findHeaderIndex(header, "prb",0);
 		int uLprbIndex 		= findHeaderIndex(header, "prb",1);
 		int uLtbsIndex 		= findHeaderIndex(header, "tbs",1);
 		int cqiIndex 		= findHeaderIndex(header, "cqi",0);
 		int riIndex			= findHeaderIndex(header, "ri",0);
-		int HARQIndex 		= findHeaderIndex(header, "harq",0);
+		int blerIndex 		= findHeaderIndex(header, "bler",0);
 		
 		int ulMcsIndex 		= findHeaderIndex(header, "mcs",2);
 		int dlMcs1Index 	= findHeaderIndex(header, "mcs1",0);
@@ -139,43 +140,41 @@ public class Main {
 		SIB			= interpretLTEdata(lteDataMatrix[SIBIndex]);
 		dlSINR 		= interpretLTEdata(lteDataMatrix[dLSINRIndex]);
 		ulSINR 		= interpretLTEdata(lteDataMatrix[uLSINRIndex]);
-		HARQ		= interpretLTEdata(lteDataMatrix[HARQIndex]);
 		dlPrb  		= interpretLTEdata(lteDataMatrix[dLprbIndex]);
 		ulPrb  		= interpretLTEdata(lteDataMatrix[uLprbIndex]);
 		cqi   		= interpretLTEdata(lteDataMatrix[cqiIndex]);
 		ri			= interpretLTEdata(lteDataMatrix[riIndex]);
+		bler		= interpretLTEdata(lteDataMatrix[blerIndex]);
 		
 		ulMcs		= interpretLTEdata(lteDataMatrix[ulMcsIndex]);
 		dlMcs1		= interpretLTEdata(lteDataMatrix[dlMcs1Index]);
 		dlMcs2		= interpretLTEdata(lteDataMatrix[dlMcs2Index]);
-		dlMcsSum	= Calculate.addArrays(dlMcs1, dlMcs2);
+		dlMcsSum	= BasicCalc.addArrays(dlMcs1, dlMcs2);
 		
 		
-		dlAvgBpsPerSINR = Calculate.tbs2Mbps(Calculate.avgValPerSINR(dLtbssum, dlSINR, SIB));
-		//Print.array(dlAvgBpsPerSINR);
-		//dlAvgBpsPerSINR =  Calculate.avgValPerSINR(dLtbssum, dlSINR, SIB) ;
-		//ulAvgBpsPerSINR = Calculate.avgValPerSINR(uLtbssum, ulSINR, SIB);
-		//dlMaxBpsPerSINR = Calculate.maxBpsPerSINR(dLtbssum, dlSINR, SIB);
-		//dlAvgBpsPerHzPerSINR = Calculate.avgBpsPerHzPerSINR(dLtbssum,dlPrb, dlSINR, SIB);
-		//dlMaxBpsPerHzPerSINR = Calculate.maxBpsPerHzPerSINR(dLtbssum,dlPrb, dlSINR, SIB);
-//		cqiPerSINR = Calculate.cqiPerSINR(cqi, dlSINR);
-//		cqiPerSINR = Calculate.avgValPerSINR(ri, dlSINR,SIB);
-//		riPerSINR = Calculate.riPerSINR(ri, dlSINR);
-		//blerPerSINR	= Calculate.blerPerSINR(HARQ, dlSINR);
-		//ulPrbPerSINR = Calculate.avgValPerSINR(ri, dlSINR, SIB);
-//		dlPrbPerSINR = Calculate.prb2hz(Calculate.avgValPerSINR(dlPrb, dlSINR, SIB));
-//		riPerSINR = Calculate.spectralEfficiencyPerSINR(dlAvgBpsPerSINR, dlPrbPerSINR);
-//		Print.array(riPerSINR);
-		//dlAvgBpsPerHzPerSINR = Calculate.avgBpsPerHzPerSINR(dLtbssum,dlPrb, dlSINR, SIB);
-		//ulAvgMcsPerSinr = Calculate.avgSINRPerMcs(dlMcs1,dlSINR , SIB, "DL");
-		//Print.array(ulSINR);
+		
+		//verkar ok
+		dlAvgBpsPerSINR = BasicCalc.tbs2Mbps(Calculate.avgValPerSINR(dLtbssum, dlSINR, SIB)); 
+		//verkar ok
+		dlPrbPerSINR = Calculate.avgValPerSINR(dlPrb, dlSINR, SIB);
+		//verkar initialt ok. några konstiga värden kring 0 cqi...
+		//dlMaxBpsPerSINR = BasicCalc.tbs2Mbps(Calculate.maxValPerSINR(dLtbssum, dlSINR, SIB));
+		//verkar ok, lite konstig runt 0.
+		//dlAvgMcsPerSinr = Calculate.avgSINRPerMcs(dlMcs1,dlSINR , SIB, "DL");
+		//verkar inte ok, kolla på senare.
+		//ulAvgMcsPerSinr = Calculate.avgSINRPerMcs(ulMcs,ulSINR , SIB, "UL");
+		//högst oklart om bra. för låg bler runt 4 och 5 cqi.
+		//dlAvgBlerPerSINR = Calculate.avgValPerSINR(bler, dlSINR, SIB);
+		//cqi per cqi, ser rätt ut
+		//cqiPerSINR = Calculate.avgValPerSINR(cqi, dlSINR,SIB);
+		//ser rätt ut. men hur fanken kan vi ha rank indiaction 1 med cl-MIMO????
+		//riPerSINR = Calculate.avgValPerSINR(ri, dlSINR,SIB);
+		
+		
 
+		dlAvgBpsPerHzPerSINR = BasicCalc.spectralEfficiencyPerSINR(dlAvgBpsPerSINR, BasicCalc.prb2hz(dlPrbPerSINR));
 		
-//		uLMbitsperSINR[0] = uplinkData[0];
-//		uLMbitsperSINR[1] = uplinkData[2];
-//		
-//		uLMbitsperHzperSINR[0] = uplinkData[1];
-//		uLMbitsperHzperSINR[1] = uplinkData[3];
+
 
 
 //		logPlot(
@@ -189,11 +188,12 @@ public class Main {
 //				"SINR [dB]",
 //				"Spectral efficiency, [bits/s/Hz]");
 		
-		logPlot(
-				dlAvgBpsPerSINR,
+		Plot.normal(
+				dlAvgBpsPerHzPerSINR,
 				"UL Throughput/SINR",
 				"SINR [dB]",
-				"Throughput, [Mbits/s]");
+				"Throughput, [Mbits/s]",
+				"inte logaritmik");
 //		logPlot(
 //				dLMbitsperHzperSINR,
 //				"UL Throughput/SINR/BW", 
@@ -237,13 +237,20 @@ public class Main {
 			
 			} else if (lteData[i].contains("NACK") ){
 				out[i] = 0;
+			} else if (lteData[i].contains("%") ){
+				//blööööörk
+				out[i]= Integer.parseInt(lteData[i].replace("%", "").trim());
 			}
 				
 			else {
 				try{
 					out[i] = Integer.parseInt(lteData[i].trim()); // parse the string in ltedata[i] to an integer
-				} catch(Exception e) {
-					out[i] = -1337;
+				} catch(Exception floatError) {
+					try{
+						out[i] = (int) Float.parseFloat(lteData[i].trim());
+					} catch(Exception notAnumberError) {
+						out[i] = -1337;
+					}
 				}
 			}
 		}
@@ -267,39 +274,6 @@ public class Main {
 		return output;
 	}
 
-	public static void logPlot(float[] outputdata,String header,String Xaxis,String Yaxis){
-
-		XYSeries avgVal 	= new XYSeries("average");
-		
-		XYDataset xyDataset = new XYSeriesCollection();
-		((XYSeriesCollection) xyDataset).addSeries(avgVal);
-
-
-		//print2dArray(outputdata);
-        for(int k=0;k<outputdata.length;k++){
-        	if(outputdata[k] != 0){
-        		avgVal.add(k,outputdata[k]); //average data values is on row 0
-        	}        	
-
-        }
-
-        JFreeChart chart = ChartFactory.createXYLineChart(
-                header, 
-                Xaxis, 
-                Yaxis,
-                xyDataset, 
-                PlotOrientation.VERTICAL, 
-                true, true, false);
-
-        final XYPlot plot = chart.getXYPlot();
-        ChartFrame graphFrame = new ChartFrame("XYLine Chart", chart);
-        graphFrame.setVisible(true);
-        graphFrame.setSize(700, 500); 
-        final NumberAxis domainAxis = new NumberAxis(Xaxis);
-        final NumberAxis rangeAxis = new LogarithmicAxis(Yaxis);
-        plot.setDomainAxis(domainAxis);
-        plot.setRangeAxis(rangeAxis);
-	}
 
 
 	
@@ -334,6 +308,7 @@ public class Main {
 				}
 			}
 		}
+		System.out.println("hitta inget index");
 		return -1;
 	}
 }
