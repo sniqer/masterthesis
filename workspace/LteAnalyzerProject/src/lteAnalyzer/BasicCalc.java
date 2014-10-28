@@ -108,6 +108,51 @@ public class BasicCalc {
 			System.out.println(array[i]);
 	}
 	
+	public static String[][] transpose(String[][] stringArr){
+		System.out.println(stringArr[0].length);
+		String[][] output = new String[stringArr[0].length][stringArr.length];
+		for(int i=0;i<stringArr.length;i++){
+			for(int j=0;j<stringArr[0].length;j++){
+				output[j][i] = stringArr[i][j];
+			}
+		}
+		return output;
+	}
+	
+	public static float[] maxKbps(int bandwidth,int fromSINR,int toSINR){
+		float[] maximum = new float[45];
+		for(int i=fromSINR;i<toSINR;i++){
+			maximum[i-fromSINR] =  (float) (bandwidth*(Math.log(Math.pow(10, (float) i/10)+1)/0.6931));
+		}
+		return maximum;
+	}
+	
+	public static float[] maxKbpspHz(int fromSINR,int toSINR){
+		float[] maxbpspHz = new float[45];
+		for(int i=fromSINR;i<toSINR;i++){
+			maxbpspHz[i-fromSINR] =  (float) (Math.log(Math.pow(10, (float) i/10)+1)/0.6931);
+		}
+		return maxbpspHz;
+	}
+
+	
+	public static int findHeaderIndex(String[] header, String headerName,int doublett){
+		int doublettcounter = 0;
+		for(int i=0;i<header.length;i++){
+			
+			if(header[i].contains(headerName)){
+				
+				if (doublett==doublettcounter){
+					return i;
+				} else {
+					System.out.println(headerName + " " + doublettcounter+1);
+					doublettcounter++;
+				}
+			}
+		}
+		System.out.println("hitta inget index");
+		return -1;
+	}
 }
 
 

@@ -6,37 +6,37 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="public" key="selection"/>
+		<item value="NR_OF_MCS_VALS" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="NR_OF_DL_MCS_VALS"/>
+			<item value="NR_OF_CQI_VALS"/>
+			<item value="maxbpsPerCqi"/>
+			<item value="SINR"/>
 			<item value="private"/>
 			<item value="find"/>
 			<item value="close"/>
 			<item value="nrSinrValInd"/>
-			<item value="nrOfSinrInd"/>
-			<item value="remo"/>
-			<item value="-11"/>
-			<item value="------"/>
 		</list>
 		<list key="replacehistory">
+			<item value="NR_OF_MCS_VALS"/>
+			<item value="NR_OF_SINR_VALS"/>
+			<item value="NR_OF_CQI_VALS"/>
+			<item value="maxValPerCqi"/>
+			<item value="cqi"/>
+			<item value="Cqi"/>
 			<item value="public"/>
 			<item value="nrSinrVals"/>
-			<item value="nrSinrValInd"/>
-			<item value="dataperSinr"/>
-			<item value="dLMbitsperSINRandHz"/>
-			<item value="interpretLTEdata"/>
-			<item value="MbitsperSINRandHz"/>
-			<item value="long"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item value="257" key="DIALOG_WIDTH"/>
+		<item value="302" key="DIALOG_WIDTH"/>
 		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
 		<item value="380" key="DIALOG_HEIGHT"/>
-		<item value="1055" key="DIALOG_X_ORIGIN"/>
+		<item value="1010" key="DIALOG_X_ORIGIN"/>
 		<item value="279" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>
