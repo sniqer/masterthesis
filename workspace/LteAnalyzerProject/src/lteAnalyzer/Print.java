@@ -9,17 +9,20 @@ public class Print {
 	}
 	public static void array(double[] stringArr){
 		for(int i=0;i<stringArr.length;i++){
-			System.out.println(stringArr[i]);
+			if(stringArr[i] != -1337)
+				System.out.println(stringArr[i]);
 		}
 	}
 	public static void array(float[] stringArr){
 		System.out.println("printing!!!!!!");
 		for(int i=0;i<stringArr.length;i++){
-			System.out.println(stringArr[i]);
+			if(stringArr[i] != -1337)
+				System.out.println(stringArr[i]);
 		}
 	}
 	public static void array(int[] stringArr){
 		for(int i=0;i<stringArr.length;i++){
+			if(stringArr[i] != -1337)
 			System.out.println(stringArr[i]);
 		}
 	}
@@ -49,5 +52,4 @@ public class Print {
 			System.out.println();
 		}
 	}
-	
 }

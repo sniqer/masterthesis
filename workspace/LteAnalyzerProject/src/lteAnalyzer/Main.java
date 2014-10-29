@@ -54,8 +54,7 @@ public class Main {
 		int[] uLtbssum 		= new int[rows]; 		//the sum of the Tbs's
 		int[] dlPrb 		= new int[rows];		//the physical resource blocks
 		int[] ulPrb 		= new int[rows];		//the physical resource blocks
-		int[] dlSINR 		= new int[rows];		//the signal-to-interference-ratio in the channel, over pusch (i think)
-		int[] ulSINR 		= new int[rows];		//the signal-to-interference-ratio in the channel, over pucch (i think)
+		int[] SINR	 		= new int[rows];		//the signal-to-interference-ratio in the channel, over pucch (i think)
 		
 		int[] ulMcs			= new int[rows];		//börk
 		int[] dlMcs1		= new int[rows];		//börk
@@ -71,24 +70,7 @@ public class Main {
 
 		
 		
-		/*The data to be plotted, first row is bitsperSINR, second is bitsperSINRperhz
-		 * it will go from -15 to 30 dB*/
-		float[] dlAvgBpsPerSINR	 		= new float[nrSinrVals]; 
-		float[] ulAvgBpsPerSINR			= new float[nrSinrVals];
-		float[] dlMaxBpsPerSINR	 		= new float[nrSinrVals];
-		float[] ulMaxBpsPerSINR	 		= new float[nrSinrVals];
-		float[] dlAvgBpsPerHzPerSINR	= new float[nrSinrVals]; 
-		float[] dlMaxBpsPerHzPerSINR	= new float[nrSinrVals];
-		float[] cqiPerSINR				= new float[nrSinrVals];
-		float[] riPerSINR				= new float[nrSinrVals];
-		float[] dlPrbPerSINR			= new float[nrSinrVals];
-		float[] ulPrbPerSINR			= new float[nrSinrVals];
-		float[] blerPerSINR				= new float[nrSinrVals];
-		
-		float[] dlAvgMcsPerSinr			= new float[nrUlMcsVals];
-		float[] ulAvgMcsPerSinr			= new float[nrDlMcsVals];
-		float[] dlAvgBlerPerSINR		= new float[nrSinrVals];
-		
+
 
 		
 		String line = null;
@@ -109,23 +91,22 @@ public class Main {
 		header = lteDataMatrix[0];
 		Print.array(header);
 		//System.out.println("kommer hit");
-		lteDataMatrix = transpose(lteDataMatrix);
+		lteDataMatrix = BasicCalc.transpose(lteDataMatrix);
 		
 		//indexes
-		int SIBIndex 		= findHeaderIndex(header, "bbUeRef",0);
-		int dLSINRIndex 	= findHeaderIndex(header, "cqi",0); //fulfel!
-		int uLSINRIndex 	= findHeaderIndex(header, "sinr",0);
-		int dLtbssumIndex 	= findHeaderIndex(header, "tbs1",0);
-		int dLprbIndex 		= findHeaderIndex(header, "prb",0);
-		int uLprbIndex 		= findHeaderIndex(header, "prb",1);
-		int uLtbsIndex 		= findHeaderIndex(header, "tbs",1);
-		int cqiIndex 		= findHeaderIndex(header, "cqi",0);
-		int riIndex			= findHeaderIndex(header, "ri",0);
-		int blerIndex 		= findHeaderIndex(header, "bler",0);
+		int SIBIndex 		= BasicCalc.findHeaderIndex(header, "bbUeRef",0);
+		int uLSINRIndex 	= BasicCalc.findHeaderIndex(header, "sinr",0);//hos razmus puschSinr
+		int cqiIndex 		= BasicCalc.findHeaderIndex(header, "cqi",0);
+		int dLtbssumIndex 	= BasicCalc.findHeaderIndex(header, "tbs1",0);//hos razmus tbssum
+		int dLprbIndex 		= BasicCalc.findHeaderIndex(header, "prb",0);
+		int uLprbIndex 		= BasicCalc.findHeaderIndex(header, "prb",1);
+		int uLtbsIndex 		= BasicCalc.findHeaderIndex(header, "tbs",2);
+		int riIndex			= BasicCalc.findHeaderIndex(header, "ri",0);
+		int blerIndex 		= BasicCalc.findHeaderIndex(header, "bler",0);
 		
-		int ulMcsIndex 		= findHeaderIndex(header, "mcs",2);
-		int dlMcs1Index 	= findHeaderIndex(header, "mcs1",0);
-		int dlMcs2Index 	= findHeaderIndex(header, "mcs2",0);
+		int ulMcsIndex 		= BasicCalc.findHeaderIndex(header, "mcs",2);
+		int dlMcs1Index 	= BasicCalc.findHeaderIndex(header, "mcs1",0);
+		int dlMcs2Index 	= BasicCalc.findHeaderIndex(header, "mcs2",0);
 		
 
 //		Print.array(header);
@@ -138,8 +119,7 @@ public class Main {
 		dLtbssum 	= interpretLTEdata(lteDataMatrix[dLtbssumIndex]);
 		uLtbssum	= interpretLTEdata(lteDataMatrix[uLtbsIndex]);
 		SIB			= interpretLTEdata(lteDataMatrix[SIBIndex]);
-		dlSINR 		= interpretLTEdata(lteDataMatrix[dLSINRIndex]);
-		ulSINR 		= interpretLTEdata(lteDataMatrix[uLSINRIndex]);
+		SINR 		= interpretLTEdata(lteDataMatrix[uLSINRIndex]);
 		dlPrb  		= interpretLTEdata(lteDataMatrix[dLprbIndex]);
 		ulPrb  		= interpretLTEdata(lteDataMatrix[uLprbIndex]);
 		cqi   		= interpretLTEdata(lteDataMatrix[cqiIndex]);
@@ -152,55 +132,101 @@ public class Main {
 		dlMcsSum	= BasicCalc.addArrays(dlMcs1, dlMcs2);
 		
 		
+		/*The data to be plotted, first row is bitsperSINR, second is bitsperSINRperhz
+		 * it will go from -15 to 30 dB*/
+		float[] dlAvgBpsPerCqi	 		= new float[nrSinrVals]; 
+		float[] ulAvgBpsPerSINR			= new float[nrSinrVals];
+		float[] dlMaxBpsPerCqi	 		= new float[nrSinrVals];
+		float[] ulMaxBpsPerSINR	 		= new float[nrSinrVals];
 		
-		//verkar ok
-		dlAvgBpsPerSINR = BasicCalc.tbs2Mbps(Calculate.avgValPerSINR(dLtbssum, dlSINR, SIB)); 
-		//verkar ok
-		dlPrbPerSINR = Calculate.avgValPerSINR(dlPrb, dlSINR, SIB);
-		//verkar initialt ok. några konstiga värden kring 0 cqi...
-		//dlMaxBpsPerSINR = BasicCalc.tbs2Mbps(Calculate.maxValPerSINR(dLtbssum, dlSINR, SIB));
-		//verkar ok, lite konstig runt 0.
-		//dlAvgMcsPerSinr = Calculate.avgSINRPerMcs(dlMcs1,dlSINR , SIB, "DL");
-		//verkar inte ok, kolla på senare.
-		//ulAvgMcsPerSinr = Calculate.avgSINRPerMcs(ulMcs,ulSINR , SIB, "UL");
-		//högst oklart om bra. för låg bler runt 4 och 5 cqi.
-		//dlAvgBlerPerSINR = Calculate.avgValPerSINR(bler, dlSINR, SIB);
-		//cqi per cqi, ser rätt ut
-		//cqiPerSINR = Calculate.avgValPerSINR(cqi, dlSINR,SIB);
-		//ser rätt ut. men hur fanken kan vi ha rank indiaction 1 med cl-MIMO????
-		//riPerSINR = Calculate.avgValPerSINR(ri, dlSINR,SIB);
+		float[] dlPrbPerCqi				= new float[nrSinrVals];
+		float[] ulPrbPerSINR			= new float[nrSinrVals];
+		
+		float[] dlAvgSpecEffPerCqi		= new float[nrSinrVals]; 
+		float[] ulAvgSpecEffPerSINR		= new float[nrSinrVals];
+
+		float[] blerPerSINR				= new float[nrSinrVals];
+		float[] riPerCqi				= new float[nrSinrVals];
+		
+		float[] dlAvgCqiPerMcs1			= new float[nrUlMcsVals];
+		float[] ulAvgSinrPerMcs			= new float[nrDlMcsVals];
+		
+		
+		
+		dlAvgBpsPerCqi = BasicCalc.tbs2Mbps(DLCalc.avgValPerCqi(dLtbssum, cqi, SIB,300)); 
+		dlMaxBpsPerCqi = BasicCalc.tbs2Mbps(DLCalc.maxValPerCqi(dLtbssum, cqi, SIB));
+		ulAvgBpsPerSINR = BasicCalc.tbs2Mbps(ULCalc.avgValPerSINR(uLtbssum, SINR, SIB,100)); 
+		ulMaxBpsPerSINR = BasicCalc.tbs2Mbps(ULCalc.maxValPerSINR(uLtbssum, SINR, SIB));
+		
+		dlPrbPerCqi = DLCalc.avgValPerCqi(dlPrb, cqi, SIB,300);
+		ulPrbPerSINR = ULCalc.avgValPerSINR(ulPrb, SINR, SIB,100);
+		
+		dlAvgSpecEffPerCqi = BasicCalc.spectralEfficiencyPerSINR(BasicCalc.prefixChanger(dlAvgBpsPerCqi, 1000000), BasicCalc.prb2hz(dlPrbPerCqi));
+		ulAvgSpecEffPerSINR = BasicCalc.spectralEfficiencyPerSINR(BasicCalc.prefixChanger(ulAvgBpsPerSINR,1000000), BasicCalc.prb2hz(ulPrbPerSINR));
+		
+		blerPerSINR = DLCalc.avgValPerCqi(bler, cqi, SIB,30);
+		riPerCqi = DLCalc.avgValPerCqi(ri, cqi, SIB,1);
+
+		dlAvgCqiPerMcs1 = DLCalc.avgCqiPerMcs(dlMcs1, cqi , SIB);
+		ulAvgSinrPerMcs = ULCalc.avgSINRPerMcs(ulMcs, SINR , SIB);
+		
 		
 		
 
-		dlAvgBpsPerHzPerSINR = BasicCalc.spectralEfficiencyPerSINR(dlAvgBpsPerSINR, BasicCalc.prb2hz(dlPrbPerSINR));
 		
-
-
-
-//		logPlot(
-//				dlAvgBpsPerSINR,
-//				"SINR/mcs",
-//				"mcs",
-//				"SINR");
-//		logPlot(
-//				dLMbitsperHzperSINR,
-//				"DL Throughput/SINR/BW", 
-//				"SINR [dB]",
-//				"Spectral efficiency, [bits/s/Hz]");
 		
 		Plot.normal(
-				dlAvgBpsPerHzPerSINR,
+				dlPrbPerCqi,
 				"UL Throughput/SINR",
 				"SINR [dB]",
 				"Throughput, [Mbits/s]",
 				"inte logaritmik");
-//		logPlot(
-//				dLMbitsperHzperSINR,
-//				"UL Throughput/SINR/BW", 
-//				"SINR [dB]",
-//				"Spectral efficiency, [bits/s/Hz]");
-//		
-		//printArray(chCap);
+		Plot.normal(
+				ulPrbPerSINR,
+				"UL Throughput/SINR",
+				"SINR [dB]",
+				"Throughput, [Mbits/s]",
+				"inte logaritmik");
+		
+		Plot.normal(
+				dlAvgSpecEffPerCqi,
+				"UL Throughput/SINR",
+				"SINR [dB]",
+				"Throughput, [Mbits/s]",
+				"inte logaritmik");
+		Plot.normal(
+				ulAvgSpecEffPerSINR,
+				"UL Throughput/SINR",
+				"SINR [dB]",
+				"Throughput, [Mbits/s]",
+				"inte logaritmik");
+
+		
+		Plot.normal(
+				blerPerSINR,
+				"Throughput, [Mbits/s]/Cqi",
+				"Cqi",
+				"Throughput, [Mbits/s]",
+				"inte logaritmik");
+		Plot.normal(
+				riPerCqi,
+				"UL Throughput/SINR",
+				"SINR [dB]",
+				"Throughput, [Mbits/s]",
+				"inte logaritmik");
+		Plot.normal(
+				dlAvgCqiPerMcs1,
+				"UL Throughput/SINR",
+				"SINR [dB]",
+				"Throughput, [Mbits/s]",
+				"inte logaritmik");
+		Plot.normal(
+				ulAvgSinrPerMcs,
+				"UL Throughput/SINR",
+				"SINR [dB]",
+				"Throughput, [Mbits/s]",
+				"inte logaritmik");
+
 
 	//printArray(sinr);
 	}
@@ -263,52 +289,10 @@ public class Main {
 
 
 	
-	public static String[][] transpose(String[][] stringArr){
-		System.out.println(stringArr[0].length);
-		String[][] output = new String[stringArr[0].length][stringArr.length];
-		for(int i=0;i<stringArr.length;i++){
-			for(int j=0;j<stringArr[0].length;j++){
-				output[j][i] = stringArr[i][j];
-			}
-		}
-		return output;
-	}
+
 
 
 
 	
-	public static float[] maxKbps(int bandwidth,int fromSINR,int toSINR){
-		float[] maximum = new float[45];
-		for(int i=fromSINR;i<toSINR;i++){
-			maximum[i-fromSINR] =  (float) (bandwidth*(Math.log(Math.pow(10, (float) i/10)+1)/0.6931));
-		}
-		return maximum;
-	}
-	public static float[] maxKbpspHz(int fromSINR,int toSINR){
-		float[] maxbpspHz = new float[45];
-		for(int i=fromSINR;i<toSINR;i++){
-			maxbpspHz[i-fromSINR] =  (float) (Math.log(Math.pow(10, (float) i/10)+1)/0.6931);
-		}
-		return maxbpspHz;
-	}
 
-
-	
-	public static int findHeaderIndex(String[] header, String headerName,int doublett){
-		int doublettcounter = 0;
-		for(int i=0;i<header.length;i++){
-			
-			if(header[i].contains(headerName)){
-				
-				if (doublett==doublettcounter){
-					return i;
-				} else {
-					System.out.println(headerName + " " + doublettcounter+1);
-					doublettcounter++;
-				}
-			}
-		}
-		System.out.println("hitta inget index");
-		return -1;
-	}
 }
