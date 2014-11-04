@@ -3,16 +3,19 @@
 \author{Paul Nedstrand \& Razmus Lindgren}
 \titleenglish{Test Data Post-Processing and Analysis of LA \& HARQ}
 \titleswedish{Svensken Titel}
-\publicationmonth{PUBMONTH}
+\publicationmonth{THEMONTH}
 \publicationyear{2015}
 \isbn{ISBN}
 \thesisnumber{THESISNUMBER}
 \thesisyearnumber{THESISYEARNUMBER}
-\dateofpublication{DATEOFPUBLICATION}
+\dateofpublication{\today}
 \supervisor{Ola Leifler}
 \examiner{EXAMINER}
 \degreesubject{Engineering}
 \supportedby{SUPPORTEDBY}
+
+\newcommand{\abbrlabel}[1]{\makebox[3cm][l]{\textbf{#1}\ \dotfill}}
+\newenvironment{abbreviations}{\begin{list}{}{\renewcommand{\makelabel}{\abbrlabel}}}{\end{list}}
 
 
 \abstract{%
@@ -21,12 +24,19 @@ The analyser tool will produce graphs with information about the correlation bet
 From the statistics produced by the analyser tool, the testing personal at Ericsson can more easily deduce where the interference in signals arises from. 
 }
 
+%\layout
 
 \begin{document}
 
-%\layout
+\begin{abbreviations}
+\item[US] United States
+\item[EU] European Union
+\item[Gvmt] Government
+\end{abbreviations}
+
 
 \makeintropages
+
 
 \chapter{Introduction}
 

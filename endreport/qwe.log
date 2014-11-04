@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.10.17)  21 OCT 2014 10:42
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.10.17)  28 OCT 2014 15:37
 entering extended mode
 **qwe.tex
 (C:\Users\erazlin\git\masterthesis\endreport\qwe.tex
@@ -162,18 +162,18 @@ Package crop Info: Local config file crop.cfg used on input line 492.
 Package crop Info: using pdf(la)tex graphics driver on input line 210.
 ))
 (C:\Users\erazlin\git\masterthesis\endreport\qwe.aux)
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -217,12 +217,12 @@ LaTeX Font Info:    ... okay on input line 25.
 ] [1] [2
 
 ]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 29.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 38.
  ("C:\Program Files (x86)\MikTex\tex\latex\base\omscmr.fd"
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 29.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 38.
  [3
 
 ]
@@ -248,12 +248,12 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ]
 Chapter 1.
 
-Underfull \hbox (badness 10000) in paragraph at lines 34--35
+Underfull \hbox (badness 10000) in paragraph at lines 44--45
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 37--38
+Underfull \hbox (badness 10000) in paragraph at lines 47--48
 
  []
 
@@ -273,62 +273,62 @@ Chapter 3.
 File: linkuniv_en_vert_blk.pdf Graphic file (type pdf)
 
 <use linkuniv_en_vert_blk.pdf>
-Package pdftex.def Info: linkuniv_en_vert_blk.pdf used on input line 425.
+Package pdftex.def Info: linkuniv_en_vert_blk.pdf used on input line 435.
 (pdftex.def)             Requested size: 56.9055pt x 40.8072pt.
 
-Overfull \hbox (261.76398pt too wide) detected at line 425
+Overfull \hbox (261.76398pt too wide) detected at line 435
 []
  []
 
 
-Overfull \hbox (358.50284pt too wide) detected at line 425
+Overfull \hbox (358.50284pt too wide) detected at line 435
 []
  []
 
 
-Overfull \hbox (91.04834pt too wide) detected at line 425
+Overfull \hbox (91.04834pt too wide) detected at line 435
 []
  []
 
 
-Overfull \hbox (187.7872pt too wide) detected at line 425
+Overfull \hbox (187.7872pt too wide) detected at line 435
 []
  []
 
 
-Overfull \hbox (358.50284pt too wide) detected at line 425
+Overfull \hbox (358.50284pt too wide) detected at line 435
 []
  []
 
 
-Overfull \hbox (187.7872pt too wide) detected at line 425
+Overfull \hbox (187.7872pt too wide) detected at line 435
 []
  []
 
 
-Overfull \hbox (358.50284pt too wide) detected at line 425
+Overfull \hbox (358.50284pt too wide) detected at line 435
 []
  []
 
 
-Overfull \hbox (358.50284pt too wide) detected at line 425
+Overfull \hbox (358.50284pt too wide) detected at line 435
 []
  []
 
 
-Overfull \hbox (358.50284pt too wide) detected at line 425
+Overfull \hbox (358.50284pt too wide) detected at line 435
 []
  []
 
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <9> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 425.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 435.
 
-Overfull \hbox (29.87495pt too wide) in paragraph at lines 425--425
+Overfull \hbox (29.87495pt too wide) in paragraph at lines 435--435
 [][]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 425--425
+Underfull \hbox (badness 10000) in paragraph at lines 435--435
 
  []
 
@@ -337,10 +337,10 @@ Underfull \hbox (badness 10000) in paragraph at lines 425--425
  <C:/Users/erazlin/git/masterthesis/endreport/linkuniv_en_vert_blk.pdf>]
 (C:\Users\erazlin\git\masterthesis\endreport\qwe.aux) ) 
 Here is how much of TeX's memory you used:
- 2223 strings out of 493921
- 30069 string characters out of 3146473
- 107800 words of memory out of 3000000
- 5482 multiletter control sequences out of 15000+200000
+ 2226 strings out of 493921
+ 30107 string characters out of 3146473
+ 107833 words of memory out of 3000000
+ 5485 multiletter control sequences out of 15000+200000
  11835 words of font info for 45 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
  40i,10n,47p,717b,241s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -356,7 +356,7 @@ s/cm/cmr7.pfb><C:/Program Files (x86)/MikTex/fonts/type1/public/amsfonts/cm/cmr
 ogram Files (x86)/MikTex/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program F
 iles (x86)/MikTex/fonts/type1/public/amsfonts/cm/cmsy9.pfb><C:/Program Files (x
 86)/MikTex/fonts/type1/public/amsfonts/symbols/msam7.pfb>
-Output written on qwe.pdf (17 pages, 3321466 bytes).
+Output written on qwe.pdf (17 pages, 3324515 bytes).
 PDF statistics:
  152 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
