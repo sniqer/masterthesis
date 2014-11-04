@@ -1,7 +1,9 @@
 package lteAnalyzer;
 
-public class BasicCalc {
-	static int NotAValue = -1337;
+public class BasicCalc extends Calculate{
+	
+	
+	private static String[] header;
 	
 	public static int[] init(int[] arr){
 		for(int i=0;i<arr.length;i++){
@@ -34,31 +36,66 @@ public class BasicCalc {
 	public static int[] addArrays(int[] arr1, int[] arr2){
 		int[] outArr = new int[Math.min(arr1.length, arr2.length)];
 		for(int i = 0; i < outArr.length; i++){
-			outArr[i] = arr1[i]+arr2[i];
+			if(arr1[i] == NOT_A_VALUE && arr2[i] == NOT_A_VALUE) outArr[i] = 0;
+			else if (arr1[i] == NOT_A_VALUE) outArr[i] = arr2[i];
+			else if (arr2[i] == NOT_A_VALUE) outArr[i] = arr1[i];
+			else outArr[i] = arr1[i] + arr2[i];
 		}
 		return outArr;
 	}
-	public static int findCloseValFrInd(int[] prb,int list_index){
-		int bandWidth = 0;
+	public static float[] addArrays(float[] arr1, float[] arr2){
+		float[] outArr = new float[Math.min(arr1.length, arr2.length)];
+		for(int i = 0; i < outArr.length; i++){
+			if(arr1[i] == NOT_A_VALUE && arr2[i] == NOT_A_VALUE) outArr[i] = 0;
+			else if (arr1[i] == NOT_A_VALUE) outArr[i] = arr2[i];
+			else if (arr2[i] == NOT_A_VALUE) outArr[i] = arr1[i];
+			else outArr[i] = arr1[i] + arr2[i];
+		}
+		return outArr;
+	}
+	public static int findCloseValFrInd(int[] list,int list_index){
+		int listVal = 0;
 		int inc = list_index;
 		int dec = list_index;
 		while(true){
-				if(prb[dec] != -1337){
-					bandWidth = prb[dec];
+				if(list[dec] != NOT_A_VALUE){
+					listVal = list[dec];
 					break;
-				} else if (prb[inc] != -1337){
-					bandWidth = prb[inc];
+				} else if (list[inc] != NOT_A_VALUE){
+					listVal = list[inc];
 					break;
 				}
 				if(dec > 0){
 					dec--;
 				}
-				if(inc<prb.length){
+				if(inc<list.length){
 					inc++;
 				}
 		}
 		//System.out.println(bandWidth+ " bandwidth");
-		return bandWidth;
+		return listVal;
+	}
+	public static double findCloseValFrInd(double[] list,int list_index){
+		double listVal = 0;
+		int inc = list_index;
+		int dec = list_index;
+		while(true){
+				if(list[dec] != NOT_A_VALUE){
+					listVal = list[dec];
+					break;
+				} else if (list[inc] != NOT_A_VALUE){
+					listVal = list[inc];
+					break;
+				}
+				if(dec > 0){
+					dec--;
+				}
+				if(inc<list.length){
+					inc++;
+				}
+		}
+		//System.out.println(bandWidth+ " bandwidth");
+		return listVal;
 	}
 	
 	//tbs is bits sending per ms, divide it by thousand to get it in Mbits/s
@@ -104,12 +141,11 @@ public class BasicCalc {
 	public static void printVals(int[] array){
 		System.out.println("printing vals");
 		for(int i=0;i<array.length;i++)
-		if(array[i] != NotAValue)
+		if(array[i] != NOT_A_VALUE)
 			System.out.println(array[i]);
 	}
 	
 	public static String[][] transpose(String[][] stringArr){
-		System.out.println(stringArr[0].length);
 		String[][] output = new String[stringArr[0].length][stringArr.length];
 		for(int i=0;i<stringArr.length;i++){
 			for(int j=0;j<stringArr[0].length;j++){
@@ -136,8 +172,9 @@ public class BasicCalc {
 	}
 
 	
-	public static int findHeaderIndex(String[] header, String headerName,int doublett){
+	public static int findHeaderIndex(String headerName,int doublett){
 		int doublettcounter = 0;
+		
 		for(int i=0;i<header.length;i++){
 			
 			if(header[i].contains(headerName)){
@@ -145,13 +182,54 @@ public class BasicCalc {
 				if (doublett==doublettcounter){
 					return i;
 				} else {
-					System.out.println(headerName + " " + doublettcounter+1);
+					//System.out.println(headerName + " " + doublettcounter+1);
 					doublettcounter++;
 				}
 			}
 		}
 		System.out.println("hitta inget index");
 		return -1;
+	}
+	//2014-10-22 12:15:00.329414
+	public static double[] timeConverter(String[] stringTime){
+		double[] doubleTime = new double[stringTime.length];
+			for (int i=0;i<stringTime.length;i++){
+				if(!stringTime[i].contains("x") && !stringTime[i].contains("timeStamp")){
+					stringTime[i] = stringTime[i].split(" ")[2];
+					stringTime[i] = stringTime[i].replace(":", "");
+					
+					
+					doubleTime[i] = Double.parseDouble(stringTime[i].trim());
+				} else {
+					doubleTime[i] = (double) NOT_A_VALUE;
+				}
+			}
+		
+		
+		
+		
+		return doubleTime;
+	}
+	
+	public static int numberOfVals(int[] array){
+		int nrOfVals = 0;
+		
+		for(int i=0;i<array.length;i++){
+			if(array[i] != NOT_A_VALUE)
+				nrOfVals++;
+		}
+		return nrOfVals;
+	}
+	public void setHeader(String[] header) {
+		// TODO Auto-generated method stub
+		this.header = header;
+	}
+	
+	public static int[] tbs2throughput(int[] tbs, String[] ndf){
+		for(int i = 0;i<tbs.length;i++)
+			if(ndf[i].contains("N")) tbs[i] = 0;
+		
+		return tbs;
 	}
 }
 

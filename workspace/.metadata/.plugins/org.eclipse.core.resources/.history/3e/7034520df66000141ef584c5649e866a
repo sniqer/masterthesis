@@ -1,0 +1,211 @@
+package lteAnalyzer;
+
+public class BasicCalc extends Calculate{
+	
+	
+	public static int[] init(int[] arr){
+		for(int i=0;i<arr.length;i++){
+				arr[i] = 0;
+		}
+		return arr;
+	}
+	public static float[] init(float[] arr){
+		for(int i=0;i<arr.length;i++){
+				arr[i] = 0;
+		}
+		return arr;
+	}
+	public static int[][] init(int[][] arr){
+		for(int i=0;i<arr.length;i++){
+			for(int j=0;j<arr[0].length;j++){
+				arr[i][j] = 0;
+			}
+		}
+		return arr;
+	}
+	public static float[][] init(float[][] arr){
+		for(int i=0;i<arr.length;i++){
+			for(int j=0;j<arr[0].length;j++){
+				arr[i][j] = 0;
+			}
+		}
+		return arr;
+	}
+	public static int[] addArrays(int[] arr1, int[] arr2){
+		int[] outArr = new int[Math.min(arr1.length, arr2.length)];
+		for(int i = 0; i < outArr.length; i++){
+			outArr[i] = arr1[i]+arr2[i];
+		}
+		return outArr;
+	}
+	public static int findCloseValFrInd(int[] list,int list_index){
+		int listVal = 0;
+		int inc = list_index;
+		int dec = list_index;
+		while(true){
+				if(list[dec] != NOT_A_VALUE){
+					listVal = list[dec];
+					break;
+				} else if (list[inc] != NOT_A_VALUE){
+					listVal = list[inc];
+					break;
+				}
+				if(dec > 0){
+					dec--;
+				}
+				if(inc<list.length){
+					inc++;
+				}
+		}
+		//System.out.println(bandWidth+ " bandwidth");
+		return listVal;
+	}
+	public static double findCloseValFrInd(double[] list,int list_index){
+		double listVal = 0;
+		int inc = list_index;
+		int dec = list_index;
+		while(true){
+				if(list[dec] != NOT_A_VALUE){
+					listVal = list[dec];
+					break;
+				} else if (list[inc] != NOT_A_VALUE){
+					listVal = list[inc];
+					break;
+				}
+				if(dec > 0){
+					dec--;
+				}
+				if(inc<list.length){
+					inc++;
+				}
+		}
+		//System.out.println(bandWidth+ " bandwidth");
+		return listVal;
+	}
+	
+	//tbs is bits sending per ms, divide it by thousand to get it in Mbits/s
+	public static float[] tbs2Mbps(float[] tbs){
+		float[] bps = new float[tbs.length];
+		for(int i=0;i<tbs.length;i++)
+			bps[i] = tbs[i]/1000;
+		
+		return bps;
+	}
+	
+	// 1 prb is 180 khz
+	public static float[] prb2hz(float[] prb){
+		float[] hz = new float[prb.length];
+		for(int i=0;i<prb.length;i++)
+			hz[i] = prb[i]*180000;
+		
+		return hz;
+	}
+	
+	//divide the average Mbit/s/SINR to the average of allocated bandwidth/SINR
+	public static float[] spectralEfficiencyPerSINR(float[] bpsPerSINR, float[] hzPerSINR){
+		float[] specEff = new float[hzPerSINR.length];
+		for(int i=0;i<hzPerSINR.length;i++){
+			if(hzPerSINR[i] != 0){
+				specEff[i] = bpsPerSINR[i]/hzPerSINR[i];
+			} else {
+				specEff[i] = 0;
+			}
+			
+		}
+		return specEff;
+	}
+	
+	public static float[] prefixChanger(float[] in, float prefix){
+		float[] out = new float[in.length];
+		for(int i=0;i<in.length;i++)
+			out[i] = in[i]*prefix;
+		
+		return out;
+	}
+	
+	public static void printVals(int[] array){
+		System.out.println("printing vals");
+		for(int i=0;i<array.length;i++)
+		if(array[i] != NOT_A_VALUE)
+			System.out.println(array[i]);
+	}
+	
+	public static String[][] transpose(String[][] stringArr){
+		System.out.println(stringArr[0].length);
+		String[][] output = new String[stringArr[0].length][stringArr.length];
+		for(int i=0;i<stringArr.length;i++){
+			for(int j=0;j<stringArr[0].length;j++){
+				output[j][i] = stringArr[i][j];
+			}
+		}
+		return output;
+	}
+	
+	public static float[] maxKbps(int bandwidth,int fromSINR,int toSINR){
+		float[] maximum = new float[45];
+		for(int i=fromSINR;i<toSINR;i++){
+			maximum[i-fromSINR] =  (float) (bandwidth*(Math.log(Math.pow(10, (float) i/10)+1)/0.6931));
+		}
+		return maximum;
+	}
+	
+	public static float[] maxKbpspHz(int fromSINR,int toSINR){
+		float[] maxbpspHz = new float[45];
+		for(int i=fromSINR;i<toSINR;i++){
+			maxbpspHz[i-fromSINR] =  (float) (Math.log(Math.pow(10, (float) i/10)+1)/0.6931);
+		}
+		return maxbpspHz;
+	}
+
+	
+	public static int findHeaderIndex(String[] header, String headerName,int doublett){
+		int doublettcounter = 0;
+		
+		for(int i=0;i<header.length;i++){
+			
+			if(header[i].contains(headerName)){
+				
+				if (doublett==doublettcounter){
+					return i;
+				} else {
+					System.out.println(headerName + " " + doublettcounter+1);
+					doublettcounter++;
+				}
+			}
+		}
+		System.out.println("hitta inget index");
+		return -1;
+	}
+	//2014-10-22 12:15:00.329414
+	public static double[] timeConverter(String[] stringTime){
+		double[] doubleTime = new double[stringTime.length];
+			for (int i=0;i<stringTime.length;i++){
+				if(!stringTime[i].contains("x") && !stringTime[i].contains("timeStamp")){
+					stringTime[i] = stringTime[i].split(" ")[2];
+					stringTime[i] = stringTime[i].replace(":", "");
+					
+					
+					doubleTime[i] = Double.parseDouble(stringTime[i].trim());
+				} else {
+					doubleTime[i] = (double) NOT_A_VALUE;
+				}
+			}
+		
+		
+		
+		
+		return doubleTime;
+	}
+	
+	public static int numberOfVals(int[] array){
+		int nrOfVals = 0;
+		
+		for(int i=0;i<array.length;i++){
+			if(array[i] != NOT_A_VALUE)
+				nrOfVals++;
+		}
+		return nrOfVals;
+	}
+}
+
+

@@ -1,0 +1,55 @@
+package lteAnalyzer;
+
+public class Calculate{
+	
+	//dl
+	static final int NOT_A_VALUE = -1337; //empty spaces in a vector is represented by this value
+	static final int NR_OF_CQI_VALS = 16; //0 to 15
+	static final int NR_OF_MCS_VALS = 29;
+	static final int MAX_MCS_VAL = 28;
+	static final int MIN_NR_OF_FOUND_XAXIS_VALS = 50;
+	
+	//ul
+	static final int NR_OF_SINR_VALS = 66; //-25 to 40
+	static final int NR_OF_UL_MCS_VALS = 23; // 0 to 22
+	static final int MAX_UL_MCS_VAL = 22;
+	static final int MIN_SINR_VAL = -25;
+	
+	
+	public static double[][] avgTbsPerSecond(int[] tbs, double[] timeStamps, int[] SIB,int granularity){
+		
+		int timeStamp_ind = 0;
+		int avgTbsSum_ind = 1;
+		
+		int j = 0;
+		int i = 0;
+		int granularityVariabel=0;
+		
+		
+		double[][] out = new double[2][tbs.length/granularity+1];
+		double avgTbsSum = 0;
+		
+		while(j < tbs.length/granularity+1){
+			
+			while(granularityVariabel <= granularity){
+				if(tbs[i] != NOT_A_VALUE){
+					avgTbsSum = avgTbsSum + (double) tbs[i];
+					granularityVariabel++;
+				}
+				i++;
+				
+			}
+			granularityVariabel=0;
+			avgTbsSum = avgTbsSum/granularity;
+			out[timeStamp_ind][i] = BasicCalc.findCloseValFrInd(timeStamps, i);
+			out[avgTbsSum_ind][i] = avgTbsSum;
+			System.out.println("lägger in data " + out[timeStamp_ind][i] + " " + out[avgTbsSum_ind][i]);
+			j++;
+			i=0;
+		}
+		
+		return out;
+	}
+	
+	
+}

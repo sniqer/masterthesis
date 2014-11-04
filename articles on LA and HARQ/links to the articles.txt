@@ -1,0 +1,18 @@
+Goodput Analysis and Link Adaptation for IEEE....
+http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=1175541
+
+
+Performance of HARQ with Reduced Size Retransmissions using Network Coding Principles
+http://ieeexplore.ieee.org.e.bibl.liu.se/stamp/stamp.jsp?tp=&arnumber=6692708
+
+
+
+
+
+Performance Comparison of Type I, II and  III Hybrid ARQ schemes over AWGN Channels 
+http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=1490770
+
+
+
+A NEW FREQUENCY-DOMAIN LINK ADAPTATION SCHEME FOR BROADBAND OFDM
+SYSTEMS http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=797134

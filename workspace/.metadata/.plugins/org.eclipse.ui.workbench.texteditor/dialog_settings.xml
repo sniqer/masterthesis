@@ -6,30 +6,30 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="NR_OF_MCS_VALS" key="selection"/>
+		<item value="&quot;Y&quot;" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="&quot;Throughput, [Mbits/s]&quot;"/>
+			<item value="&quot;SINR [dB]&quot;"/>
+			<item value="cqi"/>
+			<item value="val"/>
+			<item value="j"/>
 			<item value="NR_OF_DL_MCS_VALS"/>
 			<item value="NR_OF_CQI_VALS"/>
 			<item value="maxbpsPerCqi"/>
-			<item value="SINR"/>
-			<item value="private"/>
-			<item value="find"/>
-			<item value="close"/>
-			<item value="nrSinrValInd"/>
 		</list>
 		<list key="replacehistory">
+			<item value="&quot;Y&quot;"/>
+			<item value="&quot;X&quot;"/>
+			<item value="tbs"/>
+			<item value="Tbs"/>
+			<item value="outputindex"/>
+			<item value="out_index"/>
 			<item value="NR_OF_MCS_VALS"/>
 			<item value="NR_OF_SINR_VALS"/>
-			<item value="NR_OF_CQI_VALS"/>
-			<item value="maxValPerCqi"/>
-			<item value="cqi"/>
-			<item value="Cqi"/>
-			<item value="public"/>
-			<item value="nrSinrVals"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">

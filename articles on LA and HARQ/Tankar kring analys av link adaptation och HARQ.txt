@@ -1,0 +1,10 @@
+LINK ADAPTATION:
+Vi skulle kunna göra en analys av LA där vi kör 2 basbands traces (en uplink, en downlink) där vi kör med default inställningar och vi går från
+25 db till -20 db. Kör 2 lika dana där vi kör med hårdkodat QPSK, 2 lika dana med 16QAM, 2 lika dana med 64QAM och tittar på tex BLER/SINR
+och throughput/SINR. och tittar på när throughputen för de olika modulations scheman korsar varandra och jämför med den trace som byter automatiskt
+(LA). 
+Vad har vi för coding rates för det olika modulation scheman
+(vi borde försöka ta reda på lite mer hur LA fungerar för LTE system)
+
+HARQ:
+ingen aning. titta på hur många retransmissions vi gör, (max är ju 4), denna data har vi dock inte tillgång till....

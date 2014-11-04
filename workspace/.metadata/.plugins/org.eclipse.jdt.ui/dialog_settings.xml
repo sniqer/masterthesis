@@ -68,6 +68,8 @@
 		<item value="false" key="create_package_info_java"/>
 	</section>
 	<section name="completion_proposal_size">
+		<item value="268" key="size.y"/>
+		<item value="355" key="size.x"/>
 	</section>
 	<section name="JavaElementSearchActions">
 	</section>

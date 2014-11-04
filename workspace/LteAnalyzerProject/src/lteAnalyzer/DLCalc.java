@@ -1,26 +1,21 @@
 package lteAnalyzer;
 
 
-/*functions that calculates average values and max values Per CQI. Also CQI per MCS. 
- * All functions are for downlink*/
-public class DLCalc {
-	static final int NOT_A_VALUE = -1337; //empty spaces in a vector is represented by this value
-	static final int NR_OF_CQI_VALS = 16; //0 to 15
-	static final int NR_OF_MCS_VALS = 29;
-	static final int MAX_MCS_VAL = 28;
-	static final int MIN_NR_OF_FOUND_XAXIS_VALS = 50;
+public class DLCalc extends Calculate {
+
+	private int[] cqi;
+	private int[] SIB;
+	
 	
 	/*Calculates the average of a value and maps it to a cqi value. a place at cqi[i] that doesnt have a value is represented as something
 	big negative */
- 	public static float[] avgValPerCqi(int[] val, int[] cqi, int[] SIB,int minNrFoundXaxisVals){
+ 	public float[] avgValPerCqi(int val[],int minNrFoundXaxisVals){
  		
 		int value_ind = 0;
 		int counter_ind = 1;
 		
-		int currentCqi = -1000; //dummydefault value
 		int counter = 0;
 		int currentVal = 0;
-		
 		float[][] tempValPerCqi = new float[2][NR_OF_CQI_VALS];
 		tempValPerCqi = BasicCalc.init(tempValPerCqi);
 		
@@ -29,66 +24,45 @@ public class DLCalc {
 		
 		for(int i=0;i < cqi.length;i++){
 				//we've found legit tbs data, accumulate counter, tbs, bW and see if we have peak data rate.
-				if(SIB[i] != -1 && val[i] != -1337 ){
+				if(SIB[i] != -1 && val[i] != NOT_A_VALUE ){
 					currentVal=currentVal+val[i]; 
 					counter++;
 				}
 			if (cqi[i] >= 0 && cqi[i] <= 15 && SIB[i] != -1){
-				System.out.println( " currentCqi: " + currentCqi+ " currentVal " + val[i]);
 				tempValPerCqi[value_ind][cqi[i]] = tempValPerCqi[value_ind][cqi[i]] + currentVal; //accumulated cqi
 				tempValPerCqi[counter_ind][cqi[i]] = tempValPerCqi[counter_ind][cqi[i]] + counter;
-				//reset values
-				currentCqi = cqi[i];
 				counter=0;
 				currentVal=0;
 			}
 		}
-		for(int j=0;j<valPerCqi.length;j++){
+		for(int j=0;j<valPerCqi.length;j++)
 			if (tempValPerCqi[counter_ind][j] >= minNrFoundXaxisVals)
 				valPerCqi[j] = tempValPerCqi[value_ind][j]/tempValPerCqi[counter_ind][j];
-		}
-			Print.array2D(tempValPerCqi);
-			//Print.array(valPerCqi);
 			return valPerCqi;
 	}
  	
  	
 	
-	public static float[] maxValPerCqi(int[] tbs,int[] cqi,int[] SIB){
-		//indexes
+	public float[] maxValPerCqi(int[] val){
 		
-		//values from the inputarrays
-		int currentCqi = 0;
-		float currentMaxTbs = 0;
-		
+		float currentMaxVal = 0;
 		float[]	maxValPerCqi = new float[NR_OF_CQI_VALS];
 		maxValPerCqi = BasicCalc.init(maxValPerCqi);
 		
-		
 		for(int i=0;i<cqi.length;i++){
 			
-			//we've found legit tbs data, accumulate counter, tbs, bW and see if we have peak data rate.
-			currentMaxTbs = Math.max((float) (tbs[i]), currentMaxTbs);
-			
+			currentMaxVal = Math.max((float) (val[i]), currentMaxVal);
 
-			if (currentCqi != cqi[i] && cqi[i] != NOT_A_VALUE){
-				//System.out.println( " currentMaxTBS: " + currentMaxTbs);
-				maxValPerCqi[cqi[i]] = Math.max(maxValPerCqi[cqi[i]], currentMaxTbs); //accumulated tbs
-
-				//reset values
-				currentCqi = cqi[i];
-				currentMaxTbs = 0;
+			if (cqi[i] != NOT_A_VALUE){
+				maxValPerCqi[cqi[i]] = Math.max(maxValPerCqi[cqi[i]], currentMaxVal);
+				currentMaxVal = 0;
 			}
 		}
 		Print.array(maxValPerCqi);
 		return maxValPerCqi;
 	}
 	
-	
-
-	
-	
-	public static float[] avgCqiPerMcs(int[] mcs,int[] cqi, int[] SIB){
+	public float[] avgValPerMcs(int[] val,int[] mcs){
 		
 		//indexes
 		int counter_ind = 0;
@@ -111,10 +85,10 @@ public class DLCalc {
 		cqiPerMcs = BasicCalc.init(cqiPerMcs);
 		
 		
-		for(int i=0;i<cqi.length;i++){
+		for(int i=0;i<val.length;i++){
 			//we've found legit Prb data, accumulate counter, Prb, bW and see if we have peak data rate.
-			if(SIB[i] != -1 && cqi[i] != -1337){
-				currentCqi=currentCqi+cqi[i]; 
+			if(SIB[i] != -1 && val[i] != -1337){
+				currentCqi=currentCqi+val[i]; 
 				counter++;
 			}
 
@@ -136,4 +110,17 @@ public class DLCalc {
 		Print.array(cqiPerMcs);
 		return cqiPerMcs;
 	}
+	
+	
+	
+/*-------------------------------------------SETTERS!!!-------------------------------------------*/
+
+	public void setCqi(int[] cqi){
+		this.cqi = cqi;
+	}
+	
+	public void setSIB(int[] SIB){
+		this.SIB = SIB;
+	}
+
 }

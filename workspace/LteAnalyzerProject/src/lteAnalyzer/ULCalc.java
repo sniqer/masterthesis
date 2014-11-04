@@ -1,15 +1,12 @@
 package lteAnalyzer;
 
-public class ULCalc {
+public class ULCalc extends Calculate{
 	
-	static final int NOT_A_VALUE = -1337; //empty spaces in a vector is represented by this value
-	static final int NR_OF_SINR_VALS = 66; //-25 to 40
-	static final int NR_OF_UL_MCS_VALS = 23; // 0 to 22
-	static final int MAX_MCS_VAL = 22;
-	static final int MIN_SINR_VAL = -25;
-	static final int MIN_NR_OF_FOUND_XAXIS_VALS = 200;
+	private int[] SINR;
+	private int[] SIB;
 	
-	public static float[] avgValPerSINR(int[] val, int[] sinr, int[] SIB,int minNrFoundXaxisVals){
+	
+	public float[] avgValPerSINR(int[] val,int minNrFoundXaxisVals){
 		
 		int value_ind = 0;
 		int counter_ind = 1;
@@ -24,7 +21,7 @@ public class ULCalc {
 		float[] valPerSINR = new float[NR_OF_SINR_VALS];
 		valPerSINR = BasicCalc.init(valPerSINR);
 		
-		for(int i=0;i<sinr.length;i++){
+		for(int i=0;i<SINR.length;i++){
 			
 
 				//we've found legit tbs data, accumulate counter, tbs, bW and see if we have peak data rate.
@@ -33,10 +30,10 @@ public class ULCalc {
 					counter++;
 				}
 			
-			if (sinr[i] != NOT_A_VALUE && SIB[i] != -1){
+			if (SINR[i] != NOT_A_VALUE && SIB[i] != -1){
 				//System.out.println( " currentSinr: " + currentsinr+ " currentVal " + val[i]);
-				tempValPerSINR[value_ind][sinr[i]-MIN_SINR_VAL] = tempValPerSINR[value_ind][sinr[i]-MIN_SINR_VAL] + currentVal;
-				tempValPerSINR[counter_ind][sinr[i]-MIN_SINR_VAL] = tempValPerSINR[counter_ind][sinr[i]-MIN_SINR_VAL] + counter;
+				tempValPerSINR[value_ind][SINR[i]-MIN_SINR_VAL] = tempValPerSINR[value_ind][SINR[i]-MIN_SINR_VAL] + currentVal;
+				tempValPerSINR[counter_ind][SINR[i]-MIN_SINR_VAL] = tempValPerSINR[counter_ind][SINR[i]-MIN_SINR_VAL] + counter;
 				
 				//reset values
 				//currentsinr = sinr[i];
@@ -57,7 +54,7 @@ public class ULCalc {
 	
 	
 	//behövs förmodligen inte
-	public static float[] sinrGenerator(int[] puschPwr, int[] puschNoiseIntPwr){
+	public float[] sinrGenerator(int[] puschPwr, int[] puschNoiseIntPwr){
 		float[] sinr = new float[puschPwr.length];
 		for (int i=0; i<puschPwr.length;i++){
 			sinr[i] = (int) puschPwr[i]/BasicCalc.findCloseValFrInd(puschNoiseIntPwr,i);
@@ -66,44 +63,39 @@ public class ULCalc {
 	}
 	
 
-
-	
-	
-
-	
-	public static float[] maxValPerSINR(int[] tbs,int[] sinr,int[] SIB){
+	public float[] maxValPerSINR(int[] val){
 		//indexes
 		
 		//values from the inputarrays
-		float currentMaxTbs = 0;
+		float currentMaxVal = 0;
 		
-		float[]	maxBpsPerSINR = new float[NR_OF_SINR_VALS];
-		maxBpsPerSINR = BasicCalc.init(maxBpsPerSINR);
+		float[]	maxValPerSINR = new float[NR_OF_SINR_VALS];
+		maxValPerSINR = BasicCalc.init(maxValPerSINR);
 		
 		
-		for(int i=0;i<sinr.length;i++){
+		for(int i=0;i<SINR.length;i++){
 			
 			//we've found legit tbs data, accumulate counter, tbs, bW and see if we have peak data rate.
-			currentMaxTbs = Math.max((float) (tbs[i]), currentMaxTbs);
+			currentMaxVal = Math.max((float) (val[i]), currentMaxVal);
 			
 
-			if (sinr[i] != NOT_A_VALUE && SIB[i] != -1){
+			if (SINR[i] != NOT_A_VALUE && SIB[i] != -1){
 				//System.out.println( " currentMaxTBS: " + currentMaxTbs);
-				maxBpsPerSINR[sinr[i]-MIN_SINR_VAL] = Math.max(maxBpsPerSINR[sinr[i]-MIN_SINR_VAL], currentMaxTbs); //accumulated tbs
+				maxValPerSINR[SINR[i]-MIN_SINR_VAL] = Math.max(maxValPerSINR[SINR[i]-MIN_SINR_VAL], currentMaxVal); //accumulated tbs
 
 				//reset values
-				currentMaxTbs = 0;
+				currentMaxVal = 0;
 			}
 		}
-		Print.array(maxBpsPerSINR);
-		return maxBpsPerSINR;
+		Print.array(maxValPerSINR);
+		return maxValPerSINR;
 	}
 	
 	
 
 	
 	
-	public static float[] avgSINRPerMcs(int[] mcs,int[] sinr, int[] SIB){
+	public float[] avgSINRPerMcs(int[] mcs,int[] sinr, int[] SIB){
 		
 		//indexes
 		int counter_ind = 0;
@@ -155,4 +147,15 @@ public class ULCalc {
 		Print.array(sinrPerMcs);
 		return sinrPerMcs;
 	}
+	
+	/*-------------------------------------------SETTERS!!!-------------------------------------------*/
+
+	public  void setCqi(int[] SINR){
+		this.SINR = SINR;
+	}
+	
+	public void setSIB(int[] SIB){
+		this.SIB = SIB;
+	}
+
 }

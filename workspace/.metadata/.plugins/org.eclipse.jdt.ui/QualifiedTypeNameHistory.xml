@@ -16,4 +16,9 @@
 <fullyQualifiedTypeName name="org.jfree.chart.axis.NumberAxis"/>
 <fullyQualifiedTypeName name="org.jfree.chart.axis.LogarithmicAxis"/>
 <fullyQualifiedTypeName name="java.awt.Color"/>
+<fullyQualifiedTypeName name="java.awt.font.NumericShaper.Range"/>
+<fullyQualifiedTypeName name="com.orsoncharts.Range"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="lteAnalyzer.Calculate"/>
+<fullyQualifiedTypeName name="lteAnalyzer.BasicCalc"/>
 </qualifiedTypeNameHistroy>

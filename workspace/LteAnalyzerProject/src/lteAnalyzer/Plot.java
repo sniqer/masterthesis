@@ -38,7 +38,7 @@ public class Plot {
                 true, true, false);
 
         final XYPlot plot = chart.getXYPlot();
-        ChartFrame graphFrame = new ChartFrame("XYLine Chart", chart);
+        ChartFrame graphFrame = new ChartFrame("Log plot", chart);
         graphFrame.setVisible(true);
         graphFrame.setSize(700, 500); 
         final NumberAxis domainAxis = new NumberAxis(Xaxis);
@@ -72,11 +72,46 @@ public class Plot {
                 true, true, false);
 
         final XYPlot plot = chart.getXYPlot();
-        ChartFrame graphFrame = new ChartFrame("XYLine Chart", chart);
+        ChartFrame graphFrame = new ChartFrame("Normal plot", chart);
         graphFrame.setVisible(true);
         graphFrame.setSize(700, 500); 
         final NumberAxis domainAxis = new NumberAxis(Xaxis);
         final NumberAxis rangeAxis = new NumberAxis(Yaxis);
+        plot.setDomainAxis(domainAxis);
+        plot.setRangeAxis(rangeAxis);
+	}
+	
+	public static void overTime(double[] timeStamp,double[] outputdata,String header,String Xaxis,String Yaxis, String text){
+
+		XYSeries avgVal 	= new XYSeries(text);
+		
+		XYDataset xyDataset = new XYSeriesCollection();
+		((XYSeriesCollection) xyDataset).addSeries(avgVal);
+
+
+		//print2dArray(outputdata);
+        for(int k=0;k<outputdata.length;k++){
+        	if(outputdata[k] != 0)
+        		avgVal.add(timeStamp[k],outputdata[k]); 
+        	       	
+
+        }
+
+        JFreeChart chart = ChartFactory.createXYLineChart(
+                header, 
+                Xaxis, 
+                Yaxis,
+                xyDataset);
+        
+        //JFreeChart chart2 = ChartFactory.
+
+        final XYPlot plot = chart.getXYPlot();
+        ChartFrame graphFrame = new ChartFrame("OvertimePlot", chart);
+        graphFrame.setVisible(true);
+        graphFrame.setSize(700, 500); 
+        final NumberAxis domainAxis = new NumberAxis(Xaxis);
+        final NumberAxis rangeAxis = new NumberAxis(Yaxis);
+        rangeAxis.setAutoRangeIncludesZero(false);
         plot.setDomainAxis(domainAxis);
         plot.setRangeAxis(rangeAxis);
 	}

@@ -27,7 +27,10 @@ import org.jfree.data.xy.XYSeriesCollection;
 
 public class Main {
 	@SuppressWarnings("resource")
+	
 	public static void main(String[] arg) throws IOException{
+		
+		
 		
 		String dummyline = null;
 		BufferedReader dummyreader = null;
@@ -43,15 +46,15 @@ public class Main {
 		}
 		dummyreader.close();
 
-		//String[][] temp = new String[31][1000];
-		
 		int nrSinrVals = 45;
 		int nrDlMcsVals = 28;
 		int nrUlMcsVals = 23;
 		System.out.println(rows + " " + cols);
 		
-		int[] dLtbssum 		= new int[rows]; 		//the sum of the Tbs's
-		int[] uLtbssum 		= new int[rows]; 		//the sum of the Tbs's
+		int[] dlTbsSum 		= new int[rows]; 		//the sum of the Tbs's
+		int[] ulTbsSum 		= new int[rows]; 		//the sum of the Tbs's
+		int[] dlTbs1		= new int[rows];		//left antenna tbs
+		int[] dlTbs2		= new int[rows];		//left antenna tbs
 		int[] dlPrb 		= new int[rows];		//the physical resource blocks
 		int[] ulPrb 		= new int[rows];		//the physical resource blocks
 		int[] SINR	 		= new int[rows];		//the signal-to-interference-ratio in the channel, over pucch (i think)
@@ -66,6 +69,9 @@ public class Main {
 		int[] ri			= new int[rows];
 		int[] HARQ			= new int[rows];		//HARQ ack and nacks
 		int[] bler			= new int[rows];
+		double[] timeStamp	= new double[rows];		//time stamps
+		String[] ndf1		= new String[rows];
+		String[] ndf2		= new String[rows];
 
 
 		
@@ -79,7 +85,7 @@ public class Main {
 		
 		//läser cvs file
 		String[][] lteDataMatrix = new String[rows][cols];
-		String[] header = new String[cols];
+		String[] header  = new String[cols];
 		reader = new BufferedReader(new FileReader("C:/Users/epauned/documents/logtool/burk.csv"));
 		while ((line = reader.readLine()) != null) {
 			if(i<rows){
@@ -89,37 +95,48 @@ public class Main {
 		}
 		reader.close();
 		header = lteDataMatrix[0];
-		Print.array(header);
-		//System.out.println("kommer hit");
 		lteDataMatrix = BasicCalc.transpose(lteDataMatrix);
 		
-		//indexes
-		int SIBIndex 		= BasicCalc.findHeaderIndex(header, "bbUeRef",0);
-		int uLSINRIndex 	= BasicCalc.findHeaderIndex(header, "sinr",0);//hos razmus puschSinr
-		int cqiIndex 		= BasicCalc.findHeaderIndex(header, "cqi",0);
-		int dLtbssumIndex 	= BasicCalc.findHeaderIndex(header, "tbs1",0);//hos razmus tbssum
-		int dLprbIndex 		= BasicCalc.findHeaderIndex(header, "prb",0);
-		int uLprbIndex 		= BasicCalc.findHeaderIndex(header, "prb",1);
-		int uLtbsIndex 		= BasicCalc.findHeaderIndex(header, "tbs",2);
-		int riIndex			= BasicCalc.findHeaderIndex(header, "ri",0);
-		int blerIndex 		= BasicCalc.findHeaderIndex(header, "bler",0);
-		
-		int ulMcsIndex 		= BasicCalc.findHeaderIndex(header, "mcs",2);
-		int dlMcs1Index 	= BasicCalc.findHeaderIndex(header, "mcs1",0);
-		int dlMcs2Index 	= BasicCalc.findHeaderIndex(header, "mcs2",0);
+		//setting variable in BasicCalc class
+		BasicCalc basicCalc = new BasicCalc();
+		basicCalc.setHeader(header);
 		
 
-//		Print.array(header);
-//		Print.array(lteDataMatrix[0]);
-		System.out.println(dLtbssumIndex);
-		System.out.println(SIBIndex);
+		
+		
+		int SIBIndex 		= BasicCalc.findHeaderIndex("bbUeRef",0);
+		int SINRIndex 		= BasicCalc.findHeaderIndex("sinr",0);//hos razmus puschSinr
+		int cqiIndex 		= BasicCalc.findHeaderIndex("cqi",0);
+		int dlTbs1Index 	= BasicCalc.findHeaderIndex("tbs1",0);
+		int dlTbs2Index 	= BasicCalc.findHeaderIndex("tbs2",0);
+		//int dlTbsSumIndex 	= BasicCalc.findHeaderIndex("tbs",2);
+		int ulTbsSumIndex 	= BasicCalc.findHeaderIndex("tbs",2); //3 hos razmus
+		int dLprbIndex 		= BasicCalc.findHeaderIndex("prb",0);
+		int uLprbIndex 		= BasicCalc.findHeaderIndex("prb",1);
+		int uLtbsSumIndex 	= BasicCalc.findHeaderIndex("tbs",2);
+		int riIndex			= BasicCalc.findHeaderIndex("ri",0);
+		int blerIndex 		= BasicCalc.findHeaderIndex("bler",0);
+		
+		int ulMcsIndex 		= BasicCalc.findHeaderIndex("mcs",2);
+		int dlMcs1Index 	= BasicCalc.findHeaderIndex("mcs1",0);
+		int dlMcs2Index 	= BasicCalc.findHeaderIndex("mcs2",0);
+		
+		int timeStampIndex 	= BasicCalc.findHeaderIndex("timeStamp", 0);
+		int ndf1Index		= BasicCalc.findHeaderIndex("ndf1", 0);
+		int ndf2Index		= BasicCalc.findHeaderIndex("ndf2", 0);
+		int pmiIndex		= BasicCalc.findHeaderIndex("pmi", 0);
+		
+
 
 		
 		//Print.array(lteDataMatrix[SIBIndex]);
-		dLtbssum 	= interpretLTEdata(lteDataMatrix[dLtbssumIndex]);
-		uLtbssum	= interpretLTEdata(lteDataMatrix[uLtbsIndex]);
+		dlTbs1 		= interpretLTEdata(lteDataMatrix[dlTbs1Index]);
+		dlTbs2	 	= interpretLTEdata(lteDataMatrix[dlTbs2Index]);
+		//dlTbsSum 	= interpretLTEdata(lteDataMatrix[dlTbsSumIndex]);
+		dlTbsSum 	= BasicCalc.addArrays(dlTbs1, dlTbs2);
+		ulTbsSum	= interpretLTEdata(lteDataMatrix[ulTbsSumIndex]);
 		SIB			= interpretLTEdata(lteDataMatrix[SIBIndex]);
-		SINR 		= interpretLTEdata(lteDataMatrix[uLSINRIndex]);
+		SINR 		= interpretLTEdata(lteDataMatrix[SINRIndex]);
 		dlPrb  		= interpretLTEdata(lteDataMatrix[dLprbIndex]);
 		ulPrb  		= interpretLTEdata(lteDataMatrix[uLprbIndex]);
 		cqi   		= interpretLTEdata(lteDataMatrix[cqiIndex]);
@@ -131,13 +148,34 @@ public class Main {
 		dlMcs2		= interpretLTEdata(lteDataMatrix[dlMcs2Index]);
 		dlMcsSum	= BasicCalc.addArrays(dlMcs1, dlMcs2);
 		
+		ndf1 = lteDataMatrix[ndf1Index];
+		ndf2 = lteDataMatrix[ndf2Index];
+		
+		timeStamp	= BasicCalc.timeConverter(lteDataMatrix[timeStampIndex]);
+		//Print.array(timeStamp,30);
+		
+		//setting variable in DLCalc class
+		DLCalc dlCalc = new DLCalc();
+		dlCalc.setCqi(cqi);
+		dlCalc.setSIB(SIB);
+		
+		//setting variable in DLCalc class
+		ULCalc ulCalc = new ULCalc();
+		ulCalc.setCqi(cqi);
+		ulCalc.setSIB(SIB);
+		
 		
 		/*The data to be plotted, first row is bitsperSINR, second is bitsperSINRperhz
 		 * it will go from -15 to 30 dB*/
-		float[] dlAvgBpsPerCqi	 		= new float[nrSinrVals]; 
+		float[] dlAvgBps1PerCqi	 		= new float[nrSinrVals];
+		float[] dlAvgBps2PerCqi	 		= new float[nrSinrVals];
+		float[] dlAvgTotBpsPerCqi 		= new float[nrSinrVals];
 		float[] ulAvgBpsPerSINR			= new float[nrSinrVals];
 		float[] dlMaxBpsPerCqi	 		= new float[nrSinrVals];
 		float[] ulMaxBpsPerSINR	 		= new float[nrSinrVals];
+
+		double[][] dlAvgBpsPerSec		= new double[2][rows];
+		double[][] ulAvgBpsPerSec		= new double[2][rows];
 		
 		float[] dlPrbPerCqi				= new float[nrSinrVals];
 		float[] ulPrbPerSINR			= new float[nrSinrVals];
@@ -149,86 +187,73 @@ public class Main {
 		float[] riPerCqi				= new float[nrSinrVals];
 		
 		float[] dlAvgCqiPerMcs1			= new float[nrUlMcsVals];
-		float[] ulAvgSinrPerMcs			= new float[nrDlMcsVals];
+		float[] ulAvgSinrPerMcs1		= new float[nrDlMcsVals];
 		
 		
 		
-		dlAvgBpsPerCqi = BasicCalc.tbs2Mbps(DLCalc.avgValPerCqi(dLtbssum, cqi, SIB,300)); 
-		dlMaxBpsPerCqi = BasicCalc.tbs2Mbps(DLCalc.maxValPerCqi(dLtbssum, cqi, SIB));
-		ulAvgBpsPerSINR = BasicCalc.tbs2Mbps(ULCalc.avgValPerSINR(uLtbssum, SINR, SIB,100)); 
-		ulMaxBpsPerSINR = BasicCalc.tbs2Mbps(ULCalc.maxValPerSINR(uLtbssum, SINR, SIB));
 		
-		dlPrbPerCqi = DLCalc.avgValPerCqi(dlPrb, cqi, SIB,300);
-		ulPrbPerSINR = ULCalc.avgValPerSINR(ulPrb, SINR, SIB,100);
+		dlAvgBps1PerCqi = BasicCalc.tbs2Mbps(
+				dlCalc.avgValPerCqi(
+						BasicCalc.tbs2throughput(
+								dlTbs1,ndf1)
+						,50));
 		
-		dlAvgSpecEffPerCqi = BasicCalc.spectralEfficiencyPerSINR(BasicCalc.prefixChanger(dlAvgBpsPerCqi, 1000000), BasicCalc.prb2hz(dlPrbPerCqi));
+		dlAvgBps2PerCqi = BasicCalc.tbs2Mbps(
+				dlCalc.avgValPerCqi(
+						BasicCalc.tbs2throughput(
+								dlTbs2,ndf2)
+						,50));
+		
+		dlAvgTotBpsPerCqi = BasicCalc.addArrays(dlAvgBps1PerCqi, dlAvgBps2PerCqi);
+		dlMaxBpsPerCqi = BasicCalc.tbs2Mbps(dlCalc.maxValPerCqi(dlTbsSum));
+		ulAvgBpsPerSINR = ulCalc.avgValPerSINR(ulTbsSum,100);
+		ulMaxBpsPerSINR = BasicCalc.tbs2Mbps(ulCalc.maxValPerSINR(ulTbsSum));
+		
+		dlAvgBpsPerSec = Calculate.avgTbsPerSecond(dlTbsSum, timeStamp, SIB, 500);
+		ulAvgBpsPerSec = Calculate.avgTbsPerSecond(ulTbsSum, timeStamp, SIB, 500);
+		
+		dlPrbPerCqi = dlCalc.avgValPerCqi(dlPrb,300);
+		ulPrbPerSINR = ulCalc.avgValPerSINR(ulPrb,100);
+		
+		dlAvgSpecEffPerCqi = BasicCalc.spectralEfficiencyPerSINR(BasicCalc.prefixChanger(dlAvgTotBpsPerCqi, 1000000), BasicCalc.prb2hz(dlPrbPerCqi));
 		ulAvgSpecEffPerSINR = BasicCalc.spectralEfficiencyPerSINR(BasicCalc.prefixChanger(ulAvgBpsPerSINR,1000000), BasicCalc.prb2hz(ulPrbPerSINR));
 		
-		blerPerSINR = DLCalc.avgValPerCqi(bler, cqi, SIB,30);
-		riPerCqi = DLCalc.avgValPerCqi(ri, cqi, SIB,1);
+		blerPerSINR = dlCalc.avgValPerCqi(bler,30);
+		riPerCqi = dlCalc.avgValPerCqi(ri,1);
 
-		dlAvgCqiPerMcs1 = DLCalc.avgCqiPerMcs(dlMcs1, cqi , SIB);
-		ulAvgSinrPerMcs = ULCalc.avgSINRPerMcs(ulMcs, SINR , SIB);
+		dlAvgCqiPerMcs1 = dlCalc.avgValPerMcs(cqi,dlMcs1);
+		//ulAvgSinrPerMcs = ULCalc.avgSINRPerMcs(ulMcs, SINR , SIB);
 		
+		//Vad fattas, dlbler1PerCqi, dlbler2PerCqi, ulBlerPerSINR, dlAvgCqiPerMcs2, ulAvgSinrPerMcs, pmiPerCQI / pmiPerSINR
 		
+		/*PLOTTING SECTION*/
+		Plot.overTime(dlAvgBpsPerSec[0], dlAvgBpsPerSec[1], "dlAvgBpsPerSec", "Xaxis", "Yaxis", "text");
+		Plot.normal(dlAvgBps1PerCqi, "dlAvgBps1PerCqi", "Xaxis", "Yaxis", "text");
+		Plot.normal(dlAvgBps2PerCqi, "dlAvgBps2PerCqi", "Xaxis", "Yaxis", "text");
+		Plot.normal(dlAvgTotBpsPerCqi, "dlAvgTotBpsPerCqi", "Xaxis", "Yaxis", "text");
+		Plot.normal(dlMaxBpsPerCqi, "dlMaxBpsPerCqi", "Xaxis", "Yaxis", "text");
 		
 
+		Plot.overTime(ulAvgBpsPerSec[0], ulAvgBpsPerSec[1], "ulAvgBpsPerSec", "Xaxis", "Yaxis", "text");
+		Plot.normal(ulAvgBpsPerSINR, "ulAvgBpsPerSINR", "Xaxis", "Yaxis", "text");
+		Plot.normal(ulMaxBpsPerSINR, "dlMaxBpsPerCqi", "Xaxis", "Yaxis", "text");
 		
-		
-		Plot.normal(
-				dlPrbPerCqi,
-				"UL Throughput/SINR",
-				"SINR [dB]",
-				"Throughput, [Mbits/s]",
-				"inte logaritmik");
-		Plot.normal(
-				ulPrbPerSINR,
-				"UL Throughput/SINR",
-				"SINR [dB]",
-				"Throughput, [Mbits/s]",
-				"inte logaritmik");
-		
-		Plot.normal(
-				dlAvgSpecEffPerCqi,
-				"UL Throughput/SINR",
-				"SINR [dB]",
-				"Throughput, [Mbits/s]",
-				"inte logaritmik");
-		Plot.normal(
-				ulAvgSpecEffPerSINR,
-				"UL Throughput/SINR",
-				"SINR [dB]",
-				"Throughput, [Mbits/s]",
-				"inte logaritmik");
-
-		
-		Plot.normal(
-				blerPerSINR,
-				"Throughput, [Mbits/s]/Cqi",
-				"Cqi",
-				"Throughput, [Mbits/s]",
-				"inte logaritmik");
-		Plot.normal(
-				riPerCqi,
-				"UL Throughput/SINR",
-				"SINR [dB]",
-				"Throughput, [Mbits/s]",
-				"inte logaritmik");
-		Plot.normal(
-				dlAvgCqiPerMcs1,
-				"UL Throughput/SINR",
-				"SINR [dB]",
-				"Throughput, [Mbits/s]",
-				"inte logaritmik");
-		Plot.normal(
-				ulAvgSinrPerMcs,
-				"UL Throughput/SINR",
-				"SINR [dB]",
-				"Throughput, [Mbits/s]",
-				"inte logaritmik");
+//		
+//		Plot.normal(dlPrbPerCqi, "dlPrbPerCqi", "Xaxis", "Yaxis", "text");
+//		Plot.normal(ulPrbPerSINR, "ulPrbPerSINR", "Xaxis", "Yaxis", "text");
+//		Plot.normal(dlAvgSpecEffPerCqi, "dlAvgSpecEffPerCqi", "Xaxis", "Yaxis", "text");
+//		Plot.normal(ulAvgSpecEffPerSINR, "ulAvgSpecEffPerSINR", "Xaxis", "Yaxis", "text");
+//		Plot.normal(blerPerSINR, "blerPerSINR", "Xaxis", "Yaxis", "text");
+//		Plot.normal(riPerCqi, "riPerCqi", "Xaxis", "Yaxis", "text");
+//		Plot.normal(dlAvgCqiPerMcs1, "dlAvgCqiPerMcs1", "Xaxis", "Yaxis", "text");
 
 
+
+		
+//		timePerSecond = Calculate.avgTbsPerSecond(dLtbssum, timeStamp, SIB, 50);
+//		Plot.overTime(timePerSecond[0],timePerSecond[1], "header", "Xaxis", "Yaxis", "text");
 	//printArray(sinr);
+
 	}
 
 //IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
@@ -247,24 +272,11 @@ public class Main {
 			} else if (lteData[i].contains("SIB") ){
 				out[i] = -1; 
 				
-			//Harq dl ack and nack bits.
-			} else if (lteData[i].contains("A A") ){
-				out[i] = 2;
-			} else if (lteData[i].contains("A N") ){
+			} else if (lteData[i].contains("Y") ){
 				out[i] = 1;
-			} else if (lteData[i].contains("N A") ){
-				out[i] = 1;
-			} else if (lteData[i].contains("N N") ){
-				out[i] = 0;
-			
-			//Harq ul ack and nack bits.
-			} else if (lteData[i].contains("ACK") ){
-				out[i] = 1;
-			
-			} else if (lteData[i].contains("NACK") ){
+			} else if (lteData[i].contains("N  ") ){
 				out[i] = 0;
 			} else if (lteData[i].contains("%") ){
-				//blööööörk
 				out[i]= Integer.parseInt(lteData[i].replace("%", "").trim());
 			}
 				
@@ -282,17 +294,5 @@ public class Main {
 		}
 		return out;
 	}
-
-
-	
-	
-
-
-	
-
-
-
-
-	
 
 }
