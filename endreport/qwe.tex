@@ -40,7 +40,10 @@ From the statistics produced by the analyser tool, the testing personal at Erics
 
 \chapter{Introduction}
 
-\section{background and Motivation}
+\section{Motivation}
+
+
+
 The purpose with this master thesis is to help Long Term Evolution Interoperability Development Testing (LTE IODT) Data analysis. LTE IODT wants to automatically generate analysis of Link Adaptation (LA) and Hybrid Automatic Repeat Request (HARQ) tests where we sweep through Signal to Interference plus Noise Ratio (SINR) for different channel models. The LTE IODT lab test logs gives a unique opportunity to look into detailed behaviour of link and rank adaptation for both downlink and uplink. \newline
 
 
@@ -48,21 +51,40 @@ Ericsson needed a tool for allowing the testers to better analyse the performanc
 
 
 The visualization tool which we used in this project was an Ericsson internal project called Logtool. We implemented our program as a plugin project to Logtool. The Logtool project is built upon the eclipse framework and we also developed the plugin in eclipse development enviroment in Java. 
+\section{Background}
+The following section is to provide with information useful to understand the contents of the report. This chapter contains explenation of Link Adaptation, Modulation, Coding and code rate. 
+\subsection{Link Adaptation}
+Link Adaptation is a way to enhance the performance in systems with wireless signals yes dependent on the channel condition the modulation scheme and code rate is changed. The better channel condition the higher modulation scheme and higher code rate [source on this]?. The modulation scheme used in the LTE systems are QPSK, 16QAM and 64QAM. The codes used is QPP (quadrature polynomial permutation) turbo codes [source on this]?. When data are/is sent from a base station to a UE (DL) the UE will report a CQI (channel quality indicator) value to the base station indicating how good the channel is. CQI can take values from 0 to 15 (4 bits) where 0 represent a very bad channel condition and 15 a very good one. Out from this value The EnodeB decides a MCS (modulation and coding scheme). For downlink MCS can take values between 0-28 and uplink 0-22. Each one of this value represent a Modulation scheme and code rate. 
+
+\subsection{HARQ algorithm}
+skriver vi something here eller ar denna section bara massa skit
+
+\subsection{Modulation}
+A modulation scheme is a way to map digital bits to analog signals in wireless systems. it is a way to represent the bits in the air.
+There are different modulation schemes and the ones that are use in LTE are 4QAM (QPSK), 16QAM and 64 QAM. The signals are modulated in the following way 
+
+(bild pa 4QAM 16QAM and 64QAM over i-phase and q-phase). 
+ 
+The I-phase is basically a Sinus wave and Q-phase is a Cosine wave. This way orthogonality occur. What the points on the two axises represent is the amplitude. So in the QPSK case. What the different signals that actually will be is
+is A*sinus(f*t), A*cos(f*t), -A*sinus(f*t) and -A*cos(f*t). So in this case the it fits 2 bits in each signal. I.e e.g signal 1 = 00, signal 2 = 01, signal 3 = 10, signal 4 = 11. In 16QAM and 64QAM each signal point is represented by 4 and 6 bits respectively.
+
+The signals in LTE are modulated with an IQ-modulator and decoded with and IQ-Demodulator
+
+\subsection{Coding and code rate}
+A coding is a way to create redundancy in the bits that are send. The data will consist of real data bits and coded bits. This way you are able to correct bits that are wrongly recieved. The more coded bits you have in your message the more errors you can detect and correct, but the slower data rate you will have. The code rate states how many bits that are coded in a message. the Code rate is between 0 and 1 and is simply the ratio between #real bits to #real bits + #coded bits. 
+\\ \\
+example: if we have a code rate of 0.73 we have 73% real bits in the message and 27% coded bits. 
 
 
 
 
-
-\section{problem formulation}
-The purpose of this master thesis is to help LTE IODT Data Analysis to see how well the LTE system is performing when the HARQ (Hybrid Automatic Repeat Request)and LA (Link Adaptation) is activated. To perform such an analysis we needed to gather vast knowledge regarding how signals are treated in LTE and how the protocols implemented are constructed.
 
  
 
 
 TODO: write about all web pages and libraries which contained information about LTE
 
-
-The output should be recorded and automatically compared with the recommended minimum requirements of the 3GPP standards and Ericsson Research.
+The analyzer should be able to plot several graphs, save them and read them again such that the user can compare different traces.
 
 \section{Goals and Methodology}
 
@@ -77,8 +99,8 @@ Our task from Ericsson was to develop a lightweight analyzer tool that:
  
   \begin{itemize} 
  \item Study and understand the 3GPP standards and Ericsson Research
- \item Analyze the data from processing for the final graph
- \item Evaluate a suitable tool for the processing of data, e.g. MATLAB or other tools
+ \item Analyzfrom processing for the final graph
+ \item Evaluate a suitabe the data le tool for the processing of data, e.g. MATLAB or other tools
  \item Capability to correlate the graph to logs in order to facilitate troubleshooting
 \end{itemize}
 
@@ -87,349 +109,36 @@ TODO: write about why and how we did a focus group
 \section{Thesis Outline}
 This thesis is divided into the following Parts
 \begin{itemize}
-	\item part 1 we planned stuff here
+	\item we planned to do a analyzer tool and then we could do an analysation of link adaptation with this tool
 	\item part 2 we implemented stuff here
 	\item part 3 we reviewed stuff here
 \end{itemize}
 
-\chapter{Body}
+\chapter{The analysation tool}
+\chapter{Analysation of Link Adaptation}
 
-Are you sure that that I shouldnt me realize that the end of the wash
-cycle is a treasured moment for most people?
+\section{problem formulation}
+The purpose of this master thesis is to help LTE IODT Data Analysis to see how well the LTE system is performing when the HARQ (Hybrid Automatic Repeat Request)and LA (Link Adaptation) is activated. To perform such an analysis we needed to gather vast knowledge regarding how signals are treated in LTE and how the protocols implemented are constructed. With this tool we shall help LTE IODT be able to different analysises on our tool. 
 
-..  One FISHWICH coming up!!
+\section{The analysis}
+Paul skriver nedanstaende \\ \\
+what our analysis is intended to do is to look at how well performed the different mcs values are in the AMC (adaptive modulation control) protocol. this is dependent on the different CQI values in downlink, and from this value, the BLER (block error rate) value the enodeB choses a MCS 5-bits. What our analysis is intended to study is to see of the optimal MCS is chosen according to the sinr value. This way we can see if some mcses might be redundant och that some mcs value should be at other cqi reports. 
 
-Is it because of your life that you say one fishwich coming up?
+Uplink: \newline
+Data is sent from the UE to the enodeB. The EnodeB is calculating SINR and from this value and block error rate (and maybe something more) the enodB decides which MCS the UE shall send at. MCS in uplink varies between 0-22, where mcs = 0 in the worst channel conditions (lowest SINR's) and mcs = 22 in the highest SINR's. 
 
-If I am elected, the concrete barriers around the WHITE HOUSE
- will be replaced by tasteful foam replicas of ANN MARGARET!
+Downlink: \newline
+Data is sent from the enodeB to the UE. When the data is sent from the enodeB the UE is calculating a CQI value (0-15) which represent the channel condition. 0 is the worst channel condition and 15 is the best channel conditions. this value is sent back to the enodeB and from this value and some other parameters (BLER) an MCS is chosen. In this case this value varies between 0-28 where 0 is the modulation and coding scheme for the worst channel conditions and 28 is the modulation schemes for the best channel conditions.
 
-I dont understand.
-
-You mean you dont want to watch WRESTLING from ATLANTA?
-
-Do you really think I might want not want to watch wrestling?
-
-Is this TERMINAL fun?
-
-Is it because of the people you hang around with that you are going
-through all this?
-
-Its a lot of fun being alive...  I wonder if my bed is made?!?
-
-What makes you think you wonder if your bed is made?
-
-...PENGUINS are floating by...
-
-Earlier you said I would like not want to watch wrestling?
-
-Hey, LOOK!!  A pair of SIZE 9 CAPRI PANTS!!  They probably belong to
- SAMMY DAVIS, JR.!!
-
-How do you reconcile problems at school?
-
-BARRY..  That was the most HEART-WARMING rendition of
- ``I DID IT MY WAY Ive ever heard!!
-
-Is it because was the most heart warming rendition of you did it your
-way you have ever heard that you came to me?
-
-I know how to get the hostesses released!  Give them their own
- television series!
-
-Is it because of any hobbies you have that you say give them their own
-television series?
-
-In order to make PLANS for the WEEKEND...so that we can read RESTAURANT
- REVIEWS and decide to GO to that restaurant \& then NEVER GO...so we can
- meet a FRIEND after work in a BAR and COMPLAIN about Interior Secty
- JAMES WATT until the SUBJECT is changed to NUCLEAR BLACKMAIL...and so
- our RELATIVES can FORCE us to listen to HOCKEY STATISTICS while we
- wait for them to LEAVE on the 7:48....
-
-Does it bother you that you can read restaurant reviews and decide to
-go to that restaurant then not ever go so you can meet a friend after
-work in a bar and complain about interior secty james watt until the
-subject is changed to nuclear blackmail and so your relatives can
-force us to listen to hockey statistics while you wait for them to
-leave on the 7 48?
-
-Is this the line for the latest whimsical YUGOSLAVIAN drama which also
- makes you want to CRY and reconsider the VIETNAM WAR?
-
-How does it feel to want?
+what we have looked at is both uplink and downlink. in the downlink we did 30 different simulations. 29 simulations where we have hardcoded the enodeB to run at a specific MCS, 0-28 and one where did not hardcode a mcs. We compared all these curves to each other look at which SINR / CQI value they intersect each other and if the hardcoded mcs value were higher than the actual value it had.
 
 \section{Mainline}
 
-\section{Qwadratica}
+text...
 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
-A slightly tegelsten liknande sida. 
 
 \chapter{Closing}
 
-
-Lets all show human CONCERN for REVEREND MOONs legal difficulties!!
-
-You mentioned that I would like not want to watch wrestling?
-
-..  the MYSTERIANS are in here with my CORDUROY SOAP DISH!!
-
-Perhaps this has something to do with your sex life?
-
-Here I am at the flea market but nobody is buying
- my urine sample bottles..
-
-When did you first know that nobody is buying your urine sample
-bottles?
-
-I was in EXCRUCIATING PAIN until I started reading JACK AND JILL
- Magazine!!
-
-Possibly you should consult a doctor of medicine, I am a psychiatrist.
-
-HUGH BEAUMONT died in 1982!!
-
-This is not a healthy way of thinking.
-
-Yow!  And then we could sit on the hoods of cars at stop lights!
-
-Maybe hangups you have are related to this.
-
-I HAVE a towel.
-
-Why do you say was the most heart warming rendition of you did it your
-way you have ever heard?
-
-Excuse me, but didnt I tell you theres NO HOPE for the
- survival of OFFSET PRINTING?
-
-Is the fact that didnt you tell me theres no hope for the survival
-of offset printing the real reason?
-
-Ive read SEVEN MILLION books!!
-
-Is it because of your inhibitions that you are going through all this?
-
-..  Like I always say -- nothing can beat the BRATWURST
- here in DUSSELDORF!!
-
-Are you afraid of that?
-
-I havent been married in over six years, but we had sexual counseling
- every day from Oral Roberts!!
-
-Does the fact that you had sexual counseling every day from oral
-roberts explain anything else?
-
-Are you selling NYLON OIL WELLS??  If so, we can use TWO DOZEN!!
-
-Earlier you said you can read restaurant reviews and decide to go to
-that restaurant then not ever go so you can meet a friend after work
-in a bar and complain about interior secty james watt until the
-subject is changed to nuclear blackmail and so your relatives can
-force us to listen to hockey statistics while you wait for them to
-leave on the 7 48?
-
-Im having a BIG BANG THEORY!!
-
-How do you reconcile some problems in your childhood?
-
-I want to kill everyone here with a cute colorful Hydrogen Bomb!!
-
-Why should you get to kill everyone?
-
-Civilization is fun!  Anyway, it keeps me busy!!
-
-Have you been sure it keeps you busy?
-
-Eisenhower!!  Your mimeograph machine upsets my stomach!!
-
-You have your mind on machines, it seems.
-
-Did YOU find a DIGITAL WATCH in YOUR box of VELVEETA?
-
-What makes you believe that?
-
-Hmmm..  A hash-singer and a cross-eyed guy were SLEEPING on a deserted
- island, when...
-
-Do you use hash often?
-
-Yow!  Now we can become alcoholics!
-
-You mentioned that I would like to cry?
-
-Im having a tax-deductible experience!  I need an energy crunch!!
-
-When did you first desire to have an energy?
-
-Everywhere I look I see NEGATIVITY and ASPHALT...
-
-Perhaps this is related to some problems at home?
-
-YOW!!!  I am having fun!!!
-
-Are you sure that you are having fun?
-
-So this is what it feels like to be potato salad
+text...
 
 \end{document}

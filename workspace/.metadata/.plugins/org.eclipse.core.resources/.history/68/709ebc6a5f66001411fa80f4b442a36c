@@ -1,0 +1,98 @@
+package lteAnalyzer;
+
+import java.util.HashMap;
+
+public class Calculate{
+	
+	//dl
+	static final int NOT_A_VALUE = -1337; //empty spaces in a vector is represented by this value
+	static final int NR_OF_CQI_VALS = 16; //0 to 15
+	static final int NR_OF_MCS_VALS = 29;
+	static final int MAX_MCS_VAL = 28;
+	static final int MIN_NR_OF_FOUND_XAXIS_VALS = 50;
+	
+	//ul
+	static final int NR_OF_SINR_VALS = 66; //-25 to 40
+	static final int NR_OF_UL_MCS_VALS = 23; // 0 to 22
+	static final int MAX_UL_MCS_VAL = 22;
+	static final int MIN_SINR_VAL = -25;
+	
+	
+	
+	public static double[][] avgTbsPerSecond(int[] tbs, double[] timeStamps, int[] SIB, int granularity){
+
+		int logFileCounter = 0;
+		int averageCounter = 0;
+		
+		int averageValue = 0;
+		int sum = 0;
+		int timeStampIndex = 0;
+		int currentTbsValue;
+		double currentTimeStamp = 0;
+		
+		double[][] outputArray = new double[2][tbs.length/granularity + 1];
+
+		while(logFileCounter < tbs.length)
+		{
+			currentTbsValue = tbs[logFileCounter]; 
+			if(currentTbsValue != NOT_A_VALUE && SIB[logFileCounter] != -1){
+				sum += currentTbsValue;
+				++averageCounter;
+				
+				//check if we have found all values we intend to use for calculating the averageSum
+				if(averageCounter == granularity){
+					averageValue = sum / granularity;
+					currentTimeStamp = timeStamps[logFileCounter];
+					
+					//put values in output array
+					outputArray[1][timeStampIndex] = averageValue;
+					outputArray[0][timeStampIndex] = BasicCalc.findCloseValFrInd(timeStamps, logFileCounter);
+					++timeStampIndex;
+					
+					//reset all counters the relates to the granularity loop
+					averageCounter = 0;
+					sum = 0;
+				}
+			}
+			++logFileCounter;
+		}
+		return outputArray;
+	}
+	
+	
+public float[] avgYValPerXVal(double[] Xvals,double[] Yvals,int minNrFoundXaxisVals){
+ 		
+		int value_ind = 0;
+		int counter_ind = 1;
+		
+		int counter = 0;
+		int currentVal = 0;
+		
+		int lenOfXAxis = (int) Math.ceil(BasicCalc.getBiggest(Xvals));
+		float[][] tempValPerCqi = new float[2][lenOfXaxis];
+		tempValPerCqi = BasicCalc.init(tempValPerCqi);
+		
+		float[] valPerCqi = new float[NR_OF_CQI_VALS];
+		valPerCqi = BasicCalc.init(valPerCqi);
+		
+		for(int i=0;i < cqi.length;i++){
+				//we've found legit tbs data, accumulate counter, tbs, bW and see if we have peak data rate.
+				if(SIB[i] != -1 && val[i] != NOT_A_VALUE ){
+					currentVal=currentVal+val[i]; 
+					counter++;
+				}
+			if (cqi[i] >= 0 && cqi[i] <= 15 && SIB[i] != -1){
+				tempValPerCqi[value_ind][cqi[i]] = tempValPerCqi[value_ind][cqi[i]] + currentVal; //accumulated cqi
+				tempValPerCqi[counter_ind][cqi[i]] = tempValPerCqi[counter_ind][cqi[i]] + counter;
+				counter=0;
+				currentVal=0;
+			}
+		}
+		for(int j=0;j<valPerCqi.length;j++)
+			if (tempValPerCqi[counter_ind][j] >= minNrFoundXaxisVals)
+				valPerCqi[j] = tempValPerCqi[value_ind][j]/tempValPerCqi[counter_ind][j];
+			return valPerCqi;
+	}
+	
+}
+

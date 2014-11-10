@@ -16,3 +16,7 @@ http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=1490770
 
 A NEW FREQUENCY-DOMAIN LINK ADAPTATION SCHEME FOR BROADBAND OFDM
 SYSTEMS http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=797134
+
+
+Mutual Information based Calculation of the Precoding Matrix Indicator for 3GPP UMTSLTE
+http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=5456388

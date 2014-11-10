@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.10.17)  28 OCT 2014 15:37
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.9.19)  6 NOV 2014 15:45
 entering extended mode
 **qwe.tex
-(C:\Users\erazlin\git\masterthesis\endreport\qwe.tex
+(C:\Users\epauned\Documents\GitHub\masterthesis\endreport\qwe.tex
 LaTeX2e <2011/06/27>
 Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, ar
 abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
@@ -13,9 +13,9 @@ german-x-2013-05-26, nynorsk, oriya, panjabi, pinyin, polish, portuguese, roman
 ian, russian, sanskrit, serbian, slovak, slovenian, spanish, swedish, swissgerm
 an, tamil, telugu, turkish, turkmen, ukenglish, ukrainian, uppersorbian, usengl
 ishmax, welsh, loaded.
-(C:\Users\erazlin\git\masterthesis\endreport\idamasterthesis.cls
+(C:\Users\epauned\Documents\GitHub\masterthesis\endreport\idamasterthesis.cls
 Document Class: idamasterthesis 2011/04/19 LaTeX idamasterthesis class
-(C:\Users\erazlin\git\masterthesis\endreport\idathesis.cls
+(C:\Users\epauned\Documents\GitHub\masterthesis\endreport\idathesis.cls
 Document Class: idathesis 2005/11/10 LaTeX idathesis class
 ("C:\Program Files (x86)\MikTex\tex\latex\base\inputenc.sty"
 Package: inputenc 2008/03/30 v1.1d Input encoding file
@@ -25,12 +25,12 @@ Package: inputenc 2008/03/30 v1.1d Input encoding file
 ("C:\Program Files (x86)\MikTex\tex\latex\base\latin1.def"
 File: latin1.def 2008/03/30 v1.1d Input encoding file
 ))
-(C:\Users\erazlin\git\masterthesis\endreport\chngpage.sty
+(C:\Users\epauned\Documents\GitHub\masterthesis\endreport\chngpage.sty
 Package: chngpage 2003/08/10 v1.2 change page layout
 \c@cp@cnt=\count79
 \c@cp@tempcnt=\count80
 )
-(C:\Users\erazlin\git\masterthesis\endreport\fancyhdr.sty
+(C:\Users\epauned\Documents\GitHub\masterthesis\endreport\fancyhdr.sty
 \fancy@headwidth=\skip41
 \f@ncyO@elh=\skip42
 \f@ncyO@erh=\skip43
@@ -150,7 +150,7 @@ Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 \Gm@dimlist=\toks18
 
 ("C:\Program Files (x86)\MikTex\tex\latex\geometry\geometry.cfg"))
-(C:\Users\erazlin\git\masterthesis\endreport\crop.sty
+(C:\Users\epauned\Documents\GitHub\masterthesis\endreport\crop.sty
 Package: crop 2002/05/14 v1.7 cropmarks (mf)
 \stockwidth=\dimen114
 \stockheight=\dimen115
@@ -161,7 +161,7 @@ Package crop Info: Local config file crop.cfg used on input line 492.
 ("C:\Program Files (x86)\MikTex\tex\xelatex\xetexconfig\crop.cfg"))
 Package crop Info: using pdf(la)tex graphics driver on input line 210.
 ))
-(C:\Users\erazlin\git\masterthesis\endreport\qwe.aux)
+(C:\Users\epauned\Documents\GitHub\masterthesis\endreport\qwe.aux)
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 29.
 LaTeX Font Info:    ... okay on input line 29.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 29.
@@ -175,6 +175,20 @@ LaTeX Font Info:    ... okay on input line 29.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 29.
 LaTeX Font Info:    ... okay on input line 29.
 
+("C:\Program Files (x86)\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count98
+\scratchdimen=\dimen116
+\scratchbox=\box26
+\nofMPsegments=\count99
+\nofMParguments=\count100
+\everyMPshowfont=\toks19
+\MPscratchCnt=\count101
+\MPscratchDim=\dimen117
+\MPnumerator=\count102
+\makeMPintoPDFobject=\count103
+\everyMPtoPDFconversion=\toks20
+)
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -209,7 +223,7 @@ LaTeX Font Info:    ... okay on input line 29.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-[-1{C:/Users/erazlin/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}
+[-1{C:/Users/epauned/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}
 
 ]
 [0
@@ -228,7 +242,7 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
 ]
 [4
 
-] (C:\Users\erazlin\git\masterthesis\endreport\qwe.toc
+] (C:\Users\epauned\Documents\GitHub\masterthesis\endreport\qwe.toc
 LaTeX Font Info:    Try loading font information for U+msa on input line 3.
 
 ("C:\Program Files (x86)\MikTex\tex\latex\amsfonts\umsa.fd"
@@ -259,106 +273,110 @@ Underfull \hbox (badness 10000) in paragraph at lines 47--48
 
 [1
 
-] [2]
-Chapter 2.
-[3
+]
+Underfull \hbox (badness 10000) in paragraph at lines 75--77
 
-] [4] [5] [6]
-Chapter 3.
-[7
+ []
+
+[2] [3] [4]
+Chapter 2.
+[5
 
 ]
+Chapter 3.
 \@filenumb=\write4
- [8] <linkuniv_en_vert_blk.pdf, id=58, 240.60088pt x 172.5386pt>
+[6
+
+] <linkuniv_en_vert_blk.pdf, id=52, 240.60088pt x 172.5386pt>
 File: linkuniv_en_vert_blk.pdf Graphic file (type pdf)
 
 <use linkuniv_en_vert_blk.pdf>
-Package pdftex.def Info: linkuniv_en_vert_blk.pdf used on input line 435.
+Package pdftex.def Info: linkuniv_en_vert_blk.pdf used on input line 136.
 (pdftex.def)             Requested size: 56.9055pt x 40.8072pt.
 
-Overfull \hbox (261.76398pt too wide) detected at line 435
+Overfull \hbox (261.76398pt too wide) detected at line 136
 []
  []
 
 
-Overfull \hbox (358.50284pt too wide) detected at line 435
+Overfull \hbox (358.50284pt too wide) detected at line 136
 []
  []
 
 
-Overfull \hbox (91.04834pt too wide) detected at line 435
+Overfull \hbox (91.04834pt too wide) detected at line 136
 []
  []
 
 
-Overfull \hbox (187.7872pt too wide) detected at line 435
+Overfull \hbox (187.7872pt too wide) detected at line 136
 []
  []
 
 
-Overfull \hbox (358.50284pt too wide) detected at line 435
+Overfull \hbox (358.50284pt too wide) detected at line 136
 []
  []
 
 
-Overfull \hbox (187.7872pt too wide) detected at line 435
+Overfull \hbox (187.7872pt too wide) detected at line 136
 []
  []
 
 
-Overfull \hbox (358.50284pt too wide) detected at line 435
+Overfull \hbox (358.50284pt too wide) detected at line 136
 []
  []
 
 
-Overfull \hbox (358.50284pt too wide) detected at line 435
+Overfull \hbox (358.50284pt too wide) detected at line 136
 []
  []
 
 
-Overfull \hbox (358.50284pt too wide) detected at line 435
+Overfull \hbox (358.50284pt too wide) detected at line 136
 []
  []
 
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <9> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 435.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 136.
 
-Overfull \hbox (29.87495pt too wide) in paragraph at lines 435--435
+Overfull \hbox (29.87495pt too wide) in paragraph at lines 136--136
 [][]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 435--435
+Underfull \hbox (badness 10000) in paragraph at lines 136--136
 
  []
 
-[9
+[7
 
- <C:/Users/erazlin/git/masterthesis/endreport/linkuniv_en_vert_blk.pdf>]
-(C:\Users\erazlin\git\masterthesis\endreport\qwe.aux) ) 
+ <C:/Users/epauned/Documents/GitHub/masterthesis/endreport/linkuniv_en_vert_blk
+.pdf>] (C:\Users\epauned\Documents\GitHub\masterthesis\endreport\qwe.aux) ) 
 Here is how much of TeX's memory you used:
- 2226 strings out of 493921
- 30107 string characters out of 3146473
- 107833 words of memory out of 3000000
- 5485 multiletter control sequences out of 15000+200000
- 11835 words of font info for 45 fonts, out of 3000000 for 9000
+ 2523 strings out of 493921
+ 34307 string characters out of 3146474
+ 104679 words of memory out of 3000000
+ 5779 multiletter control sequences out of 15000+200000
+ 12440 words of font info for 47 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 40i,10n,47p,717b,241s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program Files (x86)/
-MikTex/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Program Files (x86)/MikTex
-/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Files (x86)/MikTex/fonts
-/type1/public/amsfonts/cm/cmbx7.pfb><C:/Program Files (x86)/MikTex/fonts/type1/
-public/amsfonts/cm/cmr10.pfb><C:/Program Files (x86)/MikTex/fonts/type1/public/
-amsfonts/cm/cmr12.pfb><C:/Program Files (x86)/MikTex/fonts/type1/public/amsfont
-s/cm/cmr7.pfb><C:/Program Files (x86)/MikTex/fonts/type1/public/amsfonts/cm/cmr
-9.pfb><C:/Program Files (x86)/MikTex/fonts/type1/public/amsfonts/cm/cmsl10.pfb>
-<C:/Program Files (x86)/MikTex/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Pr
-ogram Files (x86)/MikTex/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program F
-iles (x86)/MikTex/fonts/type1/public/amsfonts/cm/cmsy9.pfb><C:/Program Files (x
-86)/MikTex/fonts/type1/public/amsfonts/symbols/msam7.pfb>
-Output written on qwe.pdf (17 pages, 3324515 bytes).
+ 40i,10n,47p,934b,295s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/
+Program Files (x86)/MikTex/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Progra
+m Files (x86)/MikTex/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program File
+s (x86)/MikTex/fonts/type1/public/amsfonts/cm/cmbx7.pfb><C:/Program Files (x86)
+/MikTex/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files (x86)/MikTex
+/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files (x86)/MikTex/fonts/
+type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files (x86)/MikTex/fonts/type1/pu
+blic/amsfonts/cm/cmr9.pfb><C:/Program Files (x86)/MikTex/fonts/type1/public/ams
+fonts/cm/cmsl10.pfb><C:/Program Files (x86)/MikTex/fonts/type1/public/amsfonts/
+cm/cmsy10.pfb><C:/Program Files (x86)/MikTex/fonts/type1/public/amsfonts/cm/cms
+y7.pfb><C:/Program Files (x86)/MikTex/fonts/type1/public/amsfonts/cm/cmsy9.pfb>
+<C:/Program Files (x86)/MikTex/fonts/type1/public/amsfonts/symbols/msam7.pfb>
+Output written on qwe.pdf (15 pages, 3320528 bytes).
 PDF statistics:
- 152 PDF objects out of 1000 (max. 8388607)
+ 146 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 
