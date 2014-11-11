@@ -1,7 +1,10 @@
+
 \documentclass[cropmarks, frame, english]{idamasterthesis}
 
+%\usepackage{glossaries}
+\usepackage{amsmath}
 \author{Paul Nedstrand \& Razmus Lindgren}
-\titleenglish{Test Data Post-Processing and Analysis of LA \& HARQ}
+\titleenglish{Test Data Post-Processing and Analysis of LA}
 \titleswedish{Svensken Titel}
 \publicationmonth{THEMONTH}
 \publicationyear{2015}
@@ -28,17 +31,37 @@ From the statistics produced by the analyser tool, the testing personal at Erics
 
 \begin{document}
 
-\begin{abbreviations}
-\item[US] United States
-\item[EU] European Union
-\item[Gvmt] Government
-\end{abbreviations}
-
 
 \makeintropages
 
 
+ 
 \chapter{Introduction}
+TODO: write about how we use the tool from making a trace to generating graph
+TODO: write about all web pages and libraries which contained information about LTE
+TODO: write about why and how we did a focus group
+
+\begin{abbreviations}
+\item[CQI] Channel Quality Index, an indicator of how good the channel quality is.
+\item[SINR] Signal to Interference plus Noise Ratio, defined as $\dfrac{P_{signal}}{P_{interference} + P_{noise}}$, where $P_{signal}$ is the Power of the signal, $P_{interference}$ is the power of the interference in watt and $P_{noise}$ is the power of the noise.
+\item[eNB] enhanced Node-B, the base station that transmits or receives data from the UE.
+\item[UE] User Equipment, a device that can send data
+\item[LTE] Long Term Evolution, is the begrepp of the next generation mobile standard.
+\item[LA] Link Adaptation, is an algorithm that changes MCS according to the SINR.
+\item[MCS] Modulation and Coding Scheme, when you send wireless data this is coded and modulated
+\item[AMC] text
+\item[3GPP] is a standard for mobile broadband
+\item[FEC] Forward Error Correction. A method to correct errors in the receiver.
+\item[Modulation order] is the the order of the modulation, can be translated to how many bits a symbol consists of.
+\item[Symbol] a symbol in javafandetnuheter is a ...
+\item[OFDM Symbol]
+\item[OFDM]
+
+
+
+
+\end{abbreviations}
+
 
 \section{Motivation}
 
@@ -50,9 +73,9 @@ The purpose with this master thesis is to help Long Term Evolution Interoperabil
 Ericsson needed a tool for allowing the testers to better analyse the performance in UE-to-eNodeB implementations. The performance in this sense is whether Ericsson and/or their customer had implemented their system according to the minimum criterion of the specification for said implementation or not. To be able to judge where in the implementation the loss of performance had occurred, Ericsson needed a tool to plot the values of signal-variables that are most affected by HARQ and LA, so that their own personnel could use that information to further analyse the algorithms. To be able to plot relevant values for debugging we first had to gain vast knowledge about how LTE, HARQ and LA. \newline
 
 
-The visualization tool which we used in this project was an Ericsson internal project called Logtool. We implemented our program as a plugin project to Logtool. The Logtool project is built upon the eclipse framework and we also developed the plugin in eclipse development enviroment in Java. 
+The visualization tool which we used in this project was an Ericsson internal project called Logtool. We implemented our program as a plugin project to Logtool. The Logtool project is built upon the eclipse framework and we also developed the plugin in eclipse development environment in Java. 
 \section{Background}
-The following section is to provide with information useful to understand the contents of the report. This chapter contains explenation of Link Adaptation, Modulation, Coding and code rate. 
+The following section is to provide with information useful to understand the contents of the report. This chapter contains explanation of Link Adaptation, Modulation, Coding and code rate etc.
 \subsection{Link Adaptation}
 Link Adaptation is a way to enhance the performance in systems with wireless signals yes dependent on the channel condition the modulation scheme and code rate is changed. The better channel condition the higher modulation scheme and higher code rate [source on this]?. The modulation scheme used in the LTE systems are QPSK, 16QAM and 64QAM. The codes used is QPP (quadrature polynomial permutation) turbo codes [source on this]?. When data are/is sent from a base station to a UE (DL) the UE will report a CQI (channel quality indicator) value to the base station indicating how good the channel is. CQI can take values from 0 to 15 (4 bits) where 0 represent a very bad channel condition and 15 a very good one. Out from this value The EnodeB decides a MCS (modulation and coding scheme). For downlink MCS can take values between 0-28 and uplink 0-22. Each one of this value represent a Modulation scheme and code rate. 
 
@@ -71,20 +94,10 @@ is A*sinus(f*t), A*cos(f*t), -A*sinus(f*t) and -A*cos(f*t). So in this case the 
 The signals in LTE are modulated with an IQ-modulator and decoded with and IQ-Demodulator
 
 \subsection{Coding and code rate}
-A coding is a way to create redundancy in the bits that are send. The data will consist of real data bits and coded bits. This way you are able to correct bits that are wrongly recieved. The more coded bits you have in your message the more errors you can detect and correct, but the slower data rate you will have. The code rate states how many bits that are coded in a message. the Code rate is between 0 and 1 and is simply the ratio between #real bits to #real bits + #coded bits. 
+A coding is a way to create redundancy in the bits that are send. The data will consist of real data bits and coded bits. This way you are able to correct bits that are wrongly recieved. The more coded bits you have in your message the more errors you can detect and correct, but the slower data rate you will have. The code rate states how many bits that are coded in a message. the Code rate is between 0 and 1 and is simply the ratio between \# real bits to \# real bits + \# coded bits. 
 \\ \\
-example: if we have a code rate of 0.73 we have 73% real bits in the message and 27% coded bits. 
+example: if we have a code rate of 0.73 we have 73\% real bits in the message and 27\% coded bits. 
 
-
-
-
-
- 
-
-
-TODO: write about all web pages and libraries which contained information about LTE
-
-The analyzer should be able to plot several graphs, save them and read them again such that the user can compare different traces.
 
 \section{Goals and Methodology}
 
@@ -93,18 +106,22 @@ Our task from Ericsson was to develop a lightweight analyzer tool that:
  \begin{itemize} 
  \item simply produces statistics
  \item Handle multiple input sources
+ \item produce data in form of graphs
  \end{itemize} 
 
 \setlength{\parindent}{0cm} We also had the following criteria: 
  
-  \begin{itemize} 
+ \begin{itemize} 
  \item Study and understand the 3GPP standards and Ericsson Research
- \item Analyzfrom processing for the final graph
- \item Evaluate a suitabe the data le tool for the processing of data, e.g. MATLAB or other tools
+ \item Analyze from processing for the final graph
+ \item Evaluate a suitable tool for the processing of data, e.g. MATLAB or something similar
  \item Capability to correlate the graph to logs in order to facilitate troubleshooting
-\end{itemize}
+ \end{itemize}
 
-TODO: write about why and how we did a focus group
+
+
+\section{the choice of tool}
+In the beginning of the project we had to do a decision of which tool we were to our analyzer in. Our initial plan was to do it in Matlab and that was because we both have experience in Matlab, it is available at Ericsson and it is in our opinion an easy way to do calculations on big sets of data. But we realized after a while that it we were able to make a plugin to an already existing tool at ericsson, and we thought that this was better because then testers that would potentially use our tool would already have our analyser built in. (omformulering vore bra).
 
 \section{Thesis Outline}
 This thesis is divided into the following Parts
@@ -114,28 +131,33 @@ This thesis is divided into the following Parts
 	\item part 3 we reviewed stuff here
 \end{itemize}
 
-\chapter{The analysation tool}
-\chapter{Analysation of Link Adaptation}
+\chapter{The analysis tool}
+The analysis tool is the tool we have been developed in order to be able to do the analysis of different signal algorithms. It has been done so that IODT in an easier and more effective way can do an analysation of the datatransfer between the UE and enodeB. It is mainly developed to do analysation of data over SINR and CQI, i.e. the channel condition. But it shall be able to look at all parameters that are sent between the UE and eNB. 
+\section{description of the tool}
+The following section will in detail describe what the tool consist of, what it can do, and how it represents the data.
+\subsection{functionality}
+Our tool has been developed to be a plug-in to an already existing tool at Ericsson called logtool, and it has three different functionalities. The first is to look at specific graphs over SINR and CQI. CQI is for downlink and SINR is for uplink. The reason for this is that you only can extract the SINR at the eNB and only CQI in the UE. the graphs you can look at is Throughput/SINR, Throughput/CQI, PRB/CQI PRB/SINR BLER/CQI, BLER/SINR, SINR/(UL MCS) CQI/(DL MCS) ... These graph are the presented in a two dimensional graph as in picture X. Where the data is on the Y-axis (vertical axis) and SINR / CQI is on the X-axis (horizontal axis). The parameters are chosen at request of ericsson. 
 
-\section{problem formulation}
-The purpose of this master thesis is to help LTE IODT Data Analysis to see how well the LTE system is performing when the HARQ (Hybrid Automatic Repeat Request)and LA (Link Adaptation) is activated. To perform such an analysis we needed to gather vast knowledge regarding how signals are treated in LTE and how the protocols implemented are constructed. With this tool we shall help LTE IODT be able to different analysises on our tool. 
+The second functionality is that you are able to save graphs. If you have a set of data you should be able to compare them. There is a save button in the normala view tab. After you have saved your graphs you can run several other bb-filtration. and in the combined view you can load the graph that you wish to look at.
 
-\section{The analysis}
+The third tab is an advanced graph tab. In this view you are able to look at data in any form graphs where you choose what you want to look at in the X and Y-axis. and then plot your graph there.
+\chapter{The physical layer of the LTE system}
+The layer we have been working in is called layer 1 also known as the physical layer. And is the description of how the signals are sent through the air, how they are scheduled (eller?).
+ 
+\chapter{analysis of Link Adaptation}
+In this chapter the analysis of the Link Adaptation is described. 
+
+\section{The analysis of link adaptation}
 Paul skriver nedanstaende \\ \\
-what our analysis is intended to do is to look at how well performed the different mcs values are in the AMC (adaptive modulation control) protocol. this is dependent on the different CQI values in downlink, and from this value, the BLER (block error rate) value the enodeB choses a MCS 5-bits. What our analysis is intended to study is to see of the optimal MCS is chosen according to the sinr value. This way we can see if some mcses might be redundant och that some mcs value should be at other cqi reports. 
+what our analysis is intended to do is to look at how well performed the different mcs values are in the AMC (adaptive modulation control) protocol. this is dependent on the different CQI values in downlink, and from this value, the BLER (block error rate) value the eNB choses a MCS 5-bits. What our analysis is intended to study is to see of the optimal MCS is chosen according to the sinr value. This way we can see if some mcses might be redundant och that some mcs value should be at other cqi reports. 
 
 Uplink: \newline
-Data is sent from the UE to the enodeB. The EnodeB is calculating SINR and from this value and block error rate (and maybe something more) the enodB decides which MCS the UE shall send at. MCS in uplink varies between 0-22, where mcs = 0 in the worst channel conditions (lowest SINR's) and mcs = 22 in the highest SINR's. 
+Data is sent from the UE to the enodeB. The eNB is calculating SINR and from this value and block error rate (and maybe something more) the enodB decides which MCS the UE shall send at. MCS in uplink varies between 0-22, where mcs = 0 in the worst channel conditions (lowest SINR's) and mcs = 22 in the highest SINR's. 
 
 Downlink: \newline
-Data is sent from the enodeB to the UE. When the data is sent from the enodeB the UE is calculating a CQI value (0-15) which represent the channel condition. 0 is the worst channel condition and 15 is the best channel conditions. this value is sent back to the enodeB and from this value and some other parameters (BLER) an MCS is chosen. In this case this value varies between 0-28 where 0 is the modulation and coding scheme for the worst channel conditions and 28 is the modulation schemes for the best channel conditions.
+Data is sent from the eNB to the UE. When the data is sent from the eNB the UE is calculating a CQI value (0-15) which represent the channel condition. 0 is the worst channel condition and 15 is the best channel conditions. this value is sent back to the enodeB and from this value and some other parameters (BLER) an MCS is chosen. In this case this value varies between 0-28 where 0 is the modulation and coding scheme for the worst channel conditions and 28 is the modulation schemes for the best channel conditions.
 
 what we have looked at is both uplink and downlink. in the downlink we did 30 different simulations. 29 simulations where we have hardcoded the enodeB to run at a specific MCS, 0-28 and one where did not hardcode a mcs. We compared all these curves to each other look at which SINR / CQI value they intersect each other and if the hardcoded mcs value were higher than the actual value it had.
-
-\section{Mainline}
-
-text...
-
 
 \chapter{Closing}
 

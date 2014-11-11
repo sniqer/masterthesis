@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.9.19)  6 NOV 2014 15:45
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.9.19)  11 NOV 2014 11:24
 entering extended mode
 **qwe.tex
 (C:\Users\epauned\Documents\GitHub\masterthesis\endreport\qwe.tex
@@ -161,33 +161,91 @@ Package crop Info: Local config file crop.cfg used on input line 492.
 ("C:\Program Files (x86)\MikTex\tex\xelatex\xetexconfig\crop.cfg"))
 Package crop Info: using pdf(la)tex graphics driver on input line 210.
 ))
+("C:\Program Files (x86)\MikTex\tex\latex\amsmath\amsmath.sty"
+Package: amsmath 2013/01/14 v2.14 AMS math features
+\@mathmargin=\skip52
+
+For additional information on amsmath, use the `?' option.
+("C:\Program Files (x86)\MikTex\tex\latex\amsmath\amstext.sty"
+Package: amstext 2000/06/29 v2.01
+
+("C:\Program Files (x86)\MikTex\tex\latex\amsmath\amsgen.sty"
+File: amsgen.sty 1999/11/30 v2.0
+\@emptytoks=\toks19
+\ex@=\dimen116
+))
+("C:\Program Files (x86)\MikTex\tex\latex\amsmath\amsbsy.sty"
+Package: amsbsy 1999/11/29 v1.2d
+\pmbraise@=\dimen117
+)
+("C:\Program Files (x86)\MikTex\tex\latex\amsmath\amsopn.sty"
+Package: amsopn 1999/12/14 v2.01 operator names
+)
+\inf@bad=\count98
+LaTeX Info: Redefining \frac on input line 210.
+\uproot@=\count99
+\leftroot@=\count100
+LaTeX Info: Redefining \overline on input line 306.
+\classnum@=\count101
+\DOTSCASE@=\count102
+LaTeX Info: Redefining \ldots on input line 378.
+LaTeX Info: Redefining \dots on input line 381.
+LaTeX Info: Redefining \cdots on input line 466.
+\Mathstrutbox@=\box26
+\strutbox@=\box27
+\big@size=\dimen118
+LaTeX Font Info:    Redeclaring font encoding OML on input line 566.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 567.
+\macc@depth=\count103
+\c@MaxMatrixCols=\count104
+\dotsspace@=\muskip10
+\c@parentequation=\count105
+\dspbrk@lvl=\count106
+\tag@help=\toks20
+\row@=\count107
+\column@=\count108
+\maxfields@=\count109
+\andhelp@=\toks21
+\eqnshift@=\dimen119
+\alignsep@=\dimen120
+\tagshift@=\dimen121
+\tagwidth@=\dimen122
+\totwidth@=\dimen123
+\lineht@=\dimen124
+\@envbody=\toks22
+\multlinegap=\skip53
+\multlinetaggap=\skip54
+\mathdisplay@stack=\toks23
+LaTeX Info: Redefining \[ on input line 2665.
+LaTeX Info: Redefining \] on input line 2666.
+)
 (C:\Users\epauned\Documents\GitHub\masterthesis\endreport\qwe.aux)
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 29.
-LaTeX Font Info:    ... okay on input line 29.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 29.
-LaTeX Font Info:    ... okay on input line 29.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 29.
-LaTeX Font Info:    ... okay on input line 29.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 29.
-LaTeX Font Info:    ... okay on input line 29.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 29.
-LaTeX Font Info:    ... okay on input line 29.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 29.
-LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count98
-\scratchdimen=\dimen116
-\scratchbox=\box26
-\nofMPsegments=\count99
-\nofMParguments=\count100
-\everyMPshowfont=\toks19
-\MPscratchCnt=\count101
-\MPscratchDim=\dimen117
-\MPnumerator=\count102
-\makeMPintoPDFobject=\count103
-\everyMPtoPDFconversion=\toks20
+\scratchcounter=\count110
+\scratchdimen=\dimen125
+\scratchbox=\box28
+\nofMPsegments=\count111
+\nofMParguments=\count112
+\everyMPshowfont=\toks24
+\MPscratchCnt=\count113
+\MPscratchDim=\dimen126
+\MPnumerator=\count114
+\makeMPintoPDFobject=\count115
+\everyMPtoPDFconversion=\toks25
 )
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -231,12 +289,12 @@ LaTeX Font Info:    ... okay on input line 29.
 ] [1] [2
 
 ]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 38.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 35.
  ("C:\Program Files (x86)\MikTex\tex\latex\base\omscmr.fd"
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 38.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 35.
  [3
 
 ]
@@ -262,121 +320,138 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ]
 Chapter 1.
 
-Underfull \hbox (badness 10000) in paragraph at lines 44--45
-
+Overfull \hbox (72.64784pt too wide) in paragraph at lines 43--44
+[]\OT1/cmr/m/n/10 Signal to In-ter-fer-ence plus Noise Ra-tio, de-fined as $[]$
+,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 47--48
+Underfull \hbox (badness 10000) in paragraph at lines 61--62
 
  []
 
 [1
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 75--77
+Underfull \hbox (badness 10000) in paragraph at lines 64--65
 
  []
 
-[2] [3] [4]
+[2]
+Underfull \hbox (badness 10000) in paragraph at lines 88--91
+
+ []
+
+[3] [4]
 Chapter 2.
 [5
 
-]
+] [6]
 Chapter 3.
-\@filenumb=\write4
-[6
 
-] <linkuniv_en_vert_blk.pdf, id=52, 240.60088pt x 172.5386pt>
-File: linkuniv_en_vert_blk.pdf Graphic file (type pdf)
-
-<use linkuniv_en_vert_blk.pdf>
-Package pdftex.def Info: linkuniv_en_vert_blk.pdf used on input line 136.
-(pdftex.def)             Requested size: 56.9055pt x 40.8072pt.
-
-Overfull \hbox (261.76398pt too wide) detected at line 136
-[]
- []
-
-
-Overfull \hbox (358.50284pt too wide) detected at line 136
-[]
- []
-
-
-Overfull \hbox (91.04834pt too wide) detected at line 136
-[]
- []
-
-
-Overfull \hbox (187.7872pt too wide) detected at line 136
-[]
- []
-
-
-Overfull \hbox (358.50284pt too wide) detected at line 136
-[]
- []
-
-
-Overfull \hbox (187.7872pt too wide) detected at line 136
-[]
- []
-
-
-Overfull \hbox (358.50284pt too wide) detected at line 136
-[]
- []
-
-
-Overfull \hbox (358.50284pt too wide) detected at line 136
-[]
- []
-
-
-Overfull \hbox (358.50284pt too wide) detected at line 136
-[]
- []
-
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <9> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 136.
-
-Overfull \hbox (29.87495pt too wide) in paragraph at lines 136--136
-[][]
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 136--136
+Underfull \hbox (badness 10000) in paragraph at lines 146--148
 
  []
 
 [7
 
- <C:/Users/epauned/Documents/GitHub/masterthesis/endreport/linkuniv_en_vert_blk
-.pdf>] (C:\Users\epauned\Documents\GitHub\masterthesis\endreport\qwe.aux) ) 
+] [8]
+Chapter 4.
+\@filenumb=\write4
+[9
+
+] [10
+
+] <linkuniv_en_vert_blk.pdf, id=66, 240.60088pt x 172.5386pt>
+File: linkuniv_en_vert_blk.pdf Graphic file (type pdf)
+
+<use linkuniv_en_vert_blk.pdf>
+Package pdftex.def Info: linkuniv_en_vert_blk.pdf used on input line 166.
+(pdftex.def)             Requested size: 56.9055pt x 40.8072pt.
+
+Overfull \hbox (261.76398pt too wide) detected at line 166
+[]
+ []
+
+
+Overfull \hbox (358.50284pt too wide) detected at line 166
+[]
+ []
+
+
+Overfull \hbox (91.04834pt too wide) detected at line 166
+[]
+ []
+
+
+Overfull \hbox (187.7872pt too wide) detected at line 166
+[]
+ []
+
+
+Overfull \hbox (358.50284pt too wide) detected at line 166
+[]
+ []
+
+
+Overfull \hbox (187.7872pt too wide) detected at line 166
+[]
+ []
+
+
+Overfull \hbox (358.50284pt too wide) detected at line 166
+[]
+ []
+
+
+Overfull \hbox (358.50284pt too wide) detected at line 166
+[]
+ []
+
+
+Overfull \hbox (358.50284pt too wide) detected at line 166
+[]
+ []
+
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <9> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 166.
+
+Overfull \hbox (29.87495pt too wide) in paragraph at lines 166--166
+[][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 166--166
+
+ []
+
+[11 <C:/Users/epauned/Documents/GitHub/masterthesis/endreport/linkuniv_en_vert_
+blk.pdf>] (C:\Users\epauned\Documents\GitHub\masterthesis\endreport\qwe.aux) ) 
 Here is how much of TeX's memory you used:
- 2523 strings out of 493921
- 34307 string characters out of 3146474
- 104679 words of memory out of 3000000
- 5779 multiletter control sequences out of 15000+200000
+ 3114 strings out of 493921
+ 40925 string characters out of 3146474
+ 113837 words of memory out of 3000000
+ 6354 multiletter control sequences out of 15000+200000
  12440 words of font info for 47 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 40i,10n,47p,934b,295s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/
-Program Files (x86)/MikTex/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Progra
-m Files (x86)/MikTex/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program File
-s (x86)/MikTex/fonts/type1/public/amsfonts/cm/cmbx7.pfb><C:/Program Files (x86)
-/MikTex/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files (x86)/MikTex
-/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files (x86)/MikTex/fonts/
-type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files (x86)/MikTex/fonts/type1/pu
-blic/amsfonts/cm/cmr9.pfb><C:/Program Files (x86)/MikTex/fonts/type1/public/ams
-fonts/cm/cmsl10.pfb><C:/Program Files (x86)/MikTex/fonts/type1/public/amsfonts/
-cm/cmsy10.pfb><C:/Program Files (x86)/MikTex/fonts/type1/public/amsfonts/cm/cms
-y7.pfb><C:/Program Files (x86)/MikTex/fonts/type1/public/amsfonts/cm/cmsy9.pfb>
-<C:/Program Files (x86)/MikTex/fonts/type1/public/amsfonts/symbols/msam7.pfb>
-Output written on qwe.pdf (15 pages, 3320528 bytes).
+ 40i,11n,47p,934b,303s stack positions out of 5000i,500n,10000p,200000b,50000s
+<
+C:/Program Files (x86)/MikTex/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Pro
+gram Files (x86)/MikTex/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program F
+iles (x86)/MikTex/fonts/type1/public/amsfonts/cm/cmbx7.pfb><C:/Program Files (x
+86)/MikTex/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files (x86)/Mi
+kTex/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Program Files (x86)/MikTex/fo
+nts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files (x86)/MikTex/fonts/typ
+e1/public/amsfonts/cm/cmr12.pfb><C:/Program Files (x86)/MikTex/fonts/type1/publ
+ic/amsfonts/cm/cmr7.pfb><C:/Program Files (x86)/MikTex/fonts/type1/public/amsfo
+nts/cm/cmr9.pfb><C:/Program Files (x86)/MikTex/fonts/type1/public/amsfonts/cm/c
+msl10.pfb><C:/Program Files (x86)/MikTex/fonts/type1/public/amsfonts/cm/cmsy10.
+pfb><C:/Program Files (x86)/MikTex/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:
+/Program Files (x86)/MikTex/fonts/type1/public/amsfonts/cm/cmsy9.pfb><C:/Progra
+m Files (x86)/MikTex/fonts/type1/public/amsfonts/symbols/msam7.pfb>
+Output written on qwe.pdf (19 pages, 3346666 bytes).
 PDF statistics:
- 146 PDF objects out of 1000 (max. 8388607)
+ 167 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 
