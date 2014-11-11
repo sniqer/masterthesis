@@ -95,38 +95,27 @@ public double[] avgYValPerXVal(double[] Xvals,double[] Yvals,int minNrFoundXaxis
 			return YvalsPerXvals;
 	}
 
-public double[] maxYValPerXVal(double[] Xvals,double[] Yvals){
-		
-	int value_ind = 0;
+public double[][] avgYValPerXVal2(double[] Xvals,double[] Yvals,int minNrFoundXaxisVals){
 	
-	double currentVal = 0;
+	int counter = 0;
+	int lenOfXAxis = (int) Math.ceil(BasicCalc.getBiggest(Xvals));
 	
-	int lenOfXAxis = (int) Math.ceil(BasicCalc.getBiggest(Xvals))+1;
-	double[] tempYvalPerXval = new double[lenOfXAxis];
-	//tempXvalPerYval = BasicCalc.init(tempXvalPerYval);
 	
-	double[] YvalsPerXvals = new double[lenOfXAxis];
+	double[][] YvalsPerXvals = new double[2][lenOfXAxis];
 	//valPerCqi = BasicCalc.init(valPerCqi);
 	
 	for(int i=0;i < Yvals.length;i++){
-			//we've found legit tbs data, accumulate counter, tbs, bW and see if we have peak data rate.
-			if(SIB[i] != -1 && Yvals[i] != NOT_A_VALUE ){
-				currentVal=currentVal+Yvals[i]; 
-				counter++;
-			}
-		if (SIB[i] != -1 && Xvals[i] != NOT_A_VALUE){
-			//System.out.println(tempYvalPerXval[counter_ind][(int) Xvals[i]]+" "+tempYvalPerXval[value_ind][(int) Xvals[i]]+ " yvalperxval");
-			tempYvalPerXval[(int) Xvals[i]] = tempYvalPerXval[value_ind][(int) Xvals[i]] + currentVal; //accumulated Xvals
-			tempYvalPerXval[(int) Xvals[i]] = tempYvalPerXval[counter_ind][(int) Xvals[i]] + counter;
-			currentVal=0;
+		//we've found legit tbs data, accumulate counter, tbs, bW and see if we have peak data rate.
+		if(SIB[i] != -1 && Yvals[i] != NOT_A_VALUE ){
+			System.out.println("kommer hit");
+			YvalsPerXvals[0][counter] = Yvals[i];
+			YvalsPerXvals[1][counter] = BasicCalc.findCloseValFrInd(Xvals, i);
+			counter++;
 		}
+		
 	}
-	for(int j=0;j<YvalsPerXvals.length;j++)
-		if (tempYvalPerXval[counter_ind][j] >= minNrFoundXaxisVals)
-			YvalsPerXvals[j] = tempYvalPerXval[value_ind][j]/tempYvalPerXval[counter_ind][j];
-		return YvalsPerXvals;
+	return YvalsPerXvals;
 }
-
 	
 
 /*-------------------------------------------SETTERS!!!-------------------------------------------*/

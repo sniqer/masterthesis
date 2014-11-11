@@ -5,34 +5,7 @@ public class BasicCalc extends Calculate{
 	
 	private static String[] header;
 	
-	public static int[] init(int[] arr){
-		for(int i=0;i<arr.length;i++){
-				arr[i] = 0;
-		}
-		return arr;
-	}
-	public static float[] init(float[] arr){
-		for(int i=0;i<arr.length;i++){
-				arr[i] = 0;
-		}
-		return arr;
-	}
-	public static int[][] init(int[][] arr){
-		for(int i=0;i<arr.length;i++){
-			for(int j=0;j<arr[0].length;j++){
-				arr[i][j] = 0;
-			}
-		}
-		return arr;
-	}
-	public static float[][] init(float[][] arr){
-		for(int i=0;i<arr.length;i++){
-			for(int j=0;j<arr[0].length;j++){
-				arr[i][j] = 0;
-			}
-		}
-		return arr;
-	}
+
 	public static int[] addArrays(int[] arr1, int[] arr2){
 		int[] outArr = new int[Math.min(arr1.length, arr2.length)];
 		for(int i = 0; i < outArr.length; i++){
@@ -230,6 +203,23 @@ public class BasicCalc extends Calculate{
 			if(ndf[i].contains("N")) tbs[i] = 0;
 		
 		return tbs;
+	}
+	
+	public static double getBiggest(double[] array){
+		double max = Integer.MIN_VALUE;
+		for(int i=0;i<array.length;i++)
+			if(array[i] > max)
+				max=array[i];
+		
+		return max;
+	}
+	
+	public static double[] intArr2DoubleArr(int[] arr){
+		double[] doubleArr = new double[arr.length];
+		for(int i=0;i<arr.length;i++)
+			doubleArr[i] = (double) arr[i];
+		
+		return doubleArr;
 	}
 }
 

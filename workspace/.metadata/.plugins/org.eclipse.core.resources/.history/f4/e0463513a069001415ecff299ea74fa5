@@ -27,7 +27,7 @@ import org.jfree.data.xy.XYSeriesCollection;
 
 public class Main {
 	@SuppressWarnings("resource")
-	static final int NOT_A_VALUE = -1337; //empty spaces in a vector is represented by this value
+	
 	public static void main(String[] arg) throws IOException{
 		
 		
@@ -147,7 +147,10 @@ public class Main {
 		dlMcs1		= interpretLTEdata(lteDataMatrix[dlMcs1Index]);
 		dlMcs2		= interpretLTEdata(lteDataMatrix[dlMcs2Index]);
 		dlMcsSum	= BasicCalc.addArrays(dlMcs1, dlMcs2);
-
+		
+		double[][] hejsanhoppsan = new double[5][10];
+		Print.array2D(hejsanhoppsan);
+		System.out.println("gurka!!!!!!!!!!");
 		
 		ndf1 = lteDataMatrix[ndf1Index];
 		ndf2 = lteDataMatrix[ndf2Index];
@@ -259,11 +262,11 @@ public class Main {
 		for(int i=0;i<lteData.length;i++){
 			
 			if (lteData[i].contains("64QAM")){
-				out[i] = 6;
+				out[i] = 64;
 			} else if (lteData[i].contains("16QAM")){
-				out[i] = 4;
+				out[i] = 16;
 			} else if (lteData[i].contains("QPSK")){
-				out[i] = 2;
+				out[i] = 4;
 			} else if (lteData[i].contains("SIB") ){
 				out[i] = -1; 
 			} else if (lteData[i].contains("%") ){
@@ -277,7 +280,7 @@ public class Main {
 					try{
 						out[i] = (int) Float.parseFloat(lteData[i].trim());
 					} catch(Exception notAnumberError) {
-						out[i] = NOT_A_VALUE;
+						out[i] = -1337;
 					}
 				}
 			}

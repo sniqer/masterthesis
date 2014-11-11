@@ -17,10 +17,10 @@ public class DLCalc extends Calculate {
 		int counter = 0;
 		int currentVal = 0;
 		float[][] tempValPerCqi = new float[2][NR_OF_CQI_VALS];
-		tempValPerCqi = BasicCalc.init(tempValPerCqi);
+		//tempValPerCqi = BasicCalc.init(tempValPerCqi);
 		
 		float[] valPerCqi = new float[NR_OF_CQI_VALS];
-		valPerCqi = BasicCalc.init(valPerCqi);
+		//valPerCqi = BasicCalc.init(valPerCqi);
 		
 		for(int i=0;i < cqi.length;i++){
 				//we've found legit tbs data, accumulate counter, tbs, bW and see if we have peak data rate.
@@ -47,7 +47,7 @@ public class DLCalc extends Calculate {
 		
 		float currentMaxVal = 0;
 		float[]	maxValPerCqi = new float[NR_OF_CQI_VALS];
-		maxValPerCqi = BasicCalc.init(maxValPerCqi);
+		//maxValPerCqi = BasicCalc.init(maxValPerCqi);
 		
 		for(int i=0;i<cqi.length;i++){
 			
@@ -81,8 +81,8 @@ public class DLCalc extends Calculate {
 		cqiPerMcs = new float[NR_OF_MCS_VALS];
 		
 		
-		tempCqiPerMcs = BasicCalc.init(tempCqiPerMcs);
-		cqiPerMcs = BasicCalc.init(cqiPerMcs);
+		//tempCqiPerMcs = BasicCalc.init(tempCqiPerMcs);
+		//cqiPerMcs = BasicCalc.init(cqiPerMcs);
 		
 		
 		for(int i=0;i<val.length;i++){

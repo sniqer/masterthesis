@@ -147,7 +147,10 @@ public class Main {
 		dlMcs1		= interpretLTEdata(lteDataMatrix[dlMcs1Index]);
 		dlMcs2		= interpretLTEdata(lteDataMatrix[dlMcs2Index]);
 		dlMcsSum	= BasicCalc.addArrays(dlMcs1, dlMcs2);
-
+		
+		double[][] hejsanhoppsan = new double[5][10];
+		Print.array2D(hejsanhoppsan);
+		System.out.println("gurka!!!!!!!!!!");
 		
 		ndf1 = lteDataMatrix[ndf1Index];
 		ndf2 = lteDataMatrix[ndf2Index];

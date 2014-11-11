@@ -16,16 +16,16 @@ public class ULCalc extends Calculate{
 		int currentVal = 0;
 		
 		float[][] tempValPerSINR = new float[2][NR_OF_SINR_VALS];
-		tempValPerSINR = BasicCalc.init(tempValPerSINR);
+		//tempValPerSINR = BasicCalc.init(tempValPerSINR);
 		
 		float[] valPerSINR = new float[NR_OF_SINR_VALS];
-		valPerSINR = BasicCalc.init(valPerSINR);
+		//valPerSINR = BasicCalc.init(valPerSINR);
 		
 		for(int i=0;i<SINR.length;i++){
 			
 
 				//we've found legit tbs data, accumulate counter, tbs, bW and see if we have peak data rate.
-				if(SIB[i] != -1 && val[i] != -1337 ){
+				if(SIB[i] != -1 && val[i] != NOT_A_VALUE ){
 					currentVal=currentVal+val[i]; 
 					counter++;
 				}
@@ -70,7 +70,7 @@ public class ULCalc extends Calculate{
 		float currentMaxVal = 0;
 		
 		float[]	maxValPerSINR = new float[NR_OF_SINR_VALS];
-		maxValPerSINR = BasicCalc.init(maxValPerSINR);
+		//maxValPerSINR = BasicCalc.init(maxValPerSINR);
 		
 		
 		for(int i=0;i<SINR.length;i++){
@@ -115,8 +115,8 @@ public class ULCalc extends Calculate{
 
 
 		
-		tempSinrPerMcs = BasicCalc.init(tempSinrPerMcs);
-		sinrPerMcs = BasicCalc.init(sinrPerMcs);
+		//tempSinrPerMcs = BasicCalc.init(tempSinrPerMcs);
+		//sinrPerMcs = BasicCalc.init(sinrPerMcs);
 		
 		
 		for(int i=0;i<sinr.length;i++){

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename local variable &apos;tempXvalPerYval&apos; in &apos;lteAnalyzer.Calculate.maxYValPerXVal(...)&apos; to &apos;tempYvalPerXval&apos;&#x0D;&#x0A;- Original project: &apos;LteAnalyzerProject&apos;&#x0D;&#x0A;- Original element: &apos;lteAnalyzer.Calculate.maxYValPerXVal(double[], double[]).tempXvalPerYval&apos;&#x0D;&#x0A;- Renamed element: &apos;tempXvalPerYval&apos;&#x0D;&#x0A;- Update references to refactored element" description="Rename local variable &apos;tempXvalPerYval&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src&lt;lteAnalyzer{Calculate.java[Calculate~maxYValPerXVal~\[D~\[D@tempXvalPerYval!3408!3457!3417!3431!\[D!0!false" name="tempYvalPerXval" references="true" stamp="1415714054160" version="1.0"/>
+</session>
