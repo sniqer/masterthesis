@@ -74,7 +74,7 @@ Ericsson needed a tool for allowing the testers to better analyse the performanc
 
 The visualization tool which we used in this project was an Ericsson internal project called Logtool. We implemented our program as a plugin project to Logtool. The Logtool project is built upon the eclipse framework and we also developed the plugin in eclipse development environment. The language that Logtool is written in (that we coded our project in) is Java. 
 \section{Background}
-The following section is to provide with information useful to understand the contents of the report. This chapter contains explanation of Link Adaptation, Modulation, Coding and code rate etc.
+The following section is to provide with information useful to understand the contents of the report. This chapter contains explanation of link adaptation, modulation, coding and code rate etc.
 
 
 \section{Goals and Methodology}
@@ -97,19 +97,7 @@ Our task from Ericsson was to develop a lightweight analyzer tool that:
  \end{itemize}
 
 
-
-\section{The Tool of Choice for Analyzation}
-In the beginning of the project we had to make a decision on how we would create our analyzation tool.
-What we needed to do was produce a program that would:
-\begin{itemize}
-\item Read tracedata (from different kinds of sources)
-\item Rewrite it into a better format (for easier parameter data extraction)
-\item  Analyse the data and plot graphs with data from the analyzation
-\end{itemize} 
-Since we didn't have any advanced criteria on what our program should do we felt that it was best to build it upon an already existing project or in an enviroment that already had the functionality to do all we needed. \newline
-We started to analyse available (already existing) tools by asking personel at Ericsson if they had any preferences or any tools that they knew that they already had licences for or tools that was already used in the lab testers enviroment. Unfortunately they didn't have any recommendations, so we started to search the web for good tools that would be able to produce graphs and analyse big sets of data. Our initial idea was Matlab since both of us have lots of experience with Matlab and it contains extensive libraries for calculating signal data and for plotting graphs. Some of the competitors for our tool was (TODO add list of tools) ..., but mostly all programs seemed to do pretty much exactly what matlab did and less and therefore we didn't really feel that it was much to think about since we also even had experience with Matlab. \\
-We were still pretty openminded about using other softwares at this point, but started out with just writing code for displaying graphs. After about a week we found out from our supervisor that Ericsson did indeed already have a Ericsson-developed program called Logtool that the labtesters used for handling tracedata. It was written in java and the program was built upon the eclipse framework, all of which Razmus already had experience with since earlier. The team in charge of the project was situated in Linköping, and using Logtool would enable us to get tracedata in a good format without us having to write a single line of code to filter the unfiltered logfiles, plus our program wouldn't need any form of extra integration for Ericsson.\\
- We therefore decided to develop our program as a plugin to Logtool. 
+ 
 
 
 \section{Thesis Outline}
@@ -120,7 +108,9 @@ This thesis is divided into the following Parts
 	\item part 3 we reviewed stuff here
 \end{itemize}
 
-\chapter{Background}
+\chapter{Theoretical Background}
+\section{Basic Overview of LTE}
+here we will present a general overview of the basics of what LTE is.
 
 \section{Link Adaptation}
 Link Adaptation is a way to enhance the performance in systems with wireless signals yes dependent on the channel condition the modulation scheme and code rate is changed. The better channel condition the higher modulation scheme and higher code rate [source on this]?. The modulation scheme used in the LTE systems are QPSK, 16QAM and 64QAM. The codes used is QPP (quadrature polynomial permutation) turbo codes [source on this]?. When data are/is sent from a base station to a UE (DL) the UE will report a CQI (channel quality indicator) value to the base station indicating how good the channel is. CQI can take values from 0 to 15 (4 bits) where 0 represent a very bad channel condition and 15 a very good one. Out from this value The EnodeB decides a MCS (modulation and coding scheme). For downlink MCS can take values between 0-28 and uplink 0-22. Each one of these values represent a Modulation scheme and code rate, were MCS = 0 has the lowest code rate and lowest modulation order (QPSK). MCS = 28 in downlink and 22 in uplink has the highest code rate and the highest modulation order (64-QAM).
@@ -152,8 +142,21 @@ example: if we have a code rate of 0.73 we have 73\% real bits in the message an
 
 
 \chapter{The Analysis Tool}
-Our analysis tool was first and foremost developed for the testers at Ericsson, but it was also a means for us to be able to do our analysis of LA and HARQ in a effective way. It has been developed so that IODT in an easier and more effective way can do an analysation of the data transfer between the UE and eNB. \\
-It is mainly developed to do analysation of data over SINR and CQI, i.e. the channel condition. But it is also be able to use all parameters(that are sent between the UE and eNB) as axises in graphs so that the tester can validate any data he/she wants.
+Our analysis tool was first and foremost developed for the testers at Ericsson, but it was also a means for us to be able to do our analysis of LA and HARQ in a effective way. It has been developed so that IODT in an easier and more effective way can do an analyzation of the data transfer between the UE and eNB. \\
+It is mainly developed to perform analyzation of data over SINR and CQI, i.e. the channel condition. But it is also able to use all parameters(that are sent between the UE and eNB) as axises in graphs so that the tester can validate any data he/she wants.
+
+\section{Motivation for choosing Logtool}
+In the beginning of the project we had to make a decision on how we would create our analysis tool.
+What we needed to do was produce a program that would:
+\begin{itemize}
+\item Read tracedata (from different kinds of sources)
+\item Rewrite it into a better format (for easier parameter data extraction)
+\item  Analyse the data and plot graphs with data from the analyzation
+\end{itemize} 
+Since we didn't have any advanced criteria on what our program should do we felt that it was best to build it upon an already existing project or in an enviroment that already had the functionality to do all we needed. \newline
+We started to analyse available (already existing) tools by asking personel at Ericsson if they had any preferences or any tools that they knew that they already had licences for or tools that was already used in the lab testers enviroment. Unfortunately they didn't have any recommendations, so we started to search the web for good tools that would be able to produce graphs and analyse big sets of data. Our initial idea was Matlab since both of us have lots of experience with Matlab and it contains extensive libraries for calculating signal data and for plotting graphs. Some of the competitors for our tool was (TODO add list of tools) ..., but mostly all programs seemed to do pretty much exactly what matlab did and less and therefore we didn't really feel that it was much to think about since we also even had experience with Matlab. \\
+We were still pretty openminded about using other softwares at this point, but started out with just writing code for displaying graphs. After about a week we found out from our supervisor that Ericsson did indeed already have a Ericsson-developed program called Logtool that the labtesters used for handling tracedata. It was written in java and the program was built upon the eclipse framework, all of which Razmus already had experience with since earlier. The team in charge of the project was situated in Linköping, and using Logtool would enable us to get tracedata in a good format without us having to write a single line of code to filter the unfiltered logfiles, plus our program wouldn't need any form of extra integration for Ericsson.\\
+ We therefore decided to develop our program as a plugin to Logtool. 
  
 \section{Description of the Tool}
 The following section will in detail describe what the tool consist of, what it can do, and how it represents the data.
@@ -167,10 +170,10 @@ The third tab is an advanced graph tab. In this view you are able to look at dat
 \chapter{The Physical Layer of the LTE System}
 The layer we have been working in is called layer 1 also known as the physical layer. And is the description of how the signals are sent through the air, how they are scheduled (eller?).
  
-\chapter{Analysis of Link Adaptation}
+\chapter{Analysis of Link Adaptation and HARQ}
 In this chapter the analysis of the Link Adaptation is described. 
 
-\section{The analysis of Link Adaptation}
+\section{The Analysis of Link Adaptation}
 Paul skriver nedanstaende \\ \\
 what our analysis is intended to do is to look at how well performed the different mcs values are in the AMC (adaptive modulation control) protocol. this is dependent on the different CQI values in downlink, and from this value, the BLER (block error rate) value the eNB choses a MCS 5-bits. What our analysis is intended to study is to see of the optimal MCS is chosen according to the sinr value. This way we can see if some mcses might be redundant och that some mcs value should be at other cqi reports. 
 
@@ -181,6 +184,8 @@ Downlink: \newline
 Data is sent from the eNB to the UE. When the data is sent from the eNB the UE is calculating a CQI value (0-15) which represent the channel condition. 0 is the worst channel condition and 15 is the best channel conditions. this value is sent back to the enodeB and from this value and some other parameters (BLER) an MCS is chosen. In this case this value varies between 0-28 where 0 is the modulation and coding scheme for the worst channel conditions and 28 is the modulation schemes for the best channel conditions.
 
 what we have looked at is both uplink and downlink. in the downlink we did 30 different simulations. 29 simulations where we have hardcoded the enodeB to run at a specific MCS, 0-28 and one where did not hardcode a mcs. We compared all these curves to each other look at which SINR / CQI value they intersect each other and if the hardcoded mcs value were higher than the actual value it had.
+
+\section{The Analysis of HARQ}
 
 \chapter{Closing}
 
