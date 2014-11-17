@@ -66,9 +66,6 @@ TODO: write about why and how we did a focus group
 
 \newpage
 \section{Motivation}
-
-
-
 The purpose with this master thesis is to help Long Term Evolution Interoperability Development Testing (LTE IODT) Data analysis. LTE IODT wants to automatically generate analysis of Link Adaptation (LA) and Hybrid Automatic Repeat Request (HARQ) tests where we sweep through Signal to Interference plus Noise Ratio (SINR) for different channel models. The LTE IODT lab test logs gives a unique opportunity to look into detailed behaviour of link and rank adaptation for both downlink and uplink. \newline
 
 
@@ -78,33 +75,6 @@ Ericsson needed a tool for allowing the testers to better analyse the performanc
 The visualization tool which we used in this project was an Ericsson internal project called Logtool. We implemented our program as a plugin project to Logtool. The Logtool project is built upon the eclipse framework and we also developed the plugin in eclipse development environment. The language that Logtool is written in (that we coded our project in) is Java. 
 \section{Background}
 The following section is to provide with information useful to understand the contents of the report. This chapter contains explanation of Link Adaptation, Modulation, Coding and code rate etc.
-\subsection{Link Adaptation}
-Link Adaptation is a way to enhance the performance in systems with wireless signals yes dependent on the channel condition the modulation scheme and code rate is changed. The better channel condition the higher modulation scheme and higher code rate [source on this]?. The modulation scheme used in the LTE systems are QPSK, 16QAM and 64QAM. The codes used is QPP (quadrature polynomial permutation) turbo codes [source on this]?. When data are/is sent from a base station to a UE (DL) the UE will report a CQI (channel quality indicator) value to the base station indicating how good the channel is. CQI can take values from 0 to 15 (4 bits) where 0 represent a very bad channel condition and 15 a very good one. Out from this value The EnodeB decides a MCS (modulation and coding scheme). For downlink MCS can take values between 0-28 and uplink 0-22. Each one of these values represent a Modulation scheme and code rate, were MCS = 0 has the lowest code rate and lowest modulation order (QPSK). MCS = 28 in downlink and 22 in uplink has the highest code rate and the highest modulation order (64-QAM).
-
-\subsection{HARQ algorithm}
-skriver vi something here eller ar denna section bara massa skit
-
-\subsection{Modulation}
-A modulation scheme is a way to map digital bits to analog signals in wireless systems. it is a way to represent the bits in the air.
-There are different modulation schemes and the ones that are used in LTE are 4QAM (QPSK), 16QAM and 64QAM. The signals are modulated in the following way 
-
-(bild pa 4QAM 16QAM and 64QAM over I-phase and Q-phase). 
- 
-The I-phase is basically a Sinus wave and Q-phase is a Cosine wave. This way orthogonality occur. What the points on the two axises represent is the amplitude. So in the QPSK case, what the different signals will be is:\\
- A*sinus(f*t)\\
- A*cos(f*t)\\
- -A*sinus(f*t) \\  
- -A*cos(f*t)\\
- 
- So in this case it fits 2 bits in each signal. Therefore, the different possible signals are 00, 01, 10 and 11. In 16QAM and 64QAM each signal point is represented by 4 and 6 bits respectively.
-
-The signals in LTE are modulated with an IQ-modulator and decoded with and IQ-Demodulator 
-TODO(write stuff about IQ-Modulator/demodulator)
-
-\subsection{Coding and code rate}
-A coding is a way to create redundancy in the bits that are send. The data will consist of real data bits and coded bits. This way you are able to correct bits that are wrongly recieved. The more coded bits you have in your message the more errors you can detect and correct, but the slower data rate you will have. The code rate states how many bits that are coded in a message. the Code rate is between 0 and 1 and is simply $\dfrac{\# real bits}{ \# real bits + \# coded bits}$ . 
-\\ \\
-example: if we have a code rate of 0.73 we have 73\% real bits in the message and 27\% coded bits. 
 
 
 \section{Goals and Methodology}
@@ -150,11 +120,42 @@ This thesis is divided into the following Parts
 	\item part 3 we reviewed stuff here
 \end{itemize}
 
-\chapter{The analysis tool}
+\chapter{Background}
+
+\section{Link Adaptation}
+Link Adaptation is a way to enhance the performance in systems with wireless signals yes dependent on the channel condition the modulation scheme and code rate is changed. The better channel condition the higher modulation scheme and higher code rate [source on this]?. The modulation scheme used in the LTE systems are QPSK, 16QAM and 64QAM. The codes used is QPP (quadrature polynomial permutation) turbo codes [source on this]?. When data are/is sent from a base station to a UE (DL) the UE will report a CQI (channel quality indicator) value to the base station indicating how good the channel is. CQI can take values from 0 to 15 (4 bits) where 0 represent a very bad channel condition and 15 a very good one. Out from this value The EnodeB decides a MCS (modulation and coding scheme). For downlink MCS can take values between 0-28 and uplink 0-22. Each one of these values represent a Modulation scheme and code rate, were MCS = 0 has the lowest code rate and lowest modulation order (QPSK). MCS = 28 in downlink and 22 in uplink has the highest code rate and the highest modulation order (64-QAM).
+
+\section{HARQ algorithm}
+skriver vi something here eller ar denna section bara massa skit
+
+\section{Modulation}
+A modulation scheme is a way to map digital bits to analog signals in wireless systems. it is a way to represent the bits in the air.
+There are different modulation schemes and the ones that are used in LTE are 4QAM (QPSK), 16QAM and 64QAM. The signals are modulated in the following way 
+
+(bild pa 4QAM 16QAM and 64QAM over I-phase and Q-phase). 
+ 
+The I-phase is basically a Sinus wave and Q-phase is a Cosine wave. This way orthogonality occur. What the points on the two axises represent is the amplitude. So in the QPSK case, what the different signals will be is:\\
+ A*sinus(f*t)\\
+ A*cos(f*t)\\
+ -A*sinus(f*t) \\  
+ -A*cos(f*t)\\
+ 
+ So in this case it fits 2 bits in each signal. Therefore, the different possible signals are 00, 01, 10 and 11. In 16QAM and 64QAM each signal point is represented by 4 and 6 bits respectively.
+
+The signals in LTE are modulated with an IQ-modulator and decoded with and IQ-Demodulator 
+TODO(write stuff about IQ-Modulator/demodulator)
+
+\section{Coding and code rate}
+A coding is a way to create redundancy in the bits that are send. The data will consist of real data bits and coded bits. This way you are able to correct bits that are wrongly recieved. The more coded bits you have in your message the more errors you can detect and correct, but the slower data rate you will have. The code rate states how many bits that are coded in a message. the Code rate is between 0 and 1 and is simply $\dfrac{\# real bits}{ \# real bits + \# coded bits}$ . 
+\\ \\
+example: if we have a code rate of 0.73 we have 73\% real bits in the message and 27\% coded bits. 
+
+
+\chapter{The Analysis Tool}
 Our analysis tool was first and foremost developed for the testers at Ericsson, but it was also a means for us to be able to do our analysis of LA and HARQ in a effective way. It has been developed so that IODT in an easier and more effective way can do an analysation of the data transfer between the UE and eNB. \\
 It is mainly developed to do analysation of data over SINR and CQI, i.e. the channel condition. But it is also be able to use all parameters(that are sent between the UE and eNB) as axises in graphs so that the tester can validate any data he/she wants.
  
-\section{description of the tool}
+\section{Description of the Tool}
 The following section will in detail describe what the tool consist of, what it can do, and how it represents the data.
 
 \subsection{functionality}
@@ -163,13 +164,13 @@ Our tool has been developed to be a plug-in to an already existing tool at Erics
 The second functionality is that you are able to save graphs. If you have a set of data you should be able to compare them. There is a save button in the normala view tab. After you have saved your graphs you can run several other bb-filtration. and in the combined view you can load the graph that you wish to look at.
 
 The third tab is an advanced graph tab. In this view you are able to look at data in any form graphs where you choose what you want to look at in the X and Y-axis. and then plot your graph there.
-\chapter{The physical layer of the LTE system}
+\chapter{The Physical Layer of the LTE System}
 The layer we have been working in is called layer 1 also known as the physical layer. And is the description of how the signals are sent through the air, how they are scheduled (eller?).
  
-\chapter{analysis of Link Adaptation}
+\chapter{Analysis of Link Adaptation}
 In this chapter the analysis of the Link Adaptation is described. 
 
-\section{The analysis of link adaptation}
+\section{The analysis of Link Adaptation}
 Paul skriver nedanstaende \\ \\
 what our analysis is intended to do is to look at how well performed the different mcs values are in the AMC (adaptive modulation control) protocol. this is dependent on the different CQI values in downlink, and from this value, the BLER (block error rate) value the eNB choses a MCS 5-bits. What our analysis is intended to study is to see of the optimal MCS is chosen according to the sinr value. This way we can see if some mcses might be redundant och that some mcs value should be at other cqi reports. 
 
