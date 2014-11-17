@@ -13,35 +13,32 @@
 \thesisyearnumber{THESISYEARNUMBER}
 \dateofpublication{\today}
 \supervisor{Ola Leifler}
-\examiner{EXAMINER}
+\examiner{Johannes Schmidt}
 \degreesubject{Engineering}
-\supportedby{SUPPORTEDBY}
+
+%\supportedby{SUPPORTEDBY}
 
 \newcommand{\abbrlabel}[1]{\makebox[3cm][l]{\textbf{#1}\ \dotfill}}
 \newenvironment{abbreviations}{\begin{list}{}{\renewcommand{\makelabel}{\abbrlabel}}}{\end{list}}
 
 
-\abstract{%
+\abstract{
 \S\ This Master thesis involves developing a lightweight analyser that produce statistics from the communication between a cell phone and a E-UTRAN base station.  
 The analyser tool will produce graphs with information about the correlation between a signal throughput and the interference in the channel that the signal is sent through. 
 From the statistics produced by the analyser tool, the testing personal at Ericsson can more easily deduce where the interference in signals arises from. 
 }
 
-%\layout
+
 
 \begin{document}
-
-
 \makeintropages
 
+\chapter*{Acknowledgements}
+acknowledgements 
 
- 
-\chapter{Introduction}
-TODO: write about how we use the tool from making a trace to generating graph
-TODO: write about all web pages and libraries which contained information about LTE
-TODO: write about why and how we did a focus group
+\chapter*{Abbreviations}
 
-\begin{abbreviations}
+ \begin{abbreviations}
 \item[CQI] Channel Quality Index, an indicator of how good the channel quality is.
 \item[SINR] Signal to Interference plus Noise Ratio, defined as $\dfrac{P_{signal}}{P_{interference} + P_{noise}}$, where $P_{signal}$ is the Power of the signal, $P_{interference}$ is the power of the interference in watt and $P_{noise}$ is the power of the noise.
 \item[eNB] enhanced Node-B, the base station that transmits or receives data from the UE.
@@ -57,12 +54,17 @@ TODO: write about why and how we did a focus group
 \item[OFDM Symbol]
 \item[OFDM]
 
-
-
-
 \end{abbreviations}
 
 
+
+\chapter{Introduction}
+TODO: write about how we use the tool from making a trace to generating graph
+TODO: write about all web pages and libraries which contained information about LTE
+TODO: write about why and how we did a focus group
+
+
+\newpage
 \section{Motivation}
 
 
@@ -73,28 +75,34 @@ The purpose with this master thesis is to help Long Term Evolution Interoperabil
 Ericsson needed a tool for allowing the testers to better analyse the performance in UE-to-eNodeB implementations. The performance in this sense is whether Ericsson and/or their customer had implemented their system according to the minimum criterion of the specification for said implementation or not. To be able to judge where in the implementation the loss of performance had occurred, Ericsson needed a tool to plot the values of signal-variables that are most affected by HARQ and LA, so that their own personnel could use that information to further analyse the algorithms. To be able to plot relevant values for debugging we first had to gain vast knowledge about how LTE, HARQ and LA. \newline
 
 
-The visualization tool which we used in this project was an Ericsson internal project called Logtool. We implemented our program as a plugin project to Logtool. The Logtool project is built upon the eclipse framework and we also developed the plugin in eclipse development environment in Java. 
+The visualization tool which we used in this project was an Ericsson internal project called Logtool. We implemented our program as a plugin project to Logtool. The Logtool project is built upon the eclipse framework and we also developed the plugin in eclipse development environment. The language that Logtool is written in (that we coded our project in) is Java. 
 \section{Background}
 The following section is to provide with information useful to understand the contents of the report. This chapter contains explanation of Link Adaptation, Modulation, Coding and code rate etc.
 \subsection{Link Adaptation}
-Link Adaptation is a way to enhance the performance in systems with wireless signals yes dependent on the channel condition the modulation scheme and code rate is changed. The better channel condition the higher modulation scheme and higher code rate [source on this]?. The modulation scheme used in the LTE systems are QPSK, 16QAM and 64QAM. The codes used is QPP (quadrature polynomial permutation) turbo codes [source on this]?. When data are/is sent from a base station to a UE (DL) the UE will report a CQI (channel quality indicator) value to the base station indicating how good the channel is. CQI can take values from 0 to 15 (4 bits) where 0 represent a very bad channel condition and 15 a very good one. Out from this value The EnodeB decides a MCS (modulation and coding scheme). For downlink MCS can take values between 0-28 and uplink 0-22. Each one of this value represent a Modulation scheme and code rate. 
+Link Adaptation is a way to enhance the performance in systems with wireless signals yes dependent on the channel condition the modulation scheme and code rate is changed. The better channel condition the higher modulation scheme and higher code rate [source on this]?. The modulation scheme used in the LTE systems are QPSK, 16QAM and 64QAM. The codes used is QPP (quadrature polynomial permutation) turbo codes [source on this]?. When data are/is sent from a base station to a UE (DL) the UE will report a CQI (channel quality indicator) value to the base station indicating how good the channel is. CQI can take values from 0 to 15 (4 bits) where 0 represent a very bad channel condition and 15 a very good one. Out from this value The EnodeB decides a MCS (modulation and coding scheme). For downlink MCS can take values between 0-28 and uplink 0-22. Each one of these values represent a Modulation scheme and code rate, were MCS = 0 has the lowest code rate and lowest modulation order (QPSK). MCS = 28 in downlink and 22 in uplink has the highest code rate and the highest modulation order (64-QAM).
 
 \subsection{HARQ algorithm}
 skriver vi something here eller ar denna section bara massa skit
 
 \subsection{Modulation}
 A modulation scheme is a way to map digital bits to analog signals in wireless systems. it is a way to represent the bits in the air.
-There are different modulation schemes and the ones that are use in LTE are 4QAM (QPSK), 16QAM and 64 QAM. The signals are modulated in the following way 
+There are different modulation schemes and the ones that are used in LTE are 4QAM (QPSK), 16QAM and 64QAM. The signals are modulated in the following way 
 
-(bild pa 4QAM 16QAM and 64QAM over i-phase and q-phase). 
+(bild pa 4QAM 16QAM and 64QAM over I-phase and Q-phase). 
  
-The I-phase is basically a Sinus wave and Q-phase is a Cosine wave. This way orthogonality occur. What the points on the two axises represent is the amplitude. So in the QPSK case. What the different signals that actually will be is
-is A*sinus(f*t), A*cos(f*t), -A*sinus(f*t) and -A*cos(f*t). So in this case the it fits 2 bits in each signal. I.e e.g signal 1 = 00, signal 2 = 01, signal 3 = 10, signal 4 = 11. In 16QAM and 64QAM each signal point is represented by 4 and 6 bits respectively.
+The I-phase is basically a Sinus wave and Q-phase is a Cosine wave. This way orthogonality occur. What the points on the two axises represent is the amplitude. So in the QPSK case, what the different signals will be is:\\
+ A*sinus(f*t)\\
+ A*cos(f*t)\\
+ -A*sinus(f*t) \\  
+ -A*cos(f*t)\\
+ 
+ So in this case it fits 2 bits in each signal. Therefore, the different possible signals are 00, 01, 10 and 11. In 16QAM and 64QAM each signal point is represented by 4 and 6 bits respectively.
 
-The signals in LTE are modulated with an IQ-modulator and decoded with and IQ-Demodulator
+The signals in LTE are modulated with an IQ-modulator and decoded with and IQ-Demodulator 
+TODO(write stuff about IQ-Modulator/demodulator)
 
 \subsection{Coding and code rate}
-A coding is a way to create redundancy in the bits that are send. The data will consist of real data bits and coded bits. This way you are able to correct bits that are wrongly recieved. The more coded bits you have in your message the more errors you can detect and correct, but the slower data rate you will have. The code rate states how many bits that are coded in a message. the Code rate is between 0 and 1 and is simply the ratio between \# real bits to \# real bits + \# coded bits. 
+A coding is a way to create redundancy in the bits that are send. The data will consist of real data bits and coded bits. This way you are able to correct bits that are wrongly recieved. The more coded bits you have in your message the more errors you can detect and correct, but the slower data rate you will have. The code rate states how many bits that are coded in a message. the Code rate is between 0 and 1 and is simply $\dfrac{\# real bits}{ \# real bits + \# coded bits}$ . 
 \\ \\
 example: if we have a code rate of 0.73 we have 73\% real bits in the message and 27\% coded bits. 
 
@@ -120,8 +128,19 @@ Our task from Ericsson was to develop a lightweight analyzer tool that:
 
 
 
-\section{the choice of tool}
-In the beginning of the project we had to do a decision of which tool we were to our analyzer in. Our initial plan was to do it in Matlab and that was because we both have experience in Matlab, it is available at Ericsson and it is in our opinion an easy way to do calculations on big sets of data. But we realized after a while that it we were able to make a plugin to an already existing tool at ericsson, and we thought that this was better because then testers that would potentially use our tool would already have our analyser built in. (omformulering vore bra).
+\section{The Tool of Choice for Analyzation}
+In the beginning of the project we had to make a decision on how we would create our analyzation tool.
+What we needed to do was produce a program that would:
+\begin{itemize}
+\item Read tracedata (from different kinds of sources)
+\item Rewrite it into a better format (for easier parameter data extraction)
+\item  Analyse the data and plot graphs with data from the analyzation
+\end{itemize} 
+Since we didn't have any advanced criteria on what our program should do we felt that it was best to build it upon an already existing project or in an enviroment that already had the functionality to do all we needed. \newline
+We started to analyse available (already existing) tools by asking personel at Ericsson if they had any preferences or any tools that they knew that they already had licences for or tools that was already used in the lab testers enviroment. Unfortunately they didn't have any recommendations, so we started to search the web for good tools that would be able to produce graphs and analyse big sets of data. Our initial idea was Matlab since both of us have lots of experience with Matlab and it contains extensive libraries for calculating signal data and for plotting graphs. Some of the competitors for our tool was (TODO add list of tools) ..., but mostly all programs seemed to do pretty much exactly what matlab did and less and therefore we didn't really feel that it was much to think about since we also even had experience with Matlab. \\
+We were still pretty openminded about using other softwares at this point, but started out with just writing code for displaying graphs. After about a week we found out from our supervisor that Ericsson did indeed already have a Ericsson-developed program called Logtool that the labtesters used for handling tracedata. It was written in java and the program was built upon the eclipse framework, all of which Razmus already had experience with since earlier. The team in charge of the project was situated in Linköping, and using Logtool would enable us to get tracedata in a good format without us having to write a single line of code to filter the unfiltered logfiles, plus our program wouldn't need any form of extra integration for Ericsson.\\
+ We therefore decided to develop our program as a plugin to Logtool. 
+
 
 \section{Thesis Outline}
 This thesis is divided into the following Parts
@@ -132,9 +151,12 @@ This thesis is divided into the following Parts
 \end{itemize}
 
 \chapter{The analysis tool}
-The analysis tool is the tool we have been developed in order to be able to do the analysis of different signal algorithms. It has been done so that IODT in an easier and more effective way can do an analysation of the datatransfer between the UE and enodeB. It is mainly developed to do analysation of data over SINR and CQI, i.e. the channel condition. But it shall be able to look at all parameters that are sent between the UE and eNB. 
+Our analysis tool was first and foremost developed for the testers at Ericsson, but it was also a means for us to be able to do our analysis of LA and HARQ in a effective way. It has been developed so that IODT in an easier and more effective way can do an analysation of the data transfer between the UE and eNB. \\
+It is mainly developed to do analysation of data over SINR and CQI, i.e. the channel condition. But it is also be able to use all parameters(that are sent between the UE and eNB) as axises in graphs so that the tester can validate any data he/she wants.
+ 
 \section{description of the tool}
 The following section will in detail describe what the tool consist of, what it can do, and how it represents the data.
+
 \subsection{functionality}
 Our tool has been developed to be a plug-in to an already existing tool at Ericsson called logtool, and it has three different functionalities. The first is to look at specific graphs over SINR and CQI. CQI is for downlink and SINR is for uplink. The reason for this is that you only can extract the SINR at the eNB and only CQI in the UE. the graphs you can look at is Throughput/SINR, Throughput/CQI, PRB/CQI PRB/SINR BLER/CQI, BLER/SINR, SINR/(UL MCS) CQI/(DL MCS) ... These graph are the presented in a two dimensional graph as in picture X. Where the data is on the Y-axis (vertical axis) and SINR / CQI is on the X-axis (horizontal axis). The parameters are chosen at request of ericsson. 
 

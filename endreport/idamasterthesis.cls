@@ -97,8 +97,8 @@
   
   \clearpage
 
-%  \lhead[Linköpings universitet\\
-%         Institutionen för datavetenskap]{}
+%  \lhead[Linkï¿½pings universitet\\
+%         Institutionen fï¿½r datavetenskap]{}
   \renewcommand{\plainheadrulewidth}{0pt}
   \pagestyle{empty}
 
@@ -174,7 +174,7 @@
 % \changetext{}{}{}{5mm}{}
 % \thispagestyle{empty}
 % \setlength{\parindent}{0mm}
-% \faculty{\centerline{\footnotesize Linköping Studies in Science and Technology}
+% \faculty{\centerline{\footnotesize Linkï¿½ping Studies in Science and Technology}
 % \vspace{2mm}
 % \centerline{\footnotesize Thesis No. \@thesisnumber}}{
 % \centerline{\footnotesize \swedishenglish{Filosofiska fakulteten FiF-avhandling}{Faculty of Arts and Science FiF-thesis} \@thesisnumber}
@@ -188,9 +188,9 @@
 % \footnotesize
 % \centerline{\textbf{Licentiatavhandling}}
 % \vspace{3mm}
-% som för avläggande av \@degreetype\ licentiatexamen vid Linköpings universitet
+% som fï¿½r avlï¿½ggande av \@degreetype\ licentiatexamen vid Linkï¿½pings universitet
 % kommer att offentligt presenteras i \@presentationplace, hus \@presentationhouse, 
-% Linköpings universitet, \@presentationtime.\\[7mm]
+% Linkï¿½pings universitet, \@presentationtime.\\[7mm]
 % \setlength\parskip{8pt}\centerline{\textbf{\swedishenglish{Sammanfattning}{Abstract}}}
 % \vspace{3mm}\\[-\baselineskip]
 % }
@@ -199,9 +199,9 @@
 % 
 % \textit{\swedishenglish{Studien har finansierats av}{This work has been supported} \@supportedby.}
 % \vfill
-% \centerline{\swedishenglish{Institutionen för datavetenskap}{Department of Computer and Information Science}}
-% \centerline{Linköpings universitet}
-% \centerline{\swedishenglish{581\,83 Linköping}{SE-581\,83 Linköping, Sweden}}
+% \centerline{\swedishenglish{Institutionen fï¿½r datavetenskap}{Department of Computer and Information Science}}
+% \centerline{Linkï¿½pings universitet}
+% \centerline{\swedishenglish{581\,83 Linkï¿½ping}{SE-581\,83 Linkï¿½ping, Sweden}}
 % \vspace{7mm}
 % \hspace*{\fill}ISBN \@isbn\hspace*{\fill}\hspace*{\fill}ISSN \issn\hspace*{\fill}
 % }
