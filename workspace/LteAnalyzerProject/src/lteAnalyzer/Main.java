@@ -38,7 +38,7 @@ public class Main {
 		int cols = 0;
 		
 		//läser cvs file
-		dummyreader = new BufferedReader(new FileReader("C:/Users/epauned/documents/logtool/burk.csv"));
+		dummyreader = new BufferedReader(new FileReader("C:/Users/epauned/documents/logtool/optimal.csv"));
 		cols = dummyreader.readLine().split(",").length;
 		
 		while ((dummyline = dummyreader.readLine()) != null) {
@@ -86,7 +86,7 @@ public class Main {
 		//läser cvs file
 		String[][] lteDataMatrix = new String[rows][cols];
 		String[] header  = new String[cols];
-		reader = new BufferedReader(new FileReader("C:/Users/epauned/documents/logtool/burk.csv"));
+		reader = new BufferedReader(new FileReader("C:/Users/epauned/documents/logtool/optimal.csv"));
 		while ((line = reader.readLine()) != null) {
 			if(i<rows){
 				lteDataMatrix[i] = line.split(",");
@@ -95,6 +95,7 @@ public class Main {
 		}
 		reader.close();
 		header = lteDataMatrix[0];
+		Print.array(header);
 		lteDataMatrix = BasicCalc.transpose(lteDataMatrix);
 		
 		//setting variable in BasicCalc class
@@ -109,7 +110,7 @@ public class Main {
 		int cqiIndex 		= BasicCalc.findHeaderIndex("cqi",0);
 		int dlTbs1Index 	= BasicCalc.findHeaderIndex("tbs1",0);
 		int dlTbs2Index 	= BasicCalc.findHeaderIndex("tbs2",0);
-		//int dlTbsSumIndex 	= BasicCalc.findHeaderIndex("tbs",2);
+		int dlTbsSumIndex 	= BasicCalc.findHeaderIndex("tbs",2);
 		int ulTbsSumIndex 	= BasicCalc.findHeaderIndex("tbs",2); //3 hos razmus
 		int dLprbIndex 		= BasicCalc.findHeaderIndex("prb",0);
 		int uLprbIndex 		= BasicCalc.findHeaderIndex("prb",1);
@@ -131,26 +132,28 @@ public class Main {
 		
 		//Print.array(lteDataMatrix[SIBIndex]);
 		dlTbs1 		= interpretLTEdata(lteDataMatrix[dlTbs1Index]);
-		dlTbs2	 	= interpretLTEdata(lteDataMatrix[dlTbs2Index]);
-		//dlTbsSum 	= interpretLTEdata(lteDataMatrix[dlTbsSumIndex]);
-		dlTbsSum 	= BasicCalc.addArrays(dlTbs1, dlTbs2);
-		ulTbsSum	= interpretLTEdata(lteDataMatrix[ulTbsSumIndex]);
-		SIB			= interpretLTEdata(lteDataMatrix[SIBIndex]);
-		SINR 		= interpretLTEdata(lteDataMatrix[SINRIndex]);
-		dlPrb  		= interpretLTEdata(lteDataMatrix[dLprbIndex]);
-		ulPrb  		= interpretLTEdata(lteDataMatrix[uLprbIndex]);
-		cqi   		= interpretLTEdata(lteDataMatrix[cqiIndex]);
-		ri			= interpretLTEdata(lteDataMatrix[riIndex]);
-		bler		= interpretLTEdata(lteDataMatrix[blerIndex]);
 		
-		ulMcs		= interpretLTEdata(lteDataMatrix[ulMcsIndex]);
+
+//		dlTbs2	 	= interpretLTEdata(lteDataMatrix[dlTbs2Index]);
+//		//dlTbsSum 	= interpretLTEdata(lteDataMatrix[dlTbsSumIndex]);
+//		dlTbsSum 	= BasicCalc.addArrays(dlTbs1, dlTbs2);
+//		ulTbsSum	= interpretLTEdata(lteDataMatrix[ulTbsSumIndex]);
+		SIB			= interpretLTEdata(lteDataMatrix[SIBIndex]);
+//		SINR 		= interpretLTEdata(lteDataMatrix[SINRIndex]);
+//		dlPrb  		= interpretLTEdata(lteDataMatrix[dLprbIndex]);
+//		ulPrb  		= interpretLTEdata(lteDataMatrix[uLprbIndex]);
+		cqi   		= interpretLTEdata(lteDataMatrix[cqiIndex]);
+//		ri			= interpretLTEdata(lteDataMatrix[riIndex]);
+//		bler		= interpretLTEdata(lteDataMatrix[blerIndex]);
+//		
+//		ulMcs		= interpretLTEdata(lteDataMatrix[ulMcsIndex]);
 		dlMcs1		= interpretLTEdata(lteDataMatrix[dlMcs1Index]);
 		dlMcs2		= interpretLTEdata(lteDataMatrix[dlMcs2Index]);
-		dlMcsSum	= BasicCalc.addArrays(dlMcs1, dlMcs2);
+//		dlMcsSum	= BasicCalc.addArrays(dlMcs1, dlMcs2);
 
 		
-		ndf1 = lteDataMatrix[ndf1Index];
-		ndf2 = lteDataMatrix[ndf2Index];
+//		ndf1 = lteDataMatrix[ndf1Index];
+//		ndf2 = lteDataMatrix[ndf2Index];
 		
 		timeStamp	= BasicCalc.timeConverter(lteDataMatrix[timeStampIndex]);
 		//Print.array(timeStamp,30);
@@ -193,23 +196,31 @@ public class Main {
 		float[] dlAvgCqiPerMcs1			= new float[nrUlMcsVals];
 		float[] ulAvgSinrPerMcs1		= new float[nrDlMcsVals];
 		double[] test					= new double[100];
+		double[] test2					= new double[100];
+		double[] time					= new double[rows];
 		
+		int smallestXValue;
+//		time = BasicCalc.timeConverter(timeStamp);
 		
-		
-		dlAvgBps1PerCqi = BasicCalc.tbs2Mbps(
-				dlCalc.avgValPerCqi(
-						BasicCalc.tbs2throughput(
-								dlTbs1,ndf1)
-						,50));
+//		dlAvgBps1PerCqi = BasicCalc.tbs2Mbps(
+//				dlCalc.avgValPerCqi(
+//						BasicCalc.tbs2throughput(
+//								dlTbs1,ndf1)
+//						,50));
 		
 //		dlAvgBps2PerCqi = BasicCalc.tbs2Mbps(
 //				dlCalc.avgValPerCqi(
 //						BasicCalc.tbs2throughput(
 //								dlTbs2,ndf2)
 //						,50));
-		
+		//Print.array(BasicCalc.intArr2DoubleArr(dlTbs1));
 		//dlAvgTotBpsPerCqi = BasicCalc.addArrays(dlAvgBps1PerCqi, dlAvgBps2PerCqi);
-		test = calculate.avgYValPerXVal(BasicCalc.intArr2DoubleArr(ri), BasicCalc.intArr2DoubleArr(dlTbs1),1);
+		//Print.array(dlTbs1);
+		smallestXValue = basicCalc.getSmallest(dlMcs1);
+		System.out.println(smallestXValue);
+		test = calculate.avgYValPerXVal(BasicCalc.intArr2DoubleArr(dlMcs1), BasicCalc.intArr2DoubleArr(dlTbs1),100,smallestXValue);
+		
+		test2 = calculate.tbsAndXValsM2BpsPerXvals(dlTbs1, timeStamp, dlMcs1, 100,smallestXValue);
 //		dlMaxBpsPerCqi = BasicCalc.tbs2Mbps(dlCalc.maxValPerCqi(dlTbsSum));
 //		ulAvgBpsPerSINR = dlCalc.avgValPerCqi(dlTbsSum,100);
 //		ulMaxBpsPerSINR = BasicCalc.tbs2Mbps(ulCalc.maxValPerSINR(ulTbsSum));
@@ -245,7 +256,7 @@ public class Main {
 //		Plot.normal(ulMaxBpsPerSINR, "dlMaxBpsPerCqi", "Xaxis", "Yaxis", "text");
 		
 		
-		Plot.normal(dlAvgBps1PerCqi, "ulAvgBpsPerSINR", "Xaxis", "Yaxis", "text");
+		Plot.normal(test2, "test2", "Xaxis", "Yaxis", "text");
 		Plot.normal(test, "test", "Xaxis", "Yaxis", "text");
 
 
@@ -256,15 +267,17 @@ public class Main {
 	
 	public static int[] interpretLTEdata(String[] lteData){
 		int[] out = new int[lteData.length];
+		int hej = 0;
 		for(int i=0;i<lteData.length;i++){
-			
 			if (lteData[i].contains("64QAM")){
 				out[i] = 6;
 			} else if (lteData[i].contains("16QAM")){
 				out[i] = 4;
 			} else if (lteData[i].contains("QPSK")){
 				out[i] = 2;
-			} else if (lteData[i].contains("SIB") ){
+			} else if (lteData[i].contains("SIB") || lteData[i].contains("*")){
+				//System.out.println(lteData[i]);
+				hej++;
 				out[i] = -1; 
 			} else if (lteData[i].contains("%") ){
 				out[i]= Integer.parseInt(lteData[i].replace("%", "").trim());
@@ -272,7 +285,8 @@ public class Main {
 				
 			else {
 				try{
-					out[i] = Integer.parseInt(lteData[i].trim()); // parse the string in ltedata[i] to an integer
+					out[i] = Integer.parseInt(lteData[i].trim()); 
+					
 				} catch(Exception floatError) {
 					try{
 						out[i] = (int) Float.parseFloat(lteData[i].trim());
@@ -282,6 +296,7 @@ public class Main {
 				}
 			}
 		}
+		System.out.println(hej);
 		return out;
 	}
 

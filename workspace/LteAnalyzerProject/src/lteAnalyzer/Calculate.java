@@ -1,7 +1,5 @@
 package lteAnalyzer;
 
-import java.util.HashMap;
-
 public class Calculate extends Main{
 	
 	//dl
@@ -60,15 +58,16 @@ public class Calculate extends Main{
 	}
 	
 	
-public double[] avgYValPerXVal(double[] Xvals,double[] Yvals,int minNrFoundXaxisVals){
+public double[] avgYValPerXVal(double[] Xvals,double[] Yvals,int minNrFoundXaxisVals, int smallestXValue){
  		
 		int value_ind = 0;
 		int counter_ind = 1;
 		
 		int counter = 0;
 		double currentVal = 0;
+		int x;
 		
-		int lenOfXAxis = (int) Math.ceil(BasicCalc.getBiggest(Xvals))+1;
+		int lenOfXAxis = (int) Math.ceil(BasicCalc.getBiggest(Xvals)-smallestXValue+1);
 		double[][] tempXvalPerYval = new double[2][lenOfXAxis];
 		//tempXvalPerYval = BasicCalc.init(tempXvalPerYval);
 		
@@ -82,9 +81,10 @@ public double[] avgYValPerXVal(double[] Xvals,double[] Yvals,int minNrFoundXaxis
 					counter++;
 				}
 			if (SIB[i] != -1 && Xvals[i] != NOT_A_VALUE){
-				System.out.println(tempXvalPerYval[counter_ind][(int) Xvals[i]]+" "+tempXvalPerYval[value_ind][(int) Xvals[i]]+ " yvalperxval");
-				tempXvalPerYval[value_ind][(int) Xvals[i]] = tempXvalPerYval[value_ind][(int) Xvals[i]] + currentVal; //accumulated Xvals
-				tempXvalPerYval[counter_ind][(int) Xvals[i]] = tempXvalPerYval[counter_ind][(int) Xvals[i]] + counter;
+				x = (int) Xvals[i];
+				System.out.println(x-smallestXValue);
+				tempXvalPerYval[value_ind][x-smallestXValue] = tempXvalPerYval[value_ind][x-smallestXValue] + currentVal; //accumulated Xvals
+				tempXvalPerYval[counter_ind][x-smallestXValue] = tempXvalPerYval[counter_ind][x-smallestXValue] + counter;
 				counter=0;
 				currentVal=0;
 			}
@@ -97,36 +97,118 @@ public double[] avgYValPerXVal(double[] Xvals,double[] Yvals,int minNrFoundXaxis
 
 public double[] maxYValPerXVal(double[] Xvals,double[] Yvals){
 		
-	int value_ind = 0;
-	
 	double currentVal = 0;
 	
 	int lenOfXAxis = (int) Math.ceil(BasicCalc.getBiggest(Xvals))+1;
-	double[] tempYvalPerXval = new double[lenOfXAxis];
-	//tempXvalPerYval = BasicCalc.init(tempXvalPerYval);
 	
-	double[] YvalsPerXvals = new double[lenOfXAxis];
+	
+	double[] yvalPerXval = new double[lenOfXAxis];
 	//valPerCqi = BasicCalc.init(valPerCqi);
 	
 	for(int i=0;i < Yvals.length;i++){
-			//we've found legit tbs data, accumulate counter, tbs, bW and see if we have peak data rate.
-			if(SIB[i] != -1 && Yvals[i] != NOT_A_VALUE ){
-				currentVal=currentVal+Yvals[i]; 
-				counter++;
-			}
+		if(SIB[i] != -1 && Yvals[i] != NOT_A_VALUE ){
+			currentVal=Math.max(currentVal, Yvals[i]); 
+		}
+		
 		if (SIB[i] != -1 && Xvals[i] != NOT_A_VALUE){
-			//System.out.println(tempYvalPerXval[counter_ind][(int) Xvals[i]]+" "+tempYvalPerXval[value_ind][(int) Xvals[i]]+ " yvalperxval");
-			tempYvalPerXval[(int) Xvals[i]] = tempYvalPerXval[value_ind][(int) Xvals[i]] + currentVal; //accumulated Xvals
-			tempYvalPerXval[(int) Xvals[i]] = tempYvalPerXval[counter_ind][(int) Xvals[i]] + counter;
+			//System.out.println(yvalsPerXvals[(int) Xvals[i]]+" "+tempXvalPerYval[value_ind][(int) Xvals[i]]+ " yvalperxval");
+			yvalPerXval[(int) Xvals[i]] = Math.max(currentVal,yvalPerXval[(int) Xvals[i]]); 
 			currentVal=0;
 		}
 	}
-	for(int j=0;j<YvalsPerXvals.length;j++)
-		if (tempYvalPerXval[counter_ind][j] >= minNrFoundXaxisVals)
-			YvalsPerXvals[j] = tempYvalPerXval[value_ind][j]/tempYvalPerXval[counter_ind][j];
-		return YvalsPerXvals;
+	return yvalPerXval;
 }
 
+public double[] minYValPerXVal(double[] Xvals,double[] Yvals){
+	double max = Double.MAX_VALUE;
+	double currentVal = max;
+	
+	int lenOfXAxis = (int) Math.ceil(BasicCalc.getBiggest(Xvals))+1;
+	
+	double[] yvalPerXval = new double[lenOfXAxis];
+	
+	for(int j=0;j < yvalPerXval.length;j++){
+		yvalPerXval[j] = max;
+	}
+
+	//Print.array(Yvals);
+	
+	for(int i=0;i < Yvals.length;i++){
+		if(SIB[i] != -1 && Yvals[i] != NOT_A_VALUE ){
+			currentVal=Math.min(currentVal, Yvals[i]); 
+			//System.out.println(Yvals[i]);
+		}
+		
+		if (SIB[i] != -1 && Xvals[i] != NOT_A_VALUE){
+			yvalPerXval[(int) Xvals[i]] = Math.min(currentVal,yvalPerXval[(int) Xvals[i]]); 
+			//System.out.println(yvalPerXval[(int) Xvals[i]]);
+//			System.out.println(currentVal);
+			currentVal=max;
+		}
+	}
+	for(int k=0;k < yvalPerXval.length;k++){
+		if(yvalPerXval[k] == max) yvalPerXval[k] = 0;
+	}
+	
+	//Print.array(yvalPerXval);
+	return yvalPerXval;
+}
+
+public double[] tbsAndXValsM2BpsPerXvals(int[] tbs, double[] time, int[] xValVector, int minNrFoundXaxisVals, int SmallestXValue){
+	int nrOfRealXVals = BasicCalc.numberOfVals(xValVector);
+	int j;
+	int x;
+	//counter and data
+	double[][] bps = new double[2][BasicCalc.getBiggest(xValVector)+1-SmallestXValue];
+	double time1 = BasicCalc.findCloseValFrInd(time, 0);
+	double time2;// = BasicCalc.findCloseValFrInd(time, 0);
+	double timeDiff;
+	int currentTbs=0;
+	//int 
+	
+	int currentXVal = 0;
+	
+	
+	
+	for(int i=0;i<tbs.length;i++){
+		
+		if(tbs[i] != NOT_A_VALUE && SIB[i] != -1){
+			currentTbs += tbs[i];
+			//System.out.println(currentTbs);
+		}
+
+		
+		if(xValVector[i] != NOT_A_VALUE && SIB[i] != -1){
+			x=xValVector[i]-SmallestXValue;
+			time2 = BasicCalc.findCloseValFrInd(time, i);
+			timeDiff = BasicCalc.timeSubtract(time1,time2);
+			//data
+			bps[0][x] += currentTbs;
+			//counter
+			bps[1][x] += Math.abs(timeDiff);
+			if(timeDiff <= 0.000001)
+				System.out.println("fel " +" "+ i + " " + xValVector[i] +" "+ bps[0][x] +" "+ timeDiff);
+			
+			
+			time1=time2;
+			currentTbs=0;
+			//currentXVal = xValVector[i];
+			
+		}
+	}
+	
+	for(int i=0;i<bps[0].length;i++){
+//		System.out.println(bps[0][i] + "     " + bps[1][i]);
+		if(bps[1][i] != 0)
+			System.out.println(bps[1][i] + " " + bps[0][i]);
+			bps[0][i] = bps[0][i]/bps[1][i]/1000;
+		//System.out.println(bps[0][i]);
+		//System.out.println(bps[0][i]);
+	}
+	
+	
+	return bps[0];
+}
 	
 
 /*-------------------------------------------SETTERS!!!-------------------------------------------*/

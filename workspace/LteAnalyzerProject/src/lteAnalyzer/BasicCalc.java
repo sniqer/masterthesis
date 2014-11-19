@@ -199,19 +199,47 @@ public class BasicCalc extends Calculate{
 	}
 	
 	public static int[] tbs2throughput(int[] tbs, String[] ndf){
+		int[] newtbs = tbs;
 		for(int i = 0;i<tbs.length;i++)
-			if(ndf[i].contains("N")) tbs[i] = 0;
+			if(ndf[i].contains("N")) newtbs[i] = 0;
 		
-		return tbs;
+		return newtbs;
 	}
 	
 	public static double getBiggest(double[] array){
-		double max = Integer.MIN_VALUE;
+		double max = Double.MIN_VALUE;
 		for(int i=0;i<array.length;i++)
 			if(array[i] > max)
 				max=array[i];
 		
 		return max;
+	}
+	
+	public static int getBiggest(int[] array){
+		int max = Integer.MIN_VALUE;
+		for(int i=0;i<array.length;i++)
+			if(array[i] > max)
+				max=array[i];
+		
+		return max;
+	}
+	
+	public static double getSmallest(double[] array){
+		double smallest = Double.MAX_VALUE;
+		for(int i=0;i<array.length;i++)
+			if(array[i] < smallest && array[i] != NOT_A_VALUE)
+				smallest=array[i];
+		
+		return smallest;
+	}
+	
+	public static int getSmallest(int[] array){
+		int smallest = Integer.MAX_VALUE;
+		for(int i=0;i<array.length;i++)
+			if(array[i] < smallest && array[i] != NOT_A_VALUE)
+				smallest=array[i];
+		
+		return smallest;
 	}
 	
 	public static double[] intArr2DoubleArr(int[] arr){
@@ -220,6 +248,72 @@ public class BasicCalc extends Calculate{
 			doubleArr[i] = (double) arr[i];
 		
 		return doubleArr;
+	}
+	
+	public static double timeSubtract(double time1, double time2){
+//		System.out.println(time1);
+//		System.out.println(time2);
+		
+		String strtime1 = Double.toString(time1);
+		String strtime2 = Double.toString(time2);
+		
+		int hour1 = Integer.parseInt((String) strtime1.subSequence(0, 2));
+		int hour2 = Integer.parseInt((String) strtime2.subSequence(0, 2));		
+		
+		int min1 = Integer.parseInt((String) strtime1.subSequence(2, 4));
+		int min2 = Integer.parseInt((String) strtime2.subSequence(2, 4));		
+		int sec1 = Integer.parseInt((String) strtime1.subSequence(4, 6));
+		int sec2 = Integer.parseInt((String) strtime2.subSequence(4, 6));
+		
+		
+//		int hour1 = Integer.parseInt((String) strtime1.subSequence(0, 1));
+//		int hour2 = Integer.parseInt((String) strtime2.subSequence(0, 1));		
+//		
+//		int min1 = Integer.parseInt((String) strtime1.subSequence(1, 3));
+//		int min2 = Integer.parseInt((String) strtime2.subSequence(1, 3));		
+//		int sec1 = Integer.parseInt((String) strtime1.subSequence(3, 5));
+//		int sec2 = Integer.parseInt((String) strtime2.subSequence(3, 5));
+		
+		double msec1 = Double.parseDouble((String) strtime1.subSequence(6, strtime1.length()));
+		double msec2 = Double.parseDouble((String) strtime2.subSequence(6, strtime2.length()));
+		
+		if(sec2<sec1){
+			sec2 = sec2 + 60;
+			min2 = min2-1;
+		}
+		if(min2<min1){
+			min2 = min2+60;
+			hour2 = hour2 - 1;
+		}
+
+		double timeDiff = hour2 - hour1 + min2 - min1 + sec2 - sec1 + msec2 - msec1;
+		if(timeDiff >= 1){
+			System.out.println(time2 + "too big difference");
+			System.out.println("tid!!!!!!!");
+			System.out.println(time2);
+			System.out.println(time1);
+			System.out.println(hour2);
+			System.out.println(hour1);
+			System.out.println(min2);
+			System.out.println(min1);
+			System.out.println(sec2);
+			System.out.println(sec1);
+			System.out.println(msec2);
+			System.out.println(msec1);
+		}
+		//System.out.println(timeDiff);
+		return timeDiff;
+	}
+	
+	
+	public static double blaj(int[] tbs){
+		int counter = 0;
+		for(int i=0;i<tbs.length;i++){
+			if(tbs[i] == 36696)
+				counter++;
+		}
+		System.out.println(counter);
+		return counter;
 	}
 }
 

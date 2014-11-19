@@ -35,7 +35,7 @@ public class Print {
 	public static void array(int[] stringArr){
 		System.out.println("printing ints!!!!!!");
 		for(int i=0;i<stringArr.length;i++){
-			if(stringArr[i] != -1337)
+			//if(stringArr[i] != -1337)
 			System.out.println(stringArr[i]);
 		}
 	}
