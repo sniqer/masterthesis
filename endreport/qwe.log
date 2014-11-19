@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.10.17)  17 NOV 2014 13:46
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.10.17)  18 NOV 2014 08:29
 entering extended mode
 **qwe.tex
 (C:\Users\erazlin\git\masterthesis\endreport\qwe.tex
@@ -345,99 +345,159 @@ Underfull \hbox (badness 10000) in paragraph at lines 139--142
 Chapter 3.
 [8
 
-] [9]
+]
+Underfull \hbox (badness 10000) in paragraph at lines 168--175
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 168--175
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 168--175
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 168--175
+
+ []
+
+[9]
+Underfull \hbox (badness 10000) in paragraph at lines 177--184
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 177--184
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 177--184
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 177--184
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 186--193
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 186--193
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 186--193
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 186--193
+
+ []
+
+[10]
 Chapter 4.
-[10
+[11
 
 ]
 Chapter 5.
 
-Underfull \hbox (badness 10000) in paragraph at lines 177--179
+Underfull \hbox (badness 10000) in paragraph at lines 209--211
 
  []
 
-[11
+[12
 
-] [12]
+] [13]
 Chapter 6.
 \@filenumb=\write4
-[13
-
-] [14
+[14
 
 ] <linkuniv_en_vert_blk.pdf, id=79, 240.60088pt x 172.5386pt>
 File: linkuniv_en_vert_blk.pdf Graphic file (type pdf)
 
 <use linkuniv_en_vert_blk.pdf>
-Package pdftex.def Info: linkuniv_en_vert_blk.pdf used on input line 194.
+Package pdftex.def Info: linkuniv_en_vert_blk.pdf used on input line 239.
 (pdftex.def)             Requested size: 56.9055pt x 40.8072pt.
 
-Overfull \hbox (261.76398pt too wide) detected at line 194
+Overfull \hbox (261.76398pt too wide) detected at line 239
 []
  []
 
 
-Overfull \hbox (358.50284pt too wide) detected at line 194
+Overfull \hbox (358.50284pt too wide) detected at line 239
 []
  []
 
 
-Overfull \hbox (91.04834pt too wide) detected at line 194
+Overfull \hbox (91.04834pt too wide) detected at line 239
 []
  []
 
 
-Overfull \hbox (187.7872pt too wide) detected at line 194
+Overfull \hbox (187.7872pt too wide) detected at line 239
 []
  []
 
 
-Overfull \hbox (358.50284pt too wide) detected at line 194
+Overfull \hbox (358.50284pt too wide) detected at line 239
 []
  []
 
 
-Overfull \hbox (187.7872pt too wide) detected at line 194
+Overfull \hbox (187.7872pt too wide) detected at line 239
 []
  []
 
 
-Overfull \hbox (358.50284pt too wide) detected at line 194
+Overfull \hbox (358.50284pt too wide) detected at line 239
 []
  []
 
 
-Overfull \hbox (358.50284pt too wide) detected at line 194
+Overfull \hbox (358.50284pt too wide) detected at line 239
 []
  []
 
 
-Overfull \hbox (358.50284pt too wide) detected at line 194
+Overfull \hbox (358.50284pt too wide) detected at line 239
 []
  []
 
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <9> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 194.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 239.
 
-Overfull \hbox (29.87495pt too wide) in paragraph at lines 194--194
+Overfull \hbox (29.87495pt too wide) in paragraph at lines 239--239
 [][]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 194--194
+Underfull \hbox (badness 10000) in paragraph at lines 239--239
 
  []
 
-[15 <C:/Users/erazlin/git/masterthesis/endreport/linkuniv_en_vert_blk.pdf>]
+[15
+
+ <C:/Users/erazlin/git/masterthesis/endreport/linkuniv_en_vert_blk.pdf>]
 (C:\Users\erazlin\git\masterthesis\endreport\qwe.aux) ) 
 Here is how much of TeX's memory you used:
  2820 strings out of 493921
  36771 string characters out of 3146473
- 110002 words of memory out of 3000000
+ 110001 words of memory out of 3000000
  6063 multiletter control sequences out of 15000+200000
  12440 words of font info for 47 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 40i,11n,47p,1116b,307s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 40i,10n,47p,1116b,307s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files (x86)/
 MikTex/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Program Files (x86)/MikTex
 /fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Files (x86)/MikTex/fonts
@@ -452,7 +512,7 @@ iles (x86)/MikTex/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (
 x86)/MikTex/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files (x86)/Mi
 kTex/fonts/type1/public/amsfonts/cm/cmsy9.pfb><C:/Program Files (x86)/MikTex/fo
 nts/type1/public/amsfonts/symbols/msam7.pfb>
-Output written on qwe.pdf (23 pages, 3359292 bytes).
+Output written on qwe.pdf (23 pages, 3360249 bytes).
 PDF statistics:
  179 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
