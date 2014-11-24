@@ -20,9 +20,11 @@
 \contentsline {chapter}{\numberline {4}The Physical Layer of the LTE System}{11}
 \contentsline {chapter}{\numberline {5}Analysis of Link Adaptation and HARQ}{12}
 \contentsline {section}{\numberline {5.1}The Analysis of Link Adaptation}{12}
-\contentsline {subsection}{\numberline {5.1.1}Results}{13}
-\contentsline {subsection}{\numberline {5.1.2}Summary}{13}
+\contentsline {subsection}{\numberline {5.1.1}expected result}{13}
+\contentsline {subsection}{\numberline {5.1.2}Simulated results}{13}
+\contentsline {subsection}{\numberline {5.1.3}Summary}{13}
 \contentsline {section}{\numberline {5.2}The Analysis of HARQ}{13}
 \contentsline {subsection}{\numberline {5.2.1}Results}{13}
 \contentsline {subsection}{\numberline {5.2.2}Summary}{13}
+\contentsline {section}{\numberline {5.3}optional analysis}{13}
 \contentsline {chapter}{\numberline {6}Closing}{14}
