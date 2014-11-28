@@ -11,7 +11,6 @@ public class ULCalc extends Calculate{
 		int value_ind = 0;
 		int counter_ind = 1;
 		
-		//int currentsinr = -1000; //dummydefault value
 		int counter = 0;
 		int currentVal = 0;
 		
@@ -22,21 +21,15 @@ public class ULCalc extends Calculate{
 		//valPerSINR = BasicCalc.init(valPerSINR);
 		
 		for(int i=0;i<SINR.length;i++){
-			
-
 				//we've found legit tbs data, accumulate counter, tbs, bW and see if we have peak data rate.
 				if(SIB[i] != -1 && val[i] != NOT_A_VALUE ){
 					currentVal=currentVal+val[i]; 
 					counter++;
 				}
-			
 			if (SINR[i] != NOT_A_VALUE && SIB[i] != -1){
-				//System.out.println( " currentSinr: " + currentsinr+ " currentVal " + val[i]);
 				tempValPerSINR[value_ind][SINR[i]-MIN_SINR_VAL] = tempValPerSINR[value_ind][SINR[i]-MIN_SINR_VAL] + currentVal;
 				tempValPerSINR[counter_ind][SINR[i]-MIN_SINR_VAL] = tempValPerSINR[counter_ind][SINR[i]-MIN_SINR_VAL] + counter;
 				
-				//reset values
-				//currentsinr = sinr[i];
 				counter=0;
 				currentVal=0;
 				
@@ -47,19 +40,7 @@ public class ULCalc extends Calculate{
 				valPerSINR[j] = tempValPerSINR[value_ind][j]/tempValPerSINR[counter_ind][j];
 		}
 			Print.array2D(tempValPerSINR);
-			//Print.array(valPerSINR);
 			return valPerSINR;
-	}
-	
-	
-	
-	//behövs förmodligen inte
-	public float[] sinrGenerator(int[] puschPwr, int[] puschNoiseIntPwr){
-		float[] sinr = new float[puschPwr.length];
-		for (int i=0; i<puschPwr.length;i++){
-			sinr[i] = (int) puschPwr[i]/BasicCalc.findCloseValFrInd(puschNoiseIntPwr,i);
-		}
-		return sinr;
 	}
 	
 

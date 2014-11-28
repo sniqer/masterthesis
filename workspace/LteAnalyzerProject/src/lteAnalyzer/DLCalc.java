@@ -81,24 +81,17 @@ public class DLCalc extends Calculate {
 		cqiPerMcs = new float[NR_OF_MCS_VALS];
 		
 		
-		//tempCqiPerMcs = BasicCalc.init(tempCqiPerMcs);
-		//cqiPerMcs = BasicCalc.init(cqiPerMcs);
 		
 		
 		for(int i=0;i<val.length;i++){
-			//we've found legit Prb data, accumulate counter, Prb, bW and see if we have peak data rate.
 			if(SIB[i] != -1 && val[i] != -1337){
 				currentCqi=currentCqi+val[i]; 
 				counter++;
 			}
 
 			if (currentMcs != mcs[i] && mcs[i] >= 0 && mcs[i] <= MAX_MCS_VAL && SIB[i] != -1 ){
-				//System.out.println(mcs[i]);
-				//System.out.println( " mcs: " + mcs[i] + " current cqi: " + currentCqi + " counter: " + counter);
 				tempCqiPerMcs[mcs[i]][counter_ind] = tempCqiPerMcs[mcs[i]][counter_ind]+counter; //accumulated Counter
 				tempCqiPerMcs[mcs[i]][currentCqi_ind] = tempCqiPerMcs[mcs[i]][currentCqi_ind]+currentCqi; //accumulated Prb
-				//System.out.println(currentMcs + " " +tempCqiPerMcs[mcs[i]-1][counter_ind] + " " +  tempCqiPerMcs[mcs[i]][currentCqi_ind]);
-				//reset values
 				currentCqi = 0;
 				counter = 0;
 				currentMcs = mcs[i];

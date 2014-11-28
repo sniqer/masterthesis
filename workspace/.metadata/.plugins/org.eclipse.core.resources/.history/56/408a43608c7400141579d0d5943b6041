@@ -1,0 +1,324 @@
+package lteAnalyzer;
+
+public class BasicCalc extends Calculate{
+	
+	
+	private static String[] header;
+	
+
+	public static int[] addArrays(int[] arr1, int[] arr2){
+		int[] outArr = new int[Math.min(arr1.length, arr2.length)];
+		for(int i = 0; i < outArr.length; i++){
+			if(arr1[i] == NOT_A_VALUE && arr2[i] == NOT_A_VALUE) outArr[i] = 0;
+			else if (arr1[i] == NOT_A_VALUE) outArr[i] = arr2[i];
+			else if (arr2[i] == NOT_A_VALUE) outArr[i] = arr1[i];
+			else outArr[i] = arr1[i] + arr2[i];
+		}
+		return outArr;
+	}
+	public static float[] addArrays(float[] arr1, float[] arr2){
+		float[] outArr = new float[Math.min(arr1.length, arr2.length)];
+		for(int i = 0; i < outArr.length; i++){
+			if(arr1[i] == NOT_A_VALUE && arr2[i] == NOT_A_VALUE) outArr[i] = 0;
+			else if (arr1[i] == NOT_A_VALUE) outArr[i] = arr2[i];
+			else if (arr2[i] == NOT_A_VALUE) outArr[i] = arr1[i];
+			else outArr[i] = arr1[i] + arr2[i];
+		}
+		return outArr;
+	}
+	public static int findCloseValFrInd(int[] list,int list_index){
+		int listVal = 0;
+		int inc = list_index;
+		int dec = list_index;
+		while(true){
+				if(list[dec] != NOT_A_VALUE){
+					listVal = list[dec];
+					break;
+				} else if (list[inc] != NOT_A_VALUE){
+					listVal = list[inc];
+					break;
+				}
+				if(dec > 0){
+					dec--;
+				}
+				if(inc<list.length){
+					inc++;
+				}
+		}
+		//System.out.println(bandWidth+ " bandwidth");
+		return listVal;
+	}
+	public static double findCloseValFrInd(double[] list,int list_index){
+		double listVal = 0;
+		int inc = list_index;
+		int dec = list_index;
+		while(true){
+				if(list[dec] != NOT_A_VALUE){
+					listVal = list[dec];
+					break;
+				} else if (list[inc] != NOT_A_VALUE){
+					listVal = list[inc];
+					break;
+				}
+				if(dec > 0){
+					dec--;
+				}
+				if(inc<list.length){
+					inc++;
+				}
+		}
+		//System.out.println(bandWidth+ " bandwidth");
+		return listVal;
+	}
+	
+	//tbs is bits sending per ms, divide it by thousand to get it in Mbits/s
+	public static float[] tbs2Mbps(float[] tbs){
+		float[] bps = new float[tbs.length];
+		for(int i=0;i<tbs.length;i++)
+			bps[i] = tbs[i]/1000;
+		
+		return bps;
+	}
+	
+	// 1 prb is 180 khz
+	public static float[] prb2hz(float[] prb){
+		float[] hz = new float[prb.length];
+		for(int i=0;i<prb.length;i++)
+			hz[i] = prb[i]*180000;
+		
+		return hz;
+	}
+	
+	//divide the average Mbit/s/SINR to the average of allocated bandwidth/SINR
+	public static float[] spectralEfficiencyPerSINR(float[] bpsPerSINR, float[] hzPerSINR){
+		float[] specEff = new float[hzPerSINR.length];
+		for(int i=0;i<hzPerSINR.length;i++){
+			if(hzPerSINR[i] != 0){
+				specEff[i] = bpsPerSINR[i]/hzPerSINR[i];
+			} else {
+				specEff[i] = 0;
+			}
+			
+		}
+		return specEff;
+	}
+	
+	public static double[] multiplyArray(double[] in, int multiplier){
+		double[] out = new double[in.length];
+		for(int i=0;i<in.length;i++)
+			out[i] = in[i]*multiplier;
+		
+		return out;
+	}
+	
+	public static void printVals(int[] array){
+		System.out.println("printing vals");
+		for(int i=0;i<array.length;i++)
+		if(array[i] != NOT_A_VALUE)
+			System.out.println(array[i]);
+	}
+	
+	public static String[][] transpose(String[][] stringArr){
+		
+		String[][] output = new String[stringArr[2].length][stringArr.length+1];
+		for(int i=0;i<stringArr.length;i++){
+			for(int j=0;j<stringArr[0].length;j++){
+				Print.array(stringArr[i]);
+				System.out.println(j + " " + i);
+				System.out.println(stringArr[0].length + " " + stringArr.length);
+				output[j][i] = stringArr[i][j];
+			}
+		}
+		return output;
+	}
+	
+	public static float[] maxKbps(int bandwidth,int fromSINR,int toSINR){
+		float[] maximum = new float[45];
+		for(int i=fromSINR;i<toSINR;i++){
+			maximum[i-fromSINR] =  (float) (bandwidth*(Math.log(Math.pow(10, (float) i/10)+1)/0.6931));
+		}
+		return maximum;
+	}
+	
+	public static float[] maxKbpspHz(int fromSINR,int toSINR){
+		float[] maxbpspHz = new float[45];
+		for(int i=fromSINR;i<toSINR;i++){
+			maxbpspHz[i-fromSINR] =  (float) (Math.log(Math.pow(10, (float) i/10)+1)/0.6931);
+		}
+		return maxbpspHz;
+	}
+
+	
+	public static int findHeaderIndex(String headerName,int doublett){
+		int doublettcounter = 0;
+		
+		for(int i=0;i<header.length;i++){
+			
+			if(header[i].contains(headerName)){
+				
+				if (doublett==doublettcounter){
+					return i;
+				} else {
+					//System.out.println(headerName + " " + doublettcounter+1);
+					doublettcounter++;
+				}
+			}
+		}
+		System.out.println("hitta inget index");
+		return -1;
+	}
+	//2014-10-22 12:15:00.329414
+	public static double[] timeConverter(String[] stringTime){
+		double[] doubleTime = new double[stringTime.length];
+			for (int i=0;i<stringTime.length;i++){
+				if(!stringTime[i].contains("x") && !stringTime[i].contains("timeStamp")){
+					stringTime[i] = stringTime[i].split(" ")[2];
+					stringTime[i] = stringTime[i].replace(":", "");
+					
+					
+					doubleTime[i] = Double.parseDouble(stringTime[i].trim());
+				} else {
+					doubleTime[i] = (double) NOT_A_VALUE;
+				}
+			}
+		
+		return doubleTime;
+	}
+	
+	public static int numberOfVals(int[] array){
+		int nrOfVals = 0;
+		
+		for(int i=0;i<array.length;i++){
+			if(array[i] != NOT_A_VALUE)
+				nrOfVals++;
+		}
+		return nrOfVals;
+	}
+	public void setHeader(String[] header) {
+		// TODO Auto-generated method stub
+		this.header = header;
+	}
+	
+	public static int[] tbs2throughput(int[] tbs, String[] ndf){
+		int[] throughput = tbs;
+		for(int i = 0;i<tbs.length;i++)
+			if(ndf[i].contains("N")) throughput[i] = 0;
+		
+		return throughput;
+	}
+	
+	public static double getBiggest(double[] array){
+		double max = Double.MIN_VALUE;
+		for(int i=0;i<array.length;i++)
+			if(array[i] > max)
+				max=array[i];
+		
+		return max;
+	}
+	
+	public static int getBiggest(int[] array){
+		int max = Integer.MIN_VALUE;
+		for(int i=0;i<array.length;i++)
+			if(array[i] > max)
+				max=array[i];
+		
+		return max;
+	}
+	
+	public static double getSmallest(double[] array){
+		double smallest = Double.MAX_VALUE;
+		for(int i=0;i<array.length;i++)
+			if(array[i] < smallest && array[i] != NOT_A_VALUE)
+				smallest=array[i];
+		
+		return smallest;
+	}
+	
+	public static int getSmallest(int[] array){
+		int smallest = Integer.MAX_VALUE;
+		for(int i=0;i<array.length;i++)
+			if(array[i] < smallest && array[i] != NOT_A_VALUE)
+				smallest=array[i];
+		
+		return smallest;
+	}
+	
+	public static double[] intArr2DoubleArr(int[] arr){
+		double[] doubleArr = new double[arr.length];
+		for(int i=0;i<arr.length;i++)
+			doubleArr[i] = (double) arr[i];
+		
+		return doubleArr;
+	}
+	
+	public static double timeSubtract(double time1, double time2){
+	//System.out.println(time1);
+	//System.out.println(time2);
+		
+		String strtime1 = Double.toString(time1);
+		String strtime2 = Double.toString(time2);
+		
+		int hour1 = Integer.parseInt((String) strtime1.subSequence(0, 2));
+		int hour2 = Integer.parseInt((String) strtime2.subSequence(0, 2));		
+		
+		int min1 = Integer.parseInt((String) strtime1.subSequence(2, 4));
+		int min2 = Integer.parseInt((String) strtime2.subSequence(2, 4));		
+		int sec1 = Integer.parseInt((String) strtime1.subSequence(4, 6));
+		int sec2 = Integer.parseInt((String) strtime2.subSequence(4, 6));
+		
+		
+//		int hour1 = Integer.parseInt((String) strtime1.subSequence(0, 1));
+//		int hour2 = Integer.parseInt((String) strtime2.subSequence(0, 1));		
+//		
+//		int min1 = Integer.parseInt((String) strtime1.subSequence(1, 3));
+//		int min2 = Integer.parseInt((String) strtime2.subSequence(1, 3));		
+//		int sec1 = Integer.parseInt((String) strtime1.subSequence(3, 5));
+//		int sec2 = Integer.parseInt((String) strtime2.subSequence(3, 5));
+		
+		double msec1 = Double.parseDouble((String) strtime1.subSequence(6, strtime1.length()));
+		double msec2 = Double.parseDouble((String) strtime2.subSequence(6, strtime2.length()));
+		
+		if(sec2<sec1){
+			sec2 = sec2 + 60;
+			min2 = min2-1;
+		}
+		if(min2<min1){
+			min2 = min2+60;
+			hour2 = hour2 - 1;
+		}
+
+		double timeDiff = hour2 - hour1 + min2 - min1 + sec2 - sec1 + msec2 - msec1;
+		if(timeDiff==0){
+			System.out.println("time diff är 0");
+			System.out.println(time1);
+			System.out.println(time2);
+		}
+		return timeDiff;
+	}
+	
+	
+	public static double[] startTimeFrZero(double[] timeStamps){
+		double firstTimeStamp = findFirstTimeStamp(timeStamps);
+		double[] timeFrZero = new double[timeStamps.length];
+		for(int i=2;i<timeStamps.length;i++){
+			if(timeStamps[i] != NOT_A_VALUE)
+				timeFrZero[i] = timeSubtract(firstTimeStamp,timeStamps[i]);
+		}
+		System.out.println("kommer hit");
+		//Print.array(timeFrZero);
+		return timeFrZero;
+	}
+	
+	public static double findFirstTimeStamp(double[] timeStamp){
+		double firstTimeStamp = 0.0;
+		for(int i=0;i<timeStamp.length;i++){
+			if(timeStamp[i] != NOT_A_VALUE){
+				firstTimeStamp = timeStamp[i];
+				break;
+			}
+		}
+		return firstTimeStamp;
+	}
+}
+
+
