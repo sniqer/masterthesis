@@ -82,7 +82,7 @@ public double[] avgYValPerXVal(double[] Xvals,double[] Yvals,int minNrFoundXaxis
 				}
 			if (SIB[i] != -1 && Xvals[i] != NOT_A_VALUE){
 				x = (int) Xvals[i];
-				System.out.println(x-smallestXValue);
+				//System.out.println(x-smallestXValue);
 				tempXvalPerYval[value_ind][x-smallestXValue] = tempXvalPerYval[value_ind][x-smallestXValue] + currentVal; //accumulated Xvals
 				tempXvalPerYval[counter_ind][x-smallestXValue] = tempXvalPerYval[counter_ind][x-smallestXValue] + counter;
 				counter=0;
@@ -154,61 +154,6 @@ public double[] minYValPerXVal(double[] Xvals,double[] Yvals){
 	return yvalPerXval;
 }
 
-public double[] tbsAndXValsM2BpsPerXvals(int[] tbs, double[] time, int[] xValVector, int minNrFoundXaxisVals, int SmallestXValue){
-	int nrOfRealXVals = BasicCalc.numberOfVals(xValVector);
-	int j;
-	int x;
-	//counter and data
-	double[][] bps = new double[2][BasicCalc.getBiggest(xValVector)+1-SmallestXValue];
-	double time1 = BasicCalc.findCloseValFrInd(time, 0);
-	double time2;// = BasicCalc.findCloseValFrInd(time, 0);
-	double timeDiff;
-	int currentTbs=0;
-	//int 
-	
-	int currentXVal = 0;
-	
-	
-	
-	for(int i=0;i<tbs.length;i++){
-		
-		if(tbs[i] != NOT_A_VALUE && SIB[i] != -1){
-			currentTbs += tbs[i];
-			//System.out.println(currentTbs);
-		}
-
-		
-		if(xValVector[i] != NOT_A_VALUE && SIB[i] != -1){
-			x=xValVector[i]-SmallestXValue;
-			time2 = BasicCalc.findCloseValFrInd(time, i);
-			timeDiff = BasicCalc.timeSubtract(time1,time2);
-			//data
-			bps[0][x] += currentTbs;
-			//counter
-			bps[1][x] += Math.abs(timeDiff);
-			if(timeDiff <= 0.000001)
-				System.out.println("fel " +" "+ i + " " + xValVector[i] +" "+ bps[0][x] +" "+ timeDiff);
-			
-			
-			time1=time2;
-			currentTbs=0;
-			//currentXVal = xValVector[i];
-			
-		}
-	}
-	
-	for(int i=0;i<bps[0].length;i++){
-//		System.out.println(bps[0][i] + "     " + bps[1][i]);
-		if(bps[1][i] != 0)
-			System.out.println(bps[1][i] + " " + bps[0][i]);
-			bps[0][i] = bps[0][i]/bps[1][i]/1000;
-		//System.out.println(bps[0][i]);
-		//System.out.println(bps[0][i]);
-	}
-	
-	
-	return bps[0];
-}
 	
 
 /*-------------------------------------------SETTERS!!!-------------------------------------------*/

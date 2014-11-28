@@ -4,6 +4,7 @@ public class BasicCalc extends Calculate{
 	
 	
 	private static String[] header;
+	private int[] SIB;
 	
 
 	public static int[] addArrays(int[] arr1, int[] arr2){
@@ -27,10 +28,11 @@ public class BasicCalc extends Calculate{
 		return outArr;
 	}
 	public static int findCloseValFrInd(int[] list,int list_index){
-		int listVal = 0;
+		int listVal = NOT_A_VALUE;
 		int inc = list_index;
 		int dec = list_index;
-		while(true){
+		int loopInd = 0;
+		while(loopInd < list.length){
 				if(list[dec] != NOT_A_VALUE){
 					listVal = list[dec];
 					break;
@@ -44,15 +46,17 @@ public class BasicCalc extends Calculate{
 				if(inc<list.length){
 					inc++;
 				}
+				loopInd++;
 		}
-		//System.out.println(bandWidth+ " bandwidth");
 		return listVal;
 	}
+	
 	public static double findCloseValFrInd(double[] list,int list_index){
-		double listVal = 0;
+		double listVal = NOT_A_VALUE;
 		int inc = list_index;
 		int dec = list_index;
-		while(true){
+		int loopInd = 0;
+		while(loopInd < list.length){
 				if(list[dec] != NOT_A_VALUE){
 					listVal = list[dec];
 					break;
@@ -66,20 +70,12 @@ public class BasicCalc extends Calculate{
 				if(inc<list.length){
 					inc++;
 				}
+				loopInd++;
 		}
-		//System.out.println(bandWidth+ " bandwidth");
 		return listVal;
 	}
 	
-	//tbs is bits sending per ms, divide it by thousand to get it in Mbits/s
-	public static float[] tbs2Mbps(float[] tbs){
-		float[] bps = new float[tbs.length];
-		for(int i=0;i<tbs.length;i++)
-			bps[i] = tbs[i]/1000;
-		
-		return bps;
-	}
-	
+
 	// 1 prb is 180 khz
 	public static float[] prb2hz(float[] prb){
 		float[] hz = new float[prb.length];
@@ -89,99 +85,71 @@ public class BasicCalc extends Calculate{
 		return hz;
 	}
 	
-	//divide the average Mbit/s/SINR to the average of allocated bandwidth/SINR
-	public static float[] spectralEfficiencyPerSINR(float[] bpsPerSINR, float[] hzPerSINR){
-		float[] specEff = new float[hzPerSINR.length];
-		for(int i=0;i<hzPerSINR.length;i++){
-			if(hzPerSINR[i] != 0){
-				specEff[i] = bpsPerSINR[i]/hzPerSINR[i];
-			} else {
-				specEff[i] = 0;
-			}
-			
-		}
-		return specEff;
-	}
+
 	
-	public static float[] prefixChanger(float[] in, float prefix){
-		float[] out = new float[in.length];
+	public static double[] multiplyArray(double[] in, double multiplier){
+		double[] out = new double[in.length];
 		for(int i=0;i<in.length;i++)
-			out[i] = in[i]*prefix;
-		
+			out[i] = in[i]*multiplier;
 		return out;
 	}
 	
-	public static void printVals(int[] array){
-		System.out.println("printing vals");
-		for(int i=0;i<array.length;i++)
-		if(array[i] != NOT_A_VALUE)
-			System.out.println(array[i]);
-	}
 	
 	public static String[][] transpose(String[][] stringArr){
+		
 		String[][] output = new String[stringArr[0].length][stringArr.length];
 		for(int i=0;i<stringArr.length;i++){
 			for(int j=0;j<stringArr[0].length;j++){
-				output[j][i] = stringArr[i][j];
+				String tjoho = stringArr[i][j];
+				output[j][i] = tjoho;
 			}
 		}
 		return output;
 	}
 	
-	public static float[] maxKbps(int bandwidth,int fromSINR,int toSINR){
-		float[] maximum = new float[45];
-		for(int i=fromSINR;i<toSINR;i++){
-			maximum[i-fromSINR] =  (float) (bandwidth*(Math.log(Math.pow(10, (float) i/10)+1)/0.6931));
-		}
-		return maximum;
-	}
-	
-	public static float[] maxKbpspHz(int fromSINR,int toSINR){
-		float[] maxbpspHz = new float[45];
-		for(int i=fromSINR;i<toSINR;i++){
-			maxbpspHz[i-fromSINR] =  (float) (Math.log(Math.pow(10, (float) i/10)+1)/0.6931);
-		}
-		return maxbpspHz;
-	}
 
 	
 	public static int findHeaderIndex(String headerName,int doublett){
 		int doublettcounter = 0;
-		
 		for(int i=0;i<header.length;i++){
-			
 			if(header[i].contains(headerName)){
-				
 				if (doublett==doublettcounter){
 					return i;
 				} else {
-					//System.out.println(headerName + " " + doublettcounter+1);
 					doublettcounter++;
 				}
 			}
 		}
-		System.out.println("hitta inget index");
+		System.out.println("hitta inget index till " + headerName);
 		return -1;
 	}
 	//2014-10-22 12:15:00.329414
 	public static double[] timeConverter(String[] stringTime){
 		double[] doubleTime = new double[stringTime.length];
-			for (int i=0;i<stringTime.length;i++){
-				if(!stringTime[i].contains("x") && !stringTime[i].contains("timeStamp")){
-					stringTime[i] = stringTime[i].split(" ")[2];
-					stringTime[i] = stringTime[i].replace(":", "");
-					
-					
-					doubleTime[i] = Double.parseDouble(stringTime[i].trim());
-				} else {
-					doubleTime[i] = (double) NOT_A_VALUE;
-				}
+		for (int i=0;i<stringTime.length;i++){
+			if(!stringTime[i].contains("x")){
+				stringTime[i] = stringTime[i].replace(":", "");
+				doubleTime[i] = Double.parseDouble(stringTime[i].trim());
+			} else {
+				doubleTime[i] = (double) NOT_A_VALUE;
 			}
-		
-		
-		
-		
+		}
 		return doubleTime;
+	}
+	
+	public static String[] discardDate(String[] stringTime){
+	
+		for (int i=0;i<stringTime.length;i++){
+			if(!stringTime[i].contains("x")){
+				stringTime[i] = stringTime[i].split(" ")[2];
+				stringTime[i] = stringTime[i].replace(":", "");
+				stringTime[i] = stringTime[i].trim();
+			} else {
+				stringTime[i] = "Not a valid timestamp!";
+			}
+		}
+	
+		return stringTime;
 	}
 	
 	public static int numberOfVals(int[] array){
@@ -193,18 +161,36 @@ public class BasicCalc extends Calculate{
 		}
 		return nrOfVals;
 	}
-	public void setHeader(String[] header) {
-		// TODO Auto-generated method stub
-		this.header = header;
+
+	//makes tbs to throughput by looking at time stamp, length of throughput[] shall be the same as the others
+	public static double[] tbs2throughput(int[] tbs, String[] ndf,double[] timestamps, int[] sf){
+		int[] acknowledged_packets = tbs;
+		Print.array(ndf);
+		for(int i = 0;i<tbs.length;i++){
+			
+			if(ndf[i].contains("N")) 
+				acknowledged_packets[i] = 0;
+		}
+			
+		double[] throughput = new double[tbs.length];
+		double timeDiff = 0;
+		for(int j=1;j<tbs.length;j++){
+			if(acknowledged_packets[j] != NOT_A_VALUE){
+				timeDiff = timestamps[j] - timestamps[j-1];
+				if (timeDiff != 0.0) {
+					throughput[j] = acknowledged_packets[j]/timeDiff;
+				} else {
+					//fullösning
+					throughput[j] = acknowledged_packets[j]/(timestamps[j] - timestamps[j-2]);
+					System.out.println("här är tidsdiffen 0: " + (timestamps[j] - timestamps[j-2]) +" " + throughput[j]);
+				}
+			}
+		}
+		
+		return throughput;
 	}
 	
-	public static int[] tbs2throughput(int[] tbs, String[] ndf){
-		int[] newtbs = tbs;
-		for(int i = 0;i<tbs.length;i++)
-			if(ndf[i].contains("N")) newtbs[i] = 0;
-		
-		return newtbs;
-	}
+
 	
 	public static double getBiggest(double[] array){
 		double max = Double.MIN_VALUE;
@@ -246,36 +232,26 @@ public class BasicCalc extends Calculate{
 		double[] doubleArr = new double[arr.length];
 		for(int i=0;i<arr.length;i++)
 			doubleArr[i] = (double) arr[i];
-		
 		return doubleArr;
 	}
 	
-	public static double timeSubtract(double time1, double time2){
-//		System.out.println(time1);
-//		System.out.println(time2);
-		
-		String strtime1 = Double.toString(time1);
-		String strtime2 = Double.toString(time2);
-		
-		int hour1 = Integer.parseInt((String) strtime1.subSequence(0, 2));
-		int hour2 = Integer.parseInt((String) strtime2.subSequence(0, 2));		
-		
-		int min1 = Integer.parseInt((String) strtime1.subSequence(2, 4));
-		int min2 = Integer.parseInt((String) strtime2.subSequence(2, 4));		
-		int sec1 = Integer.parseInt((String) strtime1.subSequence(4, 6));
-		int sec2 = Integer.parseInt((String) strtime2.subSequence(4, 6));
+	//returns the time differens between time1 and time2 in seconds, input eg 12:13:14.001000, 12:13:14.002000 => output 0.001 
+	public static double timeSubtract(String time1, String time2){
 		
 		
-//		int hour1 = Integer.parseInt((String) strtime1.subSequence(0, 1));
-//		int hour2 = Integer.parseInt((String) strtime2.subSequence(0, 1));		
-//		
-//		int min1 = Integer.parseInt((String) strtime1.subSequence(1, 3));
-//		int min2 = Integer.parseInt((String) strtime2.subSequence(1, 3));		
-//		int sec1 = Integer.parseInt((String) strtime1.subSequence(3, 5));
-//		int sec2 = Integer.parseInt((String) strtime2.subSequence(3, 5));
+
+		int hour1 = Integer.parseInt((String) time1.subSequence(0, 2));
+		int hour2 = Integer.parseInt((String) time2.subSequence(0, 2));		
 		
-		double msec1 = Double.parseDouble((String) strtime1.subSequence(6, strtime1.length()));
-		double msec2 = Double.parseDouble((String) strtime2.subSequence(6, strtime2.length()));
+		int min1 = Integer.parseInt((String) time1.subSequence(2, 4));
+		int min2 = Integer.parseInt((String) time2.subSequence(2, 4));		
+		int sec1 = Integer.parseInt((String) time1.subSequence(4, 6));
+		int sec2 = Integer.parseInt((String) time2.subSequence(4, 6));
+		
+
+		
+		double msec1 = Double.parseDouble((String) time1.subSequence(6, time1.length()));
+		double msec2 = Double.parseDouble((String) time2.subSequence(6, time2.length()));
 		
 		if(sec2<sec1){
 			sec2 = sec2 + 60;
@@ -287,33 +263,48 @@ public class BasicCalc extends Calculate{
 		}
 
 		double timeDiff = hour2 - hour1 + min2 - min1 + sec2 - sec1 + msec2 - msec1;
-		if(timeDiff >= 1){
-			System.out.println(time2 + "too big difference");
-			System.out.println("tid!!!!!!!");
-			System.out.println(time2);
-			System.out.println(time1);
-			System.out.println(hour2);
-			System.out.println(hour1);
-			System.out.println(min2);
-			System.out.println(min1);
-			System.out.println(sec2);
-			System.out.println(sec1);
-			System.out.println(msec2);
-			System.out.println(msec1);
-		}
-		//System.out.println(timeDiff);
+		if(timeDiff==0)
+			System.out.println("time difference is 0");
+		
 		return timeDiff;
 	}
 	
-	
-	public static double blaj(int[] tbs){
-		int counter = 0;
-		for(int i=0;i<tbs.length;i++){
-			if(tbs[i] == 36696)
-				counter++;
+	//input 12:13:14:.11111, .... , 12:14:14.111111
+	public static double[] startTimeFrZero(String[] timeStamps){
+		int firstTimeStampIndex = findFirstTimeStamp(timeStamps);
+		String firstTimeStamp = timeStamps[firstTimeStampIndex];
+		double[] timeFrZero = new double[timeStamps.length];
+		for(int i = firstTimeStampIndex; i<timeStamps.length ;i++){
+			//if(timeStamps[i] != NOT_A_VALUE)
+				//timeFrZero[i] = timeSubtract(firstTimeStamp,timeStamps[i]);
+			timeFrZero[i] = timeSubtract(firstTimeStamp,timeStamps[i]);
 		}
-		System.out.println(counter);
-		return counter;
+		//Print.array(timeFrZero);
+		return timeFrZero;
+	}
+	
+	public static int findFirstTimeStamp(String[] timeStamp){
+
+		double[] timeStampDigits = timeConverter(timeStamp);
+		for(int i=0;i<timeStamp.length;i++){
+			if(timeStampDigits[i] != NOT_A_VALUE){
+				//firstTimeStamp[0] = timeStamp[i];
+				return i;
+			}
+		}
+		System.out.println("didnt find any timestamps");
+		return -1;
+	}
+	
+	
+	public void setHeader(String[] header) {
+		// TODO Auto-generated method stub
+		this.header = header;
+	}
+	
+	public void setSIB(int[] SIB) {
+		// TODO Auto-generated method stub
+		this.SIB = SIB;
 	}
 }
 

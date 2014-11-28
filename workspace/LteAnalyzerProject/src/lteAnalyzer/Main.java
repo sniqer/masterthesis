@@ -38,40 +38,19 @@ public class Main {
 		int cols = 0;
 		
 		//läser cvs file
-		dummyreader = new BufferedReader(new FileReader("C:/Users/epauned/documents/logtool/optimal.csv"));
+		dummyreader = new BufferedReader(new FileReader("C:/Users/epauned/documents/logtool/maximus.csv"));
 		cols = dummyreader.readLine().split(",").length;
 		
 		while ((dummyline = dummyreader.readLine()) != null) {
 			rows++;
 		}
 		dummyreader.close();
-
+		rows--;
 		int nrSinrVals = 45;
 		int nrDlMcsVals = 28;
 		int nrUlMcsVals = 23;
 		System.out.println(rows + " " + cols);
 		
-		int[] dlTbsSum 		= new int[rows]; 		//the sum of the Tbs's
-		int[] ulTbsSum 		= new int[rows]; 		//the sum of the Tbs's
-		int[] dlTbs1		= new int[rows];		//left antenna tbs
-		int[] dlTbs2		= new int[rows];		//left antenna tbs
-		int[] dlPrb 		= new int[rows];		//the physical resource blocks
-		int[] ulPrb 		= new int[rows];		//the physical resource blocks
-		int[] SINR	 		= new int[rows];		//the signal-to-interference-ratio in the channel, over pucch (i think)
-		
-		int[] ulMcs			= new int[rows];		//börk
-		int[] dlMcs1		= new int[rows];		//börk
-		int[] dlMcs2		= new int[rows];		//börk
-		int[] dlMcsSum		= new int[rows];		//börk
-		
-		int[] SIB			= new int[rows];		//System Information Block, this block we dont want to look at at the moment, delete the data in the sib rows
-		int[] cqi			= new int[rows];		//Channel Quality Index
-		int[] ri			= new int[rows];
-		int[] HARQ			= new int[rows];		//HARQ ack and nacks
-		int[] bler			= new int[rows];
-		double[] timeStamp	= new double[rows];		//time stamps
-		String[] ndf1		= new String[rows];
-		String[] ndf2		= new String[rows];
 
 
 		
@@ -82,28 +61,37 @@ public class Main {
 		String line = null;
 		BufferedReader reader = null;
 		int i = 0;
-		
+		System.out.println(cols);
 		//läser cvs file
 		String[][] lteDataMatrix = new String[rows][cols];
 		String[] header  = new String[cols];
-		reader = new BufferedReader(new FileReader("C:/Users/epauned/documents/logtool/optimal.csv"));
+		reader = new BufferedReader(new FileReader("C:/Users/epauned/documents/logtool/maximus.csv"));
 		while ((line = reader.readLine()) != null) {
-			if(i<rows){
-				lteDataMatrix[i] = line.split(",");
+			if(i == 0){
+				header = line.split(",");
+				i++;
+			}
+			else if(i>0 && i<rows+1){ //avoid the header
+				//System.out.println(i);
+				lteDataMatrix[i-1] = line.split(",");
+				System.out.println(lteDataMatrix[i-1].length);
+				if (lteDataMatrix[i-1].length != cols)
+					System.out.println("fel på rad  " + i);
 				i++;
 			} else break;
 		}
 		reader.close();
-		header = lteDataMatrix[0];
+		
 		Print.array(header);
-		lteDataMatrix = BasicCalc.transpose(lteDataMatrix);
-		
-		//setting variable in BasicCalc class
-		BasicCalc basicCalc = new BasicCalc();
-		basicCalc.setHeader(header);
-		
 
 		
+		lteDataMatrix = BasicCalc.transpose(lteDataMatrix);
+		System.out.println("färdigtransponerad");
+		
+		//we have to set header here and SIB later
+		BasicCalc basicCalc = new BasicCalc();
+		basicCalc.setHeader(header);
+
 		
 		int SIBIndex 		= BasicCalc.findHeaderIndex("bbUeRef",0);
 		int SINRIndex 		= BasicCalc.findHeaderIndex("sinr",0);//hos razmus puschSinr
@@ -126,37 +114,47 @@ public class Main {
 		int ndf1Index		= BasicCalc.findHeaderIndex("ndf1", 0);
 		int ndf2Index		= BasicCalc.findHeaderIndex("ndf2", 0);
 		int pmiIndex		= BasicCalc.findHeaderIndex("pmi", 0);
+		int sfIndex			= BasicCalc.findHeaderIndex("sf", 0);
 		
 
 
-		
-		//Print.array(lteDataMatrix[SIBIndex]);
-		dlTbs1 		= interpretLTEdata(lteDataMatrix[dlTbs1Index]);
-		
-
-//		dlTbs2	 	= interpretLTEdata(lteDataMatrix[dlTbs2Index]);
-//		//dlTbsSum 	= interpretLTEdata(lteDataMatrix[dlTbsSumIndex]);
-//		dlTbsSum 	= BasicCalc.addArrays(dlTbs1, dlTbs2);
-//		ulTbsSum	= interpretLTEdata(lteDataMatrix[ulTbsSumIndex]);
-		SIB			= interpretLTEdata(lteDataMatrix[SIBIndex]);
-//		SINR 		= interpretLTEdata(lteDataMatrix[SINRIndex]);
-//		dlPrb  		= interpretLTEdata(lteDataMatrix[dLprbIndex]);
-//		ulPrb  		= interpretLTEdata(lteDataMatrix[uLprbIndex]);
-		cqi   		= interpretLTEdata(lteDataMatrix[cqiIndex]);
-//		ri			= interpretLTEdata(lteDataMatrix[riIndex]);
-//		bler		= interpretLTEdata(lteDataMatrix[blerIndex]);
-//		
-//		ulMcs		= interpretLTEdata(lteDataMatrix[ulMcsIndex]);
-		dlMcs1		= interpretLTEdata(lteDataMatrix[dlMcs1Index]);
-		dlMcs2		= interpretLTEdata(lteDataMatrix[dlMcs2Index]);
-//		dlMcsSum	= BasicCalc.addArrays(dlMcs1, dlMcs2);
 
 		
-//		ndf1 = lteDataMatrix[ndf1Index];
-//		ndf2 = lteDataMatrix[ndf2Index];
+
+		int[] dlTbs1 		= interpretLTEdata(lteDataMatrix[dlTbs1Index]);
+		int[] dlTbs2	 	= interpretLTEdata(lteDataMatrix[dlTbs2Index]);
+		//dlTbsSum 	= interpretLTEdata(lteDataMatrix[dlTbsSumIndex]);
+		int[] dlTbsSum 	= BasicCalc.addArrays(dlTbs1, dlTbs2);
+		int[] ulTbsSum	= interpretLTEdata(lteDataMatrix[ulTbsSumIndex]);
+		int[] SIB			= interpretLTEdata(lteDataMatrix[SIBIndex]);
+		int[] SINR 		= interpretLTEdata(lteDataMatrix[SINRIndex]);
+		int[] dlPrb  		= interpretLTEdata(lteDataMatrix[dLprbIndex]);
+		int[] ulPrb  		= interpretLTEdata(lteDataMatrix[uLprbIndex]);
+		int[] cqi   		= interpretLTEdata(lteDataMatrix[cqiIndex]);
+		int[] ri			= interpretLTEdata(lteDataMatrix[riIndex]);
+		int[] bler		= interpretLTEdata(lteDataMatrix[blerIndex]);
 		
-		timeStamp	= BasicCalc.timeConverter(lteDataMatrix[timeStampIndex]);
-		//Print.array(timeStamp,30);
+		int[] ulMcs		= interpretLTEdata(lteDataMatrix[ulMcsIndex]);
+		int[] dlMcs1		= interpretLTEdata(lteDataMatrix[dlMcs1Index]);
+		int[] dlMcs2		= interpretLTEdata(lteDataMatrix[dlMcs2Index]);
+		
+		int[] sf	= interpretLTEdata(lteDataMatrix[sfIndex]);
+		int[] dlMcsSum	= BasicCalc.addArrays(dlMcs1, dlMcs2);
+
+		
+		String[] ndf1 = lteDataMatrix[ndf1Index];
+		String[] ndf2 = lteDataMatrix[ndf2Index];
+		
+		String[] timeStamp	= lteDataMatrix[timeStampIndex];
+		
+		timeStamp	= BasicCalc.discardDate(timeStamp);
+		
+		double[] timeStampInDigits	= BasicCalc.startTimeFrZero(timeStamp);
+		System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHH!!!!");
+		
+		//setting variable in BasicCalc class
+
+		basicCalc.setSIB(SIB);
 		
 		//setting variable in DLCalc class
 		DLCalc dlCalc = new DLCalc();
@@ -198,67 +196,30 @@ public class Main {
 		double[] test					= new double[100];
 		double[] test2					= new double[100];
 		double[] time					= new double[rows];
-		
+		double[] realThroughputPerMs	= new double[rows];
 		int smallestXValue;
-//		time = BasicCalc.timeConverter(timeStamp);
-		
-//		dlAvgBps1PerCqi = BasicCalc.tbs2Mbps(
-//				dlCalc.avgValPerCqi(
-//						BasicCalc.tbs2throughput(
-//								dlTbs1,ndf1)
-//						,50));
-		
-//		dlAvgBps2PerCqi = BasicCalc.tbs2Mbps(
-//				dlCalc.avgValPerCqi(
-//						BasicCalc.tbs2throughput(
-//								dlTbs2,ndf2)
-//						,50));
-		//Print.array(BasicCalc.intArr2DoubleArr(dlTbs1));
-		//dlAvgTotBpsPerCqi = BasicCalc.addArrays(dlAvgBps1PerCqi, dlAvgBps2PerCqi);
-		//Print.array(dlTbs1);
-		smallestXValue = basicCalc.getSmallest(dlMcs1);
-		System.out.println(smallestXValue);
-		test = calculate.avgYValPerXVal(BasicCalc.intArr2DoubleArr(dlMcs1), BasicCalc.intArr2DoubleArr(dlTbs1),100,smallestXValue);
-		
-		test2 = calculate.tbsAndXValsM2BpsPerXvals(dlTbs1, timeStamp, dlMcs1, 100,smallestXValue);
-//		dlMaxBpsPerCqi = BasicCalc.tbs2Mbps(dlCalc.maxValPerCqi(dlTbsSum));
-//		ulAvgBpsPerSINR = dlCalc.avgValPerCqi(dlTbsSum,100);
-//		ulMaxBpsPerSINR = BasicCalc.tbs2Mbps(ulCalc.maxValPerSINR(ulTbsSum));
-//		
-////		dlAvgBpsPerSec = Calculate.avgTbsPerSecond(dlTbsSum, timeStamp, SIB, 500);
-//		test = calculate.avgYValPerXVal(BasicCalc.intArr2DoubleArr(dlMcs1), BasicCalc.intArr2DoubleArr(dlTbsSum),100);
-//		ulAvgBpsPerSec = Calculate.avgTbsPerSecond(ulTbsSum, timeStamp, SIB, 500);
-//		
-//		dlPrbPerCqi = dlCalc.avgValPerCqi(dlPrb,300);
-//		ulPrbPerSINR = ulCalc.avgValPerSINR(ulPrb,100);
-//		
-//		dlAvgSpecEffPerCqi = BasicCalc.spectralEfficiencyPerSINR(BasicCalc.prefixChanger(dlAvgTotBpsPerCqi, 1000000), BasicCalc.prb2hz(dlPrbPerCqi));
-//		ulAvgSpecEffPerSINR = BasicCalc.spectralEfficiencyPerSINR(BasicCalc.prefixChanger(ulAvgBpsPerSINR,1000000), BasicCalc.prb2hz(ulPrbPerSINR));
-//		
-//		blerPerSINR = dlCalc.avgValPerCqi(bler,30);
-//		riPerCqi = dlCalc.avgValPerCqi(ri,1);
-//
-//		dlAvgCqiPerMcs1 = dlCalc.avgValPerMcs(cqi,dlMcs1);
-		//ulAvgSinrPerMcs = ULCalc.avgSINRPerMcs(ulMcs, SINR , SIB);
-		
-		//Vad fattas, dlbler1PerCqi, dlbler2PerCqi, ulBlerPerSINR, dlAvgCqiPerMcs2, ulAvgSinrPerMcs, pmiPerCQI / pmiPerSINR
-		
-		/*PLOTTING SECTION*/
-//		Plot.overTime(dlAvgBpsPerSec[0], dlAvgBpsPerSec[1], "dlAvgBpsPerSec", "Xaxis", "Yaxis", "text");
-//		Plot.normal(dlAvgBps1PerCqi, "dlAvgBps1PerCqi", "Xaxis", "Yaxis", "text");
-//		Plot.normal(dlAvgBps2PerCqi, "dlAvgBps2PerCqi", "Xaxis", "Yaxis", "text");
-//		Plot.normal(dlAvgTotBpsPerCqi, "dlAvgTotBpsPerCqi", "Xaxis", "Yaxis", "text");
-//		Plot.normal(dlMaxBpsPerCqi, "dlMaxBpsPerCqi", "Xaxis", "Yaxis", "text");
-//		
-//
-//		Plot.overTime(ulAvgBpsPerSec[0], ulAvgBpsPerSec[1], "ulAvgBpsPerSec", "Xaxis", "Yaxis", "text");
-//		Plot.normal(ulAvgBpsPerSINR, "ulAvgBpsPerSINR", "Xaxis", "Yaxis", "text");
-//		Plot.normal(ulMaxBpsPerSINR, "dlMaxBpsPerCqi", "Xaxis", "Yaxis", "text");
-		
-		
-		Plot.normal(test2, "test2", "Xaxis", "Yaxis", "text");
-		Plot.normal(test, "test", "Xaxis", "Yaxis", "text");
 
+		//Print.array(BasicCalc.intArr2DoubleArr(dlTbs1));
+		dlAvgTotBpsPerCqi = BasicCalc.addArrays(dlAvgBps1PerCqi, dlAvgBps2PerCqi);
+		//Print.array(dlTbs1);
+		smallestXValue = (int) basicCalc.getSmallest(timeStampInDigits);
+
+		//Print.array(timeStamp);
+		System.out.println(smallestXValue);
+		//test = calculate.avgYValPerXVal(timeStamp, BasicCalc.intArr2DoubleArr(dlTbs1),1,smallestXValue);
+		
+		realThroughputPerMs = BasicCalc.tbs2throughput(dlTbs1,ndf1,timeStampInDigits,sf);
+		//Print.array(realThroughputPerMs);
+		
+		test = calculate.avgYValPerXVal(timeStampInDigits, realThroughputPerMs,1,smallestXValue);
+		Print.array(test);
+	
+		
+		//Plot.normal(test2, "test2", "Xaxis", "Yaxis", "text");
+		Plot.normal(test, "test", "Xaxis", "Yaxis", "text");
+		//Plot.normal2(timeStampInDigits, realThroughputPerMs, "erg", "we", "wer", "r");
+//		test = calculate.avgYValPerXVal(timeStamp, BasicCalc.intArr2DoubleArr(dlTbs1),1,smallestXValue);
+//		Plot.normal(test, "test", "Xaxis", "Yaxis", "text");
 
 	}
 
@@ -296,7 +257,6 @@ public class Main {
 				}
 			}
 		}
-		System.out.println(hej);
 		return out;
 	}
 
