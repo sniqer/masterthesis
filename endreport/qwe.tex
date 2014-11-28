@@ -138,8 +138,17 @@ example: if we have a code rate of 0.73 we have 73\% real bits in the message an
 
 
 \chapter{The Analysis Tool}
-Our analysis tool was first and foremost developed for the testers at Ericsson, but it was also a means for us to be able to do our analysis of LA and HARQ in an effective way. It has been developed so that IODT in an easier and more effective way can do an analyzation of the data transfer between the UE and eNodeB. \\
-It is mainly developed to perform analyzation of data over SINR and CQI, i.e. the channel condition. But it is also able to use all parameters (that are sent between the UE and eNodeB) as axises in graphs so that the tester can validate any data he/she wants.
+Our analysis tool was first and foremost developed for the testers at Ericsson, but it was also a means for us to be able to do our analysis of LA and HARQ in an effective way. It has been developed so that IODT in an easier way can do an analyzation of the data transfer between the UE and eNodeB. Some questions we will answer is:
+\begin{itemize}
+	\item Can a tester perform a faster analysis on deciding whether the throughput in a test run is stable or not? (time test)(how sure are the tester on the validity of their answer?)
+	\item Can a tester perform a faster analysis on how the mcs values are coorelated to the SINR values in the LA algorithm from trace data?
+	\item Is it easier and/or faster to get a better overview with our tool than before for large(>300MB) quantities of trace data? (questionare)
+	\item Is it easier and/or faster to get a better overview with our tool than before for small(<300MB) quantities of trace data? (questionare)
+	\item 
+\end{itemize} 
+
+
+The tool is mainly developed to perform analyzation of data over SINR and CQI, i.e. the channel condition. But it is also able to use all parameters (that are sent between the UE and eNodeB) as axises in graphs so that the tester can validate any data he/she wants.
 
 \section{Motivation for choosing Logtool}
 In the beginning of the project we had to make a decision on how we would create our analysis tool.
@@ -149,9 +158,9 @@ What we needed to do was produce a program that would:
 \item Rewrite it into a better format (for easier parameter data extraction)
 \item  Analyse the data and plot graphs with data from the analyzation
 \end{itemize} 
-Since we didn't have any advanced criteria on what our program should do we felt that it was best to build it upon an already existing project or in an enviroment that already had the functionality to do all we needed. \newline
-We started to analyse available (already existing) tools by asking personel at Ericsson if they had any preferences or any tools that they knew that they already had licences for or tools that was already used in the lab testers enviroment. Unfortunately they didn't have any recommendations, so we started to search the web for good tools that would be able to produce graphs and analyse big sets of data. Our initial idea was Matlab since both of us have experience with Matlab and it contains extensive libraries for calculating signal data and for plotting graphs. Some of the other tools we looked at was [TODO add list of tools]. But mostly all programs seemed to do pretty much what Matlab did or less, and since we had experience with Matlab since earlier we felt that Matlab was our best choice. \\
-We were still pretty openminded about using other softwares at this point, but started out with just writing code for displaying graphs. After about a week we found out from our supervisor that Ericsson did indeed already have a Ericsson-developed program called Logtool that the labtesters used for handling tracedata. It was written in java and the program was built upon the eclipse framework, all of which Razmus already had experience with since earlier. The team in charge of the project was situated in Linköping, and using Logtool would enable us to get tracedata in a good format without us having to write a single line of code to filter the unfiltered logfiles, plus our program wouldn't need any form of extra integration for Ericsson.\\
+Since we didn't have any advanced criteria on what our program should do we felt that it was best to build it upon an already existing project or in an environment that already had the functionality to do all we needed. \newline
+We started to analyse available (already existing) tools by asking personel at Ericsson if they had any preferences or any tools that they knew that they already had licences for or tools that was already used in the lab testers environment. Unfortunately they didn't have any recommendations, so we started to search the web for good tools that would be able to produce graphs and analyse big sets of data. Our initial idea was Matlab since both of us have experience with Matlab and it contains extensive libraries for calculating signal data and for plotting graphs. Some of the other tools we looked at was [TODO add list of tools]. But mostly all programs seemed to do pretty much what Matlab did or less, and since we had experience with Matlab since earlier we felt that Matlab was our best choice. \\
+We were still pretty open minded about using other softwares at this point, but started out with just writing code for displaying graphs. After about a week we found out from our supervisor that Ericsson did indeed already have a Ericsson-developed program called Logtool that the labtesters used for handling tracedata. It was written in java and the program was built upon the eclipse framework, all of which Razmus already had experience with since earlier. The team in charge of the project was situated in Linköping, and using Logtool would enable us to get tracedata in a good format without us having to write a single line of code to filter the unfiltered logfiles, plus our program wouldn't need any form of extra integration for Ericsson.\\
 We therefore decided to develop our program as a plugin to Logtool. 
 
 \section{Logtool Plugin}

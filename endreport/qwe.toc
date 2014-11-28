@@ -14,7 +14,7 @@
 \contentsline {section}{\numberline {3.1}Motivation for choosing Logtool}{8}
 \contentsline {section}{\numberline {3.2}Logtool Plugin}{9}
 \contentsline {section}{\numberline {3.3}Description of the Tool}{9}
-\contentsline {subsection}{\numberline {3.3.1}Basic Graph View}{9}
+\contentsline {subsection}{\numberline {3.3.1}Basic Graph View}{10}
 \contentsline {subsection}{\numberline {3.3.2}Multiple Graph View}{10}
 \contentsline {subsection}{\numberline {3.3.3}Advanced Graph View}{10}
 \contentsline {chapter}{\numberline {4}The Physical Layer of the LTE System}{11}
