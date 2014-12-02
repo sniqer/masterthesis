@@ -63,8 +63,18 @@ TODO: write about how we use the tool from making a trace to generating graph\\
 TODO: write about all web pages and libraries which contained information about LTE
 
 \newpage
+
 \section{Motivation}
 The purpose with this master thesis is to help Long Term Evolution Interoperability Development Testing (LTE IODT) Data analysis. LTE IODT wants to automatically generate analysis of Link Adaptation (LA) and Hybrid Automatic Repeat Request (HARQ) tests where we sweep through Signal to Interference plus Noise Ratio (SINR) for different channel models. The LTE IODT lab test logs gives a unique opportunity to look into detailed behaviour of link and rank adaptation for both downlink and uplink. \newline
+
+In order for us to choose a suitable tool for presenting data we used the following guide lines:
+
+\begin{itemize}
+	\item Can our tool provide functionality that is useful to the testers?
+	\item Can a tester perform a set of tasks faster with our tool than without it?
+	\item Is our tool easy to use?
+	\item Will it be available for all testers?
+\end{itemize} 
 
 Ericsson needed a tool for allowing the testers to better analyse the performance in UE-to-eNodeB implementations. The performance in this sense is whether Ericsson and/or their customer had implemented their system according to the minimum criterion of the specification for said implementation or not. To be able to judge where in the implementation the loss of performance had occurred, Ericsson needed a tool to plot the values of signal-variables that are most affected by HARQ and LA, so that their own personnel could use that information to further analyse the algorithms. To be able to plot relevant values for debugging we first had to gain vast knowledge about how LTE, HARQ and LA. \newline
 
