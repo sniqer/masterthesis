@@ -26,7 +26,7 @@ public class DLCalc extends Calculate {
 					currentVal=currentVal+val[i]; 
 					counter++;
 				}
-			if (cqi[i] >= 0 && cqi[i] <= 15 && SIB[i] != -1){
+			if (SIB[i] != -1 && cqi[i] >= MIN_CQI_VAL && cqi[i] <= MAX_CQI_VAL){
 				tempValPerCqi[value_ind][cqi[i]] = tempValPerCqi[value_ind][cqi[i]] + currentVal; //accumulated cqi
 				tempValPerCqi[counter_ind][cqi[i]] = tempValPerCqi[counter_ind][cqi[i]] + counter;
 				counter=0;
@@ -50,7 +50,7 @@ public class DLCalc extends Calculate {
 			
 			currentMaxVal = Math.max((double) (val[i]), currentMaxVal);
 
-			if (cqi[i] != NOT_A_VALUE){
+			if (cqi[i] != NOT_A_VALUE && cqi[i] >= MIN_CQI_VAL && cqi[i] <= MAX_CQI_VAL){
 				maxValPerCqi[cqi[i]] = Math.max(maxValPerCqi[cqi[i]], currentMaxVal);
 				currentMaxVal = 0;
 			}
@@ -62,13 +62,13 @@ public class DLCalc extends Calculate {
 	public double[] maxValPerCqi(double[] val){
 		
 		double currentMaxVal = 0;
-		double[]	maxValPerCqi = new double[NR_OF_CQI_VALS];
+		double[] maxValPerCqi = new double[NR_OF_CQI_VALS];
 		
 		for(int i=0;i<cqi.length;i++){
 			
 			currentMaxVal = Math.max((double) (val[i]), currentMaxVal);
 
-			if (cqi[i] != NOT_A_VALUE){
+			if (cqi[i] != NOT_A_VALUE && >= MIN_CQI_VAL && cqi[i] <= MAX_CQI_VAL){
 				maxValPerCqi[cqi[i]] = Math.max(maxValPerCqi[cqi[i]], currentMaxVal);
 				currentMaxVal = 0;
 			}
@@ -98,12 +98,9 @@ public class DLCalc extends Calculate {
 				counter++;
 			}
 
-			if (currentMcs != mcs[i] && mcs[i] >= 0 && mcs[i] <= MAX_DL_MCS_VAL && SIB[i] != -1 ){
-				//System.out.println(mcs[i]);
-				//System.out.println( " mcs: " + mcs[i] + " current cqi: " + currentCqi + " counter: " + counter);
+			if (currentMcs != mcs[i] && mcs[i] >= MIN_DL_MCS_VAL && mcs[i] <= MAX_DL_MCS_VAL){
 				tempCqiPerMcs[mcs[i]][counter_ind] = tempCqiPerMcs[mcs[i]][counter_ind]+counter; //accumulated Counter
-				tempCqiPerMcs[mcs[i]][currentCqi_ind] = tempCqiPerMcs[mcs[i]][currentCqi_ind]+currentCqi; //accumulated Prb
-				//System.out.println(currentMcs + " " +tempCqiPerMcs[mcs[i]-1][counter_ind] + " " +  tempCqiPerMcs[mcs[i]][currentCqi_ind]);
+				tempCqiPerMcs[mcs[i]][currentCqi_ind] = tempCqiPerMcs[mcs[i]][currentCqi_ind]+currentCqi; //accumulated Prb//System.out.println(currentMcs + " " +tempCqiPerMcs[mcs[i]-1][counter_ind] + " " +  tempCqiPerMcs[mcs[i]][currentCqi_ind]);
 				//reset values
 				currentCqi = 0;
 				counter = 0;

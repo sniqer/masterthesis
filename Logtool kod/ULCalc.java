@@ -31,7 +31,7 @@ public class ULCalc extends Calculate{
 					counter++;
 				}
 			
-			if (SINR[i] != NOT_A_VALUE && SIB[i] != -1 && SINR[i] >= -25 && SINR[i] <= 40){
+			if (SINR[i] != NOT_A_VALUE && SIB[i] != -1 && SINR[i] >= MIN_SINR_VAL && SINR[i] <= MAX_SINR_VAL){
 				//System.out.println( " currentSinr: " + currentsinr+ " currentVal " + val[i]);
 				tempValPerSINR[value_ind][SINR[i]-MIN_SINR_VAL] = tempValPerSINR[value_ind][SINR[i]-MIN_SINR_VAL] + currentVal;
 				tempValPerSINR[counter_ind][SINR[i]-MIN_SINR_VAL] = tempValPerSINR[counter_ind][SINR[i]-MIN_SINR_VAL] + counter;
@@ -63,7 +63,7 @@ public class ULCalc extends Calculate{
 			
 			currentMaxVal = Math.max((double) (val[i]), currentMaxVal);
 
-			if (SINR[i] != NOT_A_VALUE && SINR[i] >=-25 && SINR[i] <=40){
+			if (SINR[i] != NOT_A_VALUE && SINR[i] >= MIN_SINR_VAL && SINR[i] <= MAX_SINR_VAL){
 				maxValPerSINR[SINR[i]-MIN_SINR_VAL] = Math.max(maxValPerSINR[SINR[i]-MIN_SINR_VAL], currentMaxVal); //accumulated tbs
 				currentMaxVal = 0;
 			}
@@ -102,7 +102,7 @@ public class ULCalc extends Calculate{
 				counter++;
 			}
 
-			if (currentMcs != mcs[i] && mcs[i] >= 0 && mcs[i] <= MAX_UL_MCS_VAL && SIB[i] != -1 ){
+			if (mcs[i] >= MIN_UL_MCS_VAL && mcs[i] <= MAX_UL_MCS_VAL && SIB[i] != -1 ){
 				//System.out.println(mcs[i]);
 				//System.out.println( " mcs: " + mcs[i] + " current sinr: " + currentSinr + " counter: " + counter);
 				tempSinrPerMcs[mcs[i]][counter_ind] = tempSinrPerMcs[mcs[i]][counter_ind]+counter; //accumulated Counter

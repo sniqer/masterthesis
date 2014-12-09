@@ -328,9 +328,6 @@ public class LTEAnalyzer {
 		pmiPerCqi = dlCalc.avgValPerCqi(basicCalc.intArr2DoubleArr(pmi),20);
 		dlAvgCqiPerMcs1 = dlCalc.avgValPerMcs(basicCalc.intArr2DoubleArr(cqi),dlMcs1);
 		ulAvgSinrPerMcs = ulCalc.avgValPerMcs(basicCalc.intArr2DoubleArr(SINR),ulMcs);
-//		Print.array(dLrealThroughputPerMs);
-//		System.out.println("ny printing");
-//		Print.array(dLrealThroughput1PerMs);
 	}
 	
 	/**
@@ -402,8 +399,12 @@ public class LTEAnalyzer {
 	
 	public int[] interpretLTEdata(int index){
 		String[] lteData = lteDataMatrix[index];
-		
 		int[] out = new int[lteData.length];
+		//dl and ul harq index
+		//Paul added this 9/12
+		if(header[index].contains("harq")){
+			out = interpretHARQ(index);
+		} else {
 		for(int i=0;i<lteData.length;i++){
 			
 			if (lteData[i].contains("64QAM")){
@@ -432,6 +433,27 @@ public class LTEAnalyzer {
 					}
 				}
 			}
+		}
+		}
+		return out;
+	}
+	//Paul added this 9/12/12
+	public int[] interpretHARQ(int index){
+		String[] lteData = lteDataMatrix[index];
+		
+		int[] out = new int[lteData.length];
+		for(int i=0;i<lteData.length;i++){
+			if (lteData[i].contains("ACK")) out[i] = 1;
+			if (lteData[i].contains("NACK")) out[i] = 0;
+			if (lteData[i].contains("A  ")) out[i] = 1;
+			if (lteData[i].contains("  A")) out[i] = 1;
+			if (lteData[i].contains("N  ")) out[i] = 0;
+			if (lteData[i].contains("  N")) out[i] = 0;
+			if (lteData[i].contains("N A")) out[i] = 1;
+			if (lteData[i].contains("A N")) out[i] = 1;
+			if (lteData[i].contains("A A")) out[i] = 2;
+			if (lteData[i].contains("N N")) out[i] = 0;
+			else out[i] = -1337;
 		}
 		return out;
 	}
