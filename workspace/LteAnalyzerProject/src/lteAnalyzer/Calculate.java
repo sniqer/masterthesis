@@ -2,60 +2,29 @@ package lteAnalyzer;
 
 public class Calculate extends Main{
 	
-	//dl
 	static final int NOT_A_VALUE = -1337; //empty spaces in a vector is represented by this value
+	static final int MIN_NR_OF_FOUND_XAXIS_VALS = 0;
+	//dl
+
+	static final int MIN_CQI_VAL = 0;
+	static final int MAX_CQI_VAL = 15;
 	static final int NR_OF_CQI_VALS = 16; //0 to 15
-	static final int NR_OF_MCS_VALS = 29;
-	static final int MAX_MCS_VAL = 28;
-	static final int MIN_NR_OF_FOUND_XAXIS_VALS = 50;
+	
+	static final int MIN_DL_MCS_VAL = 0;
+	static final int MAX_DL_MCS_VAL = 28;
+	static final int NR_OF_DL_MCS_VALS = 29; // 0 to 22
+	
+
 	
 	//ul
-	static final int NR_OF_SINR_VALS = 66; //-25 to 40
-	static final int NR_OF_UL_MCS_VALS = 23; // 0 to 22
-	static final int MAX_UL_MCS_VAL = 22;
+	static final int MAX_UL_MCS_VAL = 24;
+	static final int MIN_UL_MCS_VAL = 0;
+	static final int NR_OF_UL_MCS_VALS = 25; // 0 to 24
+	
 	static final int MIN_SINR_VAL = -25;
-	
+	static final int MAX_SINR_VAL = 45;
+	static final int NR_OF_SINR_VALS = 71; //-25 to 45
 	private int[] SIB;
-	
-	public static double[][] avgTbsPerSecond(int[] tbs, double[] timeStamps, int[] SIB, int granularity){
-
-		int logFileCounter = 0;
-		int averageCounter = 0;
-		
-		int averageValue = 0;
-		int sum = 0;
-		int timeStampIndex = 0;
-		int currentTbsValue;
-		double currentTimeStamp = 0;
-		
-		double[][] outputArray = new double[2][tbs.length/granularity + 1];
-
-		while(logFileCounter < tbs.length)
-		{
-			currentTbsValue = tbs[logFileCounter]; 
-			if(currentTbsValue != NOT_A_VALUE && SIB[logFileCounter] != -1){
-				sum += currentTbsValue;
-				++averageCounter;
-				
-				//check if we have found all values we intend to use for calculating the averageSum
-				if(averageCounter == granularity){
-					averageValue = sum / granularity;
-					currentTimeStamp = timeStamps[logFileCounter];
-					
-					//put values in output array
-					outputArray[1][timeStampIndex] = averageValue;
-					outputArray[0][timeStampIndex] = BasicCalc.findCloseValFrInd(timeStamps, logFileCounter);
-					++timeStampIndex;
-					
-					//reset all counters the relates to the granularity loop
-					averageCounter = 0;
-					sum = 0;
-				}
-			}
-			++logFileCounter;
-		}
-		return outputArray;
-	}
 	
 	
 public double[] avgYValPerXVal(double[] Xvals,double[] Yvals,int minNrFoundXaxisVals, int smallestXValue){
@@ -76,13 +45,13 @@ public double[] avgYValPerXVal(double[] Xvals,double[] Yvals,int minNrFoundXaxis
 		
 		for(int i=0;i < Yvals.length;i++){
 				//we've found legit tbs data, accumulate counter, tbs, bW and see if we have peak data rate.
-				if(SIB[i] != -1 && Yvals[i] != NOT_A_VALUE ){
+				if(SIB[i] != -1 && Yvals[i] != NOT_A_VALUE*1000 ){
 					currentVal=currentVal+Yvals[i]; 
 					counter++;
 				}
-			if (SIB[i] != -1 && Xvals[i] != NOT_A_VALUE){
+			if (SIB[i] != -1 && Xvals[i] != NOT_A_VALUE*1000){
 				x = (int) Xvals[i];
-				//System.out.println(x-smallestXValue);
+				System.out.println(x-smallestXValue);
 				tempXvalPerYval[value_ind][x-smallestXValue] = tempXvalPerYval[value_ind][x-smallestXValue] + currentVal; //accumulated Xvals
 				tempXvalPerYval[counter_ind][x-smallestXValue] = tempXvalPerYval[counter_ind][x-smallestXValue] + counter;
 				counter=0;
@@ -153,6 +122,7 @@ public double[] minYValPerXVal(double[] Xvals,double[] Yvals){
 	//Print.array(yvalPerXval);
 	return yvalPerXval;
 }
+
 
 	
 

@@ -1,0 +1,94 @@
+package lteAnalyzer;
+
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
+
+public class OptimumAnalyzer extends Calculate {
+
+public static double[][] graph2DoubleMatrix(XYSeriesCollection graph){
+	double[][] outArray = new double[graph.getSeries().size()][];
+	for(int i = 0; i < graph.getSeries().size(); i++){
+		XYSeries serie = graph.getSeries(i); 
+		outArray[i] = new double[serie.getItemCount()];
+		for(int k = 0; k < serie.getItemCount(); k++){
+			outArray[i][k] = (double) serie.getY(k);
+
+		}
+		
+	}
+	//Print.array2D(outArray);
+	return outArray;
+}
+	
+public static void printOptimumSerieInGraph(XYSeriesCollection graph){
+	double[][] graphData = graph2DoubleMatrix(graph);
+	double[] outputSum = new double[graphData.length];
+	System.out.println(graph.getSeriesKey(1));
+	for(int i = 0; i<graphData[0].length;i++){
+		for(int j = 0;j<graphData.length;j++){
+			if(graphData[j][i] != NOT_A_VALUE)
+				outputSum[j] += graphData[j][i];
+		}
+	}
+	double[] maxVal = maxValWithIndex(outputSum);
+	System.out.println("the biggest throughput or whatever is: " +maxVal[0]+ " and the series is: " +graph.getSeriesKey((int) maxVal[1]));
+}
+
+public static void printOptimumAtEachPoint(XYSeriesCollection graph){
+	double[][] optimumAtEachPoint = calcOptimumForEachPoint(graph);
+	String optimumName = (String) graph.getSeriesKey((int) optimumAtEachPoint[0][1]);
+	double optimumNumber  = optimumAtEachPoint[0][1];
+	System.out.println("in the beginning the optimal graph is: "+optimumName);
+	for(int i = 0; i < optimumAtEachPoint.length;i++){
+		if(optimumNumber != optimumAtEachPoint[i][1]){
+			optimumNumber = optimumAtEachPoint[i][1];
+			System.out.println("optimal graph from (Xname): "+i+ " is " +graph.getSeriesKey((int) optimumNumber));
+		}
+	}
+}	
+
+private static double[][] calcOptimumForEachPoint(XYSeriesCollection graph){
+	double[][] graphData = graph2DoubleMatrix(graph);
+	double[][] outputSum = new double[graphData[0].length][2];
+	graphData=transpose(graphData);
+	for(int i=0;i<graphData.length;i++){
+		outputSum[i] = maxValWithIndex(graphData[i]);
+	}
+	return outputSum;
+}
+
+
+
+
+private static double[][] transpose(double[][] stringArr){
+	
+	double[][] output = new double[stringArr[0].length][stringArr.length];
+	for(int i=0;i<stringArr.length;i++){
+		for(int j=0;j<stringArr[0].length;j++){
+			output[j][i] = stringArr[i][j];
+		}
+	}
+	return output;
+	
+}
+
+private static double[] maxValWithIndex(double[] graphColumn){
+	double[] maxWithIndex = {graphColumn[0], 0};
+	
+	for(int i=0;i<graphColumn.length;i++){
+		if(graphColumn[i] > maxWithIndex[0]){
+			maxWithIndex[0] = graphColumn[i];
+			maxWithIndex[1] = i;
+		}
+	}
+	return maxWithIndex;
+}
+
+private static double max(double[] vals){
+	double maxVal = vals[0];
+	for(int i = 0;i<vals.length;i++){
+		maxVal = Double.max(maxVal,vals[i]);
+	}
+	return maxVal;
+	}
+}

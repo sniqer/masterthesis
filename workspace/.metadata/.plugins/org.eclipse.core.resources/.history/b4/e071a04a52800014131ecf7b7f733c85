@@ -1,0 +1,18 @@
+package lteAnalyzer;
+
+public class OptimumAnalyzer extends Calculate {
+
+public static double[] sumValsInGraph(double[][] graphData){
+	double[] outputSum = new double[graphData.length];
+	
+	for(int i = 0; i<graphData[0].length;i++){
+		for(int j = 0;j<graphData.length;j++){
+			if(graphData[j][i] != NOT_A_VALUE)
+				outputSum[j] += graphData[j][i];
+		}
+	}
+	return outputSum;
+}
+
+
+}

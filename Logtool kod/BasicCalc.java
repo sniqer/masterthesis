@@ -118,8 +118,7 @@ public class BasicCalc extends Calculate{
 		String[][] output = new String[stringArr[0].length][stringArr.length];
 		for(int i=0;i<stringArr.length;i++){
 			for(int j=0;j<stringArr[0].length;j++){
-				String tjoho = stringArr[i][j];
-				output[j][i] = tjoho;
+				output[j][i] = stringArr[i][j];
 			}
 		}
 		return output;

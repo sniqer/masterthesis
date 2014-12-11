@@ -6,30 +6,38 @@ public class ULCalc extends Calculate{
 	private int[] SIB;
 	
 	
-	public float[] avgValPerSINR(int[] val,int minNrFoundXaxisVals){
+	public double[] avgValPerSINR(double[] val,int minNrFoundXaxisVals){
 		
 		int value_ind = 0;
 		int counter_ind = 1;
 		
+		//int currentsinr = -1000; //dummydefault value
 		int counter = 0;
-		int currentVal = 0;
+		double currentVal = 0;
 		
-		float[][] tempValPerSINR = new float[2][NR_OF_SINR_VALS];
+		double[][] tempValPerSINR = new double[2][NR_OF_SINR_VALS];
 		//tempValPerSINR = BasicCalc.init(tempValPerSINR);
 		
-		float[] valPerSINR = new float[NR_OF_SINR_VALS];
+		double[] valPerSINR = new double[NR_OF_SINR_VALS];
+		BasicCalc.init(valPerSINR);
 		//valPerSINR = BasicCalc.init(valPerSINR);
 		
 		for(int i=0;i<SINR.length;i++){
+			
+
 				//we've found legit tbs data, accumulate counter, tbs, bW and see if we have peak data rate.
-				if(SIB[i] != -1 && val[i] != NOT_A_VALUE ){
+				if(SIB[i] != -1 && val[i] != -1337 ){
 					currentVal=currentVal+val[i]; 
 					counter++;
 				}
-			if (SINR[i] != NOT_A_VALUE && SIB[i] != -1){
+			
+			if (SINR[i] != NOT_A_VALUE && SIB[i] != -1 && SINR[i] >= MIN_SINR_VAL && SINR[i] <= MAX_SINR_VAL){
+				//System.out.println( " currentSinr: " + currentsinr+ " currentVal " + val[i]);
 				tempValPerSINR[value_ind][SINR[i]-MIN_SINR_VAL] = tempValPerSINR[value_ind][SINR[i]-MIN_SINR_VAL] + currentVal;
 				tempValPerSINR[counter_ind][SINR[i]-MIN_SINR_VAL] = tempValPerSINR[counter_ind][SINR[i]-MIN_SINR_VAL] + counter;
 				
+				//reset values
+				//currentsinr = sinr[i];
 				counter=0;
 				currentVal=0;
 				
@@ -39,44 +47,34 @@ public class ULCalc extends Calculate{
 			if (tempValPerSINR[counter_ind][j] > minNrFoundXaxisVals)
 				valPerSINR[j] = tempValPerSINR[value_ind][j]/tempValPerSINR[counter_ind][j];
 		}
-			Print.array2D(tempValPerSINR);
 			return valPerSINR;
 	}
 	
 
-	public float[] maxValPerSINR(int[] val){
-		//indexes
+	public double[] maxValPerSINR(double[] val){
 		
-		//values from the inputarrays
-		float currentMaxVal = 0;
-		
-		float[]	maxValPerSINR = new float[NR_OF_SINR_VALS];
+		double currentMaxVal = 0;
+		double[]	maxValPerSINR = new double[NR_OF_SINR_VALS];
+		BasicCalc.init(maxValPerSINR);
 		//maxValPerSINR = BasicCalc.init(maxValPerSINR);
 		
 		
 		for(int i=0;i<SINR.length;i++){
 			
-			//we've found legit tbs data, accumulate counter, tbs, bW and see if we have peak data rate.
-			currentMaxVal = Math.max((float) (val[i]), currentMaxVal);
-			
+			currentMaxVal = Math.max((double) (val[i]), currentMaxVal);
 
-			if (SINR[i] != NOT_A_VALUE && SIB[i] != -1){
-				//System.out.println( " currentMaxTBS: " + currentMaxTbs);
+			if (SINR[i] != NOT_A_VALUE && SINR[i] >= MIN_SINR_VAL && SINR[i] <= MAX_SINR_VAL){
 				maxValPerSINR[SINR[i]-MIN_SINR_VAL] = Math.max(maxValPerSINR[SINR[i]-MIN_SINR_VAL], currentMaxVal); //accumulated tbs
-
-				//reset values
 				currentMaxVal = 0;
 			}
 		}
-		Print.array(maxValPerSINR);
 		return maxValPerSINR;
 	}
 	
 	
 
 	
-	
-	public float[] avgSINRPerMcs(int[] mcs,int[] sinr, int[] SIB){
+	public double[] avgValPerMcs(double[] val,int[] mcs){
 		
 		//indexes
 		int counter_ind = 0;
@@ -85,29 +83,26 @@ public class ULCalc extends Calculate{
 		
 		//values from the inputarrays
 		int counter = 0;
-		int currentSinr = 0;
+		double currentSinr = 0;
 		int currentMcs = 0;
 		
-		int[][] tempSinrPerMcs = null;
-		float[]	sinrPerMcs = null;
 		
-		tempSinrPerMcs = new int [24][2];
-		sinrPerMcs = new float[24];
-
-
+		double[][] tempSinrPerMcs = new double [NR_OF_UL_MCS_VALS][2];
+		double[] sinrPerMcs = new double[NR_OF_UL_MCS_VALS];
+		BasicCalc.init(sinrPerMcs);
 		
 		//tempSinrPerMcs = BasicCalc.init(tempSinrPerMcs);
 		//sinrPerMcs = BasicCalc.init(sinrPerMcs);
 		
 		
-		for(int i=0;i<sinr.length;i++){
+		for(int i=0;i<SINR.length;i++){
 			//we've found legit Prb data, accumulate counter, Prb, bW and see if we have peak data rate.
-			if(SIB[i] != -1 && sinr[i] != -1337){
-				currentSinr=currentSinr+sinr[i]; 
+			if(SIB[i] != -1 && mcs[i] != NOT_A_VALUE){
+				currentSinr=currentSinr+val[i]; 
 				counter++;
 			}
 
-			if (currentMcs != mcs[i] && mcs[i] >= 0 && mcs[i] <= MAX_MCS_VAL && SIB[i] != -1 ){
+			if (mcs[i] >= MIN_UL_MCS_VAL && mcs[i] <= MAX_UL_MCS_VAL && SIB[i] != -1 ){
 				//System.out.println(mcs[i]);
 				//System.out.println( " mcs: " + mcs[i] + " current sinr: " + currentSinr + " counter: " + counter);
 				tempSinrPerMcs[mcs[i]][counter_ind] = tempSinrPerMcs[mcs[i]][counter_ind]+counter; //accumulated Counter
@@ -125,18 +120,17 @@ public class ULCalc extends Calculate{
 				sinrPerMcs[j] = ((float) tempSinrPerMcs[j][currentSinr_ind]/tempSinrPerMcs[j][counter_ind]);//divide by thousand, we get Mbits/s/SINR
 			}
 		}
-		Print.array(sinrPerMcs);
+//		Print.array(sinrPerMcs);
 		return sinrPerMcs;
 	}
 	
 	/*-------------------------------------------SETTERS!!!-------------------------------------------*/
 
-	public  void setCqi(int[] SINR){
+	public  void setSINR(int[] SINR){
 		this.SINR = SINR;
 	}
 	
 	public void setSIB(int[] SIB){
 		this.SIB = SIB;
 	}
-
 }
