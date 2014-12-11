@@ -18,7 +18,7 @@ public class ProgressbarWindow extends JFrame{
 		super("MemoryInformationWindow");
 		JPanel pane = new JPanel();
 		
-	    pb2 = new ProgressBar(pane, SWT.SMOOTH);
+//	    pb2 = new ProgressBar(pane, SWT.SMOOTH);
 	    pb2.setBounds(100, 40, 200, 20);
 	    	    
 	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

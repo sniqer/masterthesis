@@ -408,11 +408,11 @@ public class LTEAnalyzer {
 		for(int i=0;i<lteData.length;i++){
 			
 			if (lteData[i].contains("64QAM")){
-				out[i] = 64;
+				out[i] = 6;
 			} else if (lteData[i].contains("16QAM")){
-				out[i] = 16;
-			} else if (lteData[i].contains("QPSK")){
 				out[i] = 4;
+			} else if (lteData[i].contains("QPSK")){
+				out[i] = 2;
 			} else if (lteData[i].contains("SIB") ){
 				out[i] = -1; 
 			

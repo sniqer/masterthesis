@@ -68,7 +68,7 @@ public class DLCalc extends Calculate {
 			
 			currentMaxVal = Math.max((double) (val[i]), currentMaxVal);
 
-			if (cqi[i] != NOT_A_VALUE && >= MIN_CQI_VAL && cqi[i] <= MAX_CQI_VAL){
+			if (cqi[i] != NOT_A_VALUE && cqi[i] >= MIN_CQI_VAL && cqi[i] <= MAX_CQI_VAL){
 				maxValPerCqi[cqi[i]] = Math.max(maxValPerCqi[cqi[i]], currentMaxVal);
 				currentMaxVal = 0;
 			}
