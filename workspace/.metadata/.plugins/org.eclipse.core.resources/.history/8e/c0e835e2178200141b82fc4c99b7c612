@@ -1,0 +1,11 @@
+package lteAnalyzer;
+
+public class CorruptedParameter extends Calculate{
+
+	public static void timeStamp(double[] timeStamps){
+		int wrong = 0;
+		for(int i = 0;i<timestamps.length;i++){
+			if(timestamps[])
+		}
+	}
+}

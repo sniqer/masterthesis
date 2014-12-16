@@ -1,0 +1,47 @@
+package lteAnalyzer;
+
+public class CorruptedParameter extends Calculate{
+
+	public static boolean timeStamp(double[] timeStamps){
+		int wrong = 0;
+		double timeDiff = 0;
+		for(int i = 1;i<timeStamps.length;i++){
+			if(timeStamps[i] != NOT_A_VALUE){
+				timeDiff = timeStamps[i] - timeStamps[BasicCalc.findClosestPrevTimestamp(timeStamps,i)]; 
+				if(timeDiff > 0.0011 || timeDiff < 0.0009)
+					wrong++;
+			}
+		}
+		
+		
+		if(wrong > 1){
+			felmeddelande(wrong,"puschSINR");
+			return true;
+		}
+		return false;
+	}
+	
+	public static boolean SINR(int[] sinr){
+		int wrong = 0;
+		int toHigh = 15;
+		
+		for(int i = 1;i<sinr.length;i++){
+			if(sinr[i] != NOT_A_VALUE){
+				if(Math.abs(sinr[i] - BasicCalc.findCloseValFrInd(sinr, i)) >= toHigh)
+					wrong++;
+			}
+		}
+		
+		if(wrong > 1){
+			felmeddelande(wrong,"puschSINR");
+			return true;
+		}
+		return false;
+	}
+	
+	private static void felmeddelande(int wrong, String header_vector){
+		if(wrong>100000) System.out.println("there seems to be a lot of errors in "+header_vector+", check your csv file");
+		if(wrong>1000) System.out.println("there seems to be some errors in "+header_vector+", check your csv file");
+		if(wrong>10) System.out.println("there seems to be a few errors in "+header_vector+", check your csv file");
+	}
+}

@@ -1,0 +1,462 @@
+package lteAnalyzer;
+
+public class BasicCalc extends Calculate{
+	
+
+	private static String[] header;
+	private static int[] SIB;
+	
+
+	public static int[] addArrays(int[] arr1, int[] arr2){
+		int[] outArr = new int[Math.min(arr1.length, arr2.length)];
+		for(int i = 0; i < outArr.length; i++){
+			if(arr1[i] == NOT_A_VALUE && arr2[i] == NOT_A_VALUE) outArr[i] = 0;
+			else if (arr1[i] == NOT_A_VALUE) outArr[i] = arr2[i];
+			else if (arr2[i] == NOT_A_VALUE) outArr[i] = arr1[i];
+			else outArr[i] = arr1[i] + arr2[i];
+		}
+		return outArr;
+	}
+	
+	public static double[] addArrays(double[] arr1, double[] arr2){
+		double[] outArr = new double[Math.min(arr1.length, arr2.length)];
+		for(int i = 0; i < outArr.length; i++){
+			if(arr1[i] == NOT_A_VALUE && arr2[i] == NOT_A_VALUE) outArr[i] = NOT_A_VALUE;
+			else if (arr1[i] == NOT_A_VALUE) outArr[i] = arr2[i];
+			else if (arr2[i] == NOT_A_VALUE) outArr[i] = arr1[i];
+			else outArr[i] = arr1[i] + arr2[i];
+		}
+		return outArr;
+	}
+	public static float[] addArrays(float[] arr1, float[] arr2){
+		float[] outArr = new float[Math.min(arr1.length, arr2.length)];
+		for(int i = 0; i < outArr.length; i++){
+			if(arr1[i] == NOT_A_VALUE && arr2[i] == NOT_A_VALUE) outArr[i] = 0;
+			else if (arr1[i] == NOT_A_VALUE) outArr[i] = arr2[i];
+			else if (arr2[i] == NOT_A_VALUE) outArr[i] = arr1[i];
+			else outArr[i] = arr1[i] + arr2[i];
+		}
+		return outArr;
+	}
+	public static int findCloseValFrInd(int[] list,int list_index){
+		int listVal = NOT_A_VALUE;
+		int inc = list_index;
+		int dec = list_index;
+		int loopInd = 0;
+		while(loopInd < list.length){
+				if(list[dec] != NOT_A_VALUE){
+					listVal = list[dec];
+					break;
+				} else if (list[inc] != NOT_A_VALUE){
+					listVal = list[inc];
+					break;
+				}
+				if(dec > 0){
+					dec--;
+				}
+				if(inc<list.length){
+					inc++;
+				}
+				loopInd++;
+		}
+		return listVal;
+	}
+	
+//	public static double findCloseValFrInd2(double[] list,int list_index){
+//		double listVal = NOT_A_VALUE;
+//		int inc = list_index;
+//		int dec = list_index;
+//		int loopInd = 0;
+//		while(loopInd < list.length){
+//				if(list[dec] != NOT_A_VALUE){
+//					listVal = list[dec];
+//					break;
+//				} else if (list[inc] != NOT_A_VALUE){
+//					listVal = list[inc];
+//					break;
+//				}
+//				if(dec > 0){
+//					dec--;
+//				}
+//				if(inc<list.length){
+//					inc++;
+//				}
+//				loopInd++;
+//		}
+//		return listVal;
+//	}
+//	
+	public static double findCloseValFrInd(double[] list,int list_index){
+		double listVal = NOT_A_VALUE;
+		int inc = list_index;
+		int dec = list_index;
+		int loopInd = 0;
+		while(loopInd < list.length){
+				if(list[dec] != NOT_A_VALUE){
+					listVal = list[dec];
+					break;
+				} else if (list[inc] != NOT_A_VALUE){
+					listVal = list[inc];
+					break;
+				}
+				if(dec > 0){
+					dec--;
+				}
+				if(inc<list.length-1){
+					inc++;
+				}
+				loopInd++;
+		}
+		return listVal;
+	}
+	
+
+	// 1 prb is 180 khz
+	public static double[] prb2hz(int[] prb){
+		double[] hz = new double[prb.length];
+		for(int i=0;i<prb.length;i++)
+			hz[i] = prb[i]*180000;
+		
+		return hz;
+	}
+	
+
+	
+	public static double[] multiplyArray(double[] in, double multiplier){
+		double[] out = new double[in.length];
+		for(int i=0;i<in.length;i++)
+			if(in[i] != NOT_A_VALUE)
+				out[i] = in[i]*multiplier;
+		return out;
+	}
+	
+	public static float[] multiplyArray(float[] in, float multiplier){
+		float[] out = new float[in.length];
+		for(int i=0;i<in.length;i++)
+			out[i] = in[i]*multiplier;
+		return out;
+	}
+	
+	public static String[][] transpose(String[][] stringArr){
+		
+		String[][] output = new String[stringArr[0].length][stringArr.length];
+		for(int i=0;i<stringArr.length;i++){
+			for(int j=0;j<stringArr[0].length;j++){
+				output[j][i] = stringArr[i][j];
+			}
+		}
+		return output;
+	}
+	
+
+	
+	public static int findHeaderIndex(String headerName,int doublett){
+		int doublettcounter = 0;
+		for(int i=0;i<header.length;i++){
+			if(header[i].contains(headerName)){
+				if (doublett==doublettcounter){
+					return i;
+				} else {
+					doublettcounter++;
+				}
+			}
+		}
+		System.out.println("hitta inget index till " + headerName);
+		return -1;
+	}
+	//2014-10-22 12:15:00.329414
+	public static double[] timeConverter(String[] stringTime){
+		double[] doubleTime = new double[stringTime.length];
+		for (int i=0;i<stringTime.length;i++){
+			if(!stringTime[i].contains("x")){
+				stringTime[i] = stringTime[i].replace(":", "");
+				doubleTime[i] = Double.parseDouble(stringTime[i].trim());
+			} else {
+				doubleTime[i] = (double) NOT_A_VALUE;
+			}
+		}
+		return doubleTime;
+	}
+	
+	public static String[] discardDate(String[] stringTime){
+	
+		for (int i=0;i<stringTime.length;i++){
+			if(!stringTime[i].contains("x")){
+				stringTime[i] = stringTime[i].split(" ")[3];
+				stringTime[i] = stringTime[i].replace(":", "");
+				stringTime[i] = stringTime[i].trim();
+			//} else {
+				
+			}
+		}
+	
+		return stringTime;
+	}
+	
+	public static double[] bitwiseArrayDiv(double[] array1, double[] array2){
+		double[] output = new double[array1.length];
+		for(int i=0;i<output.length;i++)
+			output[i] = array1[i]/array2[i];
+		return output;
+	}
+	public static int numberOfVals(int[] array){
+		int nrOfVals = 0;
+		
+		for(int i=0;i<array.length;i++){
+			if(array[i] != NOT_A_VALUE)
+				nrOfVals++;
+		}
+		return nrOfVals;
+	}
+
+	public static void init(int[] values){
+		for(int i = 0; i < values.length; i++)
+			values[i] = NOT_A_VALUE;
+	}
+	
+	public static void init(double[] values){
+		for(int i = 0; i < values.length; i++)
+			values[i] = NOT_A_VALUE;
+	}
+	
+	public static void init(double[][] values){
+		for(int i = 0; i < values[0].length; i++){
+			for(int j = 0; j < values.length; j++)
+				values[j][i] = NOT_A_VALUE;	
+		}
+	}
+
+	
+	//makes tbs to throughput by looking at time stamp, length of throughput[] shall be the same as the others
+	public static double[] tbs2throughputOld(int[] tbs, String[] ndf,double[] timestamps,int averageOver){
+		int[] acknowledged_packets = tbs;
+		for(int i = 0;i<tbs.length;i++){
+			
+			if(ndf[i].contains("N") || tbs[i] == NOT_A_VALUE || timestamps[i] == NOT_A_VALUE) 
+				acknowledged_packets[i] = 0;
+		}
+			
+		double[] throughput = new double[tbs.length];
+		BasicCalc.init(throughput);
+		int j=0;
+		double timeDiff=0;
+		double timefirst=0;
+		double timelast=0;
+		int acc_acknowledge_p = 0;
+		for(int i = 1; i<acknowledged_packets.length;i=i+averageOver){
+			if(timestamps[i] != NOT_A_VALUE){
+				j=0;
+				timelast=timestamps[i];
+				while(j <= averageOver && (i-j) >= 0){
+					//System.out.println(i + " " + j);
+					acc_acknowledge_p += acknowledged_packets[i-j];
+					j++;
+				}
+				timefirst = findCloseValFrInd(timestamps,i-j+1);
+				timeDiff=timelast-timefirst;
+				if(timeDiff != 0)
+					throughput[i]=acc_acknowledge_p/timeDiff;
+				else
+					System.out.println("timediff är 0"); 
+				//System.out.println(throughput);
+				acc_acknowledge_p = 0;
+			}
+		}
+		return throughput;
+	}
+	
+	//makes tbs to throughput by looking at time stamp, length of throughput[] shall be the same as the others
+	public static double[] tbs2throughput(int[] tbs, String[] ndf,double[] timestamps,int averageOver){
+		int[] acknowledged_packets = tbs;
+		int rows = acknowledged_packets.length;
+		for(int i = 0;i<rows;i++){
+			
+			if(ndf[i].contains("N") || tbs[i] == NOT_A_VALUE || timestamps[i] == NOT_A_VALUE) 
+				acknowledged_packets[i] = 0;
+		}
+			
+		double[] throughput = new double[tbs.length];
+		BasicCalc.init(throughput);
+		double timeDiff=0;
+		double timeFirst=0;
+		double timeLast=0;
+		int acc_acknowledge_p = 0;
+		for(int i =0; i<rows - averageOver;i=i+averageOver){
+			timeFirst = findCloseValFrInd(timestamps,i);
+			timeLast = findCloseValFrInd(timestamps,i+averageOver);
+			
+			for(int j=0;j<averageOver;j++){
+				acc_acknowledge_p += acknowledged_packets[i+j];
+			}
+			
+			timeDiff = timeLast-timeFirst;
+			if(timeDiff != NOT_A_VALUE)
+				throughput[i+averageOver] = acc_acknowledge_p/timeDiff;
+			acc_acknowledge_p=0;
+		}
+		return throughput;
+	}
+
+
+//	private static int add(int sum, int number) {
+//		if(number == NOT_A_VALUE) return sum;
+//		else return sum+number;
+//	}
+
+	public static int findClosestPrevTimestamp(double[] timestamp, int index){
+//		int loopVar = 1;
+		double originalVal = timestamp[index];
+		index--;
+		while(index > 0){
+			if (timestamp[index] != NOT_A_VALUE)// && (originalVal - timestamp[index]) > 0.00091 && (originalVal - timestamp[index]) < 0.00109)
+				return index;
+			index--;
+		}
+		return NOT_A_VALUE;
+	}
+	
+	public static double getBiggest(double[] array){
+		double max = Double.MIN_VALUE;
+		for(int i=0;i<array.length;i++)
+			if(array[i] > max)
+				max=array[i];
+		
+		return max;
+	}
+	
+	public static int getBiggest(int[] array){
+		int max = Integer.MIN_VALUE;
+		for(int i=0;i<array.length;i++)
+			if(array[i] > max)
+				max=array[i];
+		
+		return max;
+	}
+	
+	public static double getSmallest(double[] array){
+		double smallest = Double.MAX_VALUE;
+		for(int i=0;i<array.length;i++)
+			if(array[i] < smallest && array[i] != NOT_A_VALUE)
+				smallest=array[i];
+		
+		return smallest;
+	}
+	
+	public static int getSmallest(int[] array){
+		int smallest = Integer.MAX_VALUE;
+		for(int i=0;i<array.length;i++)
+			if(array[i] < smallest && array[i] != NOT_A_VALUE)
+				smallest=array[i];
+		
+		return smallest;
+	}
+	
+	
+	public static double[] intArr2DoubleArr(int[] arr){
+		double[] doubleArr = new double[arr.length];
+		for(int i=0;i<arr.length;i++)
+			doubleArr[i] = (double) arr[i];
+		return doubleArr;
+	}
+	
+	public static int[] doubleArr2IntArr(double[] arr){
+		int[] doubleArr = new int[arr.length];
+		for(int i=0;i<arr.length;i++)
+			doubleArr[i] = (int) arr[i];
+		return doubleArr;
+	}
+	
+	public static double timeSubtract2(String time1, String time2){
+		int hour1 = Integer.parseInt((String) time1.subSequence(0, 2));
+		int hour2 = Integer.parseInt((String) time2.subSequence(0, 2)); 
+		int min1 = Integer.parseInt((String) time1.subSequence(2, 4));
+		int min2 = Integer.parseInt((String) time2.subSequence(2, 4)); 
+		int sec1 = Integer.parseInt((String) time1.subSequence(4, 6));
+		int sec2 = Integer.parseInt((String) time2.subSequence(4, 6));
+		double msec1 = Double.parseDouble((String) time1.subSequence(6, time1.length()));
+		double msec2 = Double.parseDouble((String) time2.subSequence(6, time2.length()));
+
+		sec1 += 3600*hour1 + 60*min1;
+		sec2 += 3600*hour2 + 60*min2;
+		double timeDiff = sec2 - sec1 + msec2 - msec1;
+//		System.out.println(timeDiff);
+		return timeDiff;
+		}
+
+	
+	//input 12:13:14:.11111, .... , 12:14:14.111111
+	public static double[] startTimeFrZero(String[] timeStamps){
+		int firstTimeStampIndex = findFirstTimeStamp(timeStamps);
+		String firstTimeStamp = timeStamps[firstTimeStampIndex];
+		double[] timeFrZero = new double[timeStamps.length];
+		init(timeFrZero);
+		for(int i = firstTimeStampIndex; i<timeStamps.length ;i++){
+			if( !timeStamps[i].contains("x"))
+				//timeFrZero[i] = timeSubtract(firstTimeStamp,timeStamps[i]);
+			timeFrZero[i] = timeSubtract2(firstTimeStamp,timeStamps[i]);
+			else {
+				timeFrZero[i] = NOT_A_VALUE;
+			}
+		}
+		//Print.array(timeFrZero);
+		return timeFrZero;
+	}
+	
+	public static int findFirstTimeStamp(String[] timeStamp){
+
+		double[] timeStampDigits = timeConverter(timeStamp);
+		for(int i=0;i<timeStamp.length;i++){
+			if(timeStampDigits[i] != NOT_A_VALUE){
+				return i;
+			}
+		}
+		System.out.println("didnt find any timestamps");
+		return -1;
+	}
+	
+	
+
+	public static void removePotentialErrorsInSINR(int[] SINR){
+		int toHigh = 15;
+		double prevRealVal = 0;
+		for(int i=0;i<SINR.length;i++){
+			if(SINR[i] != NOT_A_VALUE){
+				prevRealVal = previousRealValue(SINR,i);
+				if(Math.abs(prevRealVal - SINR[i]) >= toHigh) SINR[i] = NOT_A_VALUE;
+			}
+		}
+	}
+	
+	private static double previousRealValue(int[] SINR,int i){
+		int aRealVal = SINR[i];
+		
+		
+		while(i>0){
+			i--;
+			if(SINR[i] != NOT_A_VALUE) return SINR[i];
+		}
+		return aRealVal;
+	}
+
+
+	public void tryToFixTimeStamp(String[] timeStamp, int[] dlMcs1,int[] dlMcs2, int[] ulMcs) {
+		for(int i=0;i<timeStamp.length;i++){
+			if((dlMcs1[i] == NOT_A_VALUE && dlMcs2[i] == NOT_A_VALUE && ulMcs[i] == NOT_A_VALUE) || SIB[i] == -1){
+//			if((ulMcs[i] == NOT_A_VALUE) || SIB[i] == -1){
+				timeStamp[i] = timeStamp[i] +"x";
+			}
+		}
+	}
+	
+	public void setHeader(String[] header) {
+		// TODO Auto-generated method stub
+		this.header = header;
+	}
+	
+	public void setSIB(int[] SIB) {
+		// TODO Auto-generated method stub
+		this.SIB = SIB;
+	}
+}
+
+

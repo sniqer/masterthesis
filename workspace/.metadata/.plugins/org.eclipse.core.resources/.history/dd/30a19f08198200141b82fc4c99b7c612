@@ -1,0 +1,13 @@
+package lteAnalyzer;
+
+public class CorruptedParameter extends Calculate{
+
+	public static void timeStamp(double[] timeStamps){
+		int wrong = 0;
+		double timeDiff = 0;
+		for(int i = 1;i<timeStamps.length;i++){
+			timeDiff = timeStamps[i] - BasicCalc.findClosestPrevTimestamp(timeStamps,i); 
+			if(timestamps[i]-B > )
+		}
+	}
+}

@@ -24,6 +24,7 @@ public class Calculate extends Main{
 	static final int MIN_SINR_VAL = -25;
 	static final int MAX_SINR_VAL = 45;
 	static final int NR_OF_SINR_VALS = 71; //-25 to 45
+	
 	private int[] SIB;
 	
 	
@@ -33,6 +34,7 @@ public double[] avgYValPerXVal(double[] Xvals,double[] Yvals,int minNrFoundXaxis
 		int counter_ind = 1;
 		
 		int counter = 0;
+		
 		double currentVal = 0;
 		int x;
 		
@@ -45,13 +47,13 @@ public double[] avgYValPerXVal(double[] Xvals,double[] Yvals,int minNrFoundXaxis
 		
 		for(int i=0;i < Yvals.length;i++){
 				//we've found legit tbs data, accumulate counter, tbs, bW and see if we have peak data rate.
-				if(SIB[i] != -1 && Yvals[i] != NOT_A_VALUE*1000 ){
+				if(SIB[i] != -1 && Yvals[i] != NOT_A_VALUE){
 					currentVal=currentVal+Yvals[i]; 
 					counter++;
 				}
-			if (SIB[i] != -1 && Xvals[i] != NOT_A_VALUE*1000){
+			if (SIB[i] != -1 && Xvals[i] != NOT_A_VALUE){
 				x = (int) Xvals[i];
-				System.out.println(x-smallestXValue);
+				//System.out.println(x-smallestXValue);
 				tempXvalPerYval[value_ind][x-smallestXValue] = tempXvalPerYval[value_ind][x-smallestXValue] + currentVal; //accumulated Xvals
 				tempXvalPerYval[counter_ind][x-smallestXValue] = tempXvalPerYval[counter_ind][x-smallestXValue] + counter;
 				counter=0;
