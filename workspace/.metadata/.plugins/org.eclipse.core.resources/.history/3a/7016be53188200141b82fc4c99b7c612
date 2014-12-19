@@ -1,0 +1,12 @@
+package lteAnalyzer;
+
+public class CorruptedParameter extends Calculate{
+
+	public static void timeStamp(double[] timeStamps){
+		int wrong = 0;
+		for(int i = 1;i<timestamps.length;i++){
+			double timeDiff = timestamps[i] - BasicCalc.Timestamps[i]; 
+			if(timestamps[i]-B > )
+		}
+	}
+}

@@ -14,7 +14,7 @@ import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
-public class Plot {
+public class Plot extends Calculate{
 
 	public static void YvalPerXval(double[] Xval,double[] Yval,String header,String Xaxis,String Yaxis, String text){
 
@@ -26,7 +26,8 @@ public class Plot {
 
 		//print2dArray(outputdata);
         for(int k=0;k<Xval.length;k++){
-    		avgVal.add(Xval[k],Yval[k]); //average data values is on row 0
+        	if (Xval[k] != NOT_A_VALUE && Yval[k] != NOT_A_VALUE)
+    			avgVal.add(Xval[k],Yval[k]); //average data values is on row 0
         }
 
         JFreeChart chart = ChartFactory.createXYLineChart(
@@ -50,24 +51,23 @@ public class Plot {
 	public static void normal(double[] outputdata, int smallestX,String header,String Xaxis,String Yaxis, String text){
 
 		XYSeries avgVal 	= new XYSeries(text);
-		XYSeries avgVal2 	= new XYSeries(text+"2");
+//		XYSeries avgVal2 	= new XYSeries(text+"2");
 		
 		XYSeriesCollection xyDataset = new XYSeriesCollection();
 		xyDataset.addSeries(avgVal);
-		xyDataset.addSeries(avgVal2);
+//		xyDataset.addSeries(avgVal2);
 
 
-		//print2dArray(outputdata);
         for(int k=0;k<outputdata.length;k++){
-        	if(outputdata[k] != 0){
+        	if(outputdata[k] != -1337){
         		avgVal.add(k+smallestX,outputdata[k]); //average data values is on row 0
-        		avgVal2.add(k+smallestX,outputdata[k]+(k*1000 % 5000)-3000); //average data values is on row 0
+//        		avgVal2.add(k+smallestX,outputdata[k]+(k*1000 % 5000)-3000); //average data values is on row 0
         	}        	
 
         }
         
-        OptimumAnalyzer.printOptimumSerieInGraph(xyDataset);
-        OptimumAnalyzer.printOptimumAtEachPoint(xyDataset,Xaxis,smallestX);
+//        OptimumAnalyzer.printOptimumSerieInGraph(xyDataset);
+//        OptimumAnalyzer.printOptimumAtEachPoint(xyDataset,Xaxis,smallestX);
         JFreeChart chart = ChartFactory.createXYLineChart(
                 header, 
                 Xaxis, 
@@ -79,21 +79,6 @@ public class Plot {
         final XYPlot plot = chart.getXYPlot();
         
         XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
-        
-        XYToolTipGenerator tt1 = new XYToolTipGenerator() {
-
-    	 public String generateToolTip(XYDataset dataset, int series, int item) {
-    		 StringBuffer sb = new StringBuffer();
-    		 Number x = dataset.getX(series, item);
-    		 Number y = dataset.getY(series, item);
-    		 String output = "x: " + x.doubleValue() + "\n y: " + y.doubleValue();
-    		 return output;
-	 		}
-    	 };
-    	 renderer.setToolTipGenerator(tt1);
-    	 renderer.setItemLabelGenerator(new StandardXYItemLabelGenerator());
-
-
         
         
         ChartFrame graphFrame = new ChartFrame("Normal plot", chart);

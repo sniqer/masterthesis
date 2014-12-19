@@ -11,8 +11,7 @@ public class Print {
 	public static void array(double[] stringArr){
 		System.out.println("printing doubles!!!!!!");
 		for(int i=0;i<stringArr.length;i++){
-			//if(stringArr[i] != -1337)
-				System.out.println(stringArr[i]);
+			System.out.println(stringArr[i]);
 		}
 	}
 	public static void array(double[] stringArr,int cols){
