@@ -1,31 +1,30 @@
 \select@language {english}
-\contentsline {chapter}{\numberline {1}Introduction}{4}
-\contentsline {section}{\numberline {1.1}Background}{5}
-\contentsline {section}{\numberline {1.2}Problem Formation}{5}
-\contentsline {section}{\numberline {1.3}Motivation}{6}
-\contentsline {section}{\numberline {1.4}Related Work}{6}
-\contentsline {section}{\numberline {1.5}Thesis Outline}{6}
-\contentsline {chapter}{\numberline {2}Theoretical Background}{8}
-\contentsline {section}{\numberline {2.1}Basic Overview of LTE}{8}
-\contentsline {section}{\numberline {2.2}Link Adaptation}{8}
-\contentsline {section}{\numberline {2.3}HARQ Algorithm}{9}
-\contentsline {section}{\numberline {2.4}Modulation}{9}
-\contentsline {section}{\numberline {2.5}Coding and Code Rate}{10}
-\contentsline {chapter}{\numberline {3}The Analysis Tool}{11}
-\contentsline {section}{\numberline {3.1}Motivation for choosing Logtool}{11}
-\contentsline {section}{\numberline {3.2}Logtool Plugin}{12}
-\contentsline {section}{\numberline {3.3}Description of the Tool}{12}
-\contentsline {subsection}{\numberline {3.3.1}Basic Graph View}{13}
-\contentsline {subsection}{\numberline {3.3.2}Multiple Graph View}{13}
-\contentsline {subsection}{\numberline {3.3.3}Advanced Graph View}{13}
-\contentsline {chapter}{\numberline {4}The Physical Layer of the LTE System}{14}
-\contentsline {chapter}{\numberline {5}The Analysis of BLER target}{15}
-\contentsline {section}{\numberline {5.1}Problem formulation of the analysist}{15}
-\contentsline {subsection}{\numberline {5.1.1}expected result}{15}
-\contentsline {subsection}{\numberline {5.1.2}Simulated results}{16}
-\contentsline {subsection}{\numberline {5.1.3}Summary}{16}
-\contentsline {section}{\numberline {5.2}Survey on analysis tool effectivity}{16}
-\contentsline {subsection}{\numberline {5.2.1}expected result}{16}
-\contentsline {subsection}{\numberline {5.2.2}Simulated results}{16}
-\contentsline {subsection}{\numberline {5.2.3}Summary}{16}
-\contentsline {chapter}{\numberline {6}Closing}{17}
+\contentsline {chapter}{\numberline {1}Introduction}{3}
+\contentsline {section}{\numberline {1.1}Motivation}{4}
+\contentsline {section}{\numberline {1.2}Background}{4}
+\contentsline {section}{\numberline {1.3}Goals and Methodology}{5}
+\contentsline {section}{\numberline {1.4}Thesis Outline}{5}
+\contentsline {chapter}{\numberline {2}Theoretical Background}{6}
+\contentsline {section}{\numberline {2.1}Basic Overview of LTE}{6}
+\contentsline {section}{\numberline {2.2}Link Adaptation}{6}
+\contentsline {section}{\numberline {2.3}HARQ Algorithm}{6}
+\contentsline {section}{\numberline {2.4}Modulation}{7}
+\contentsline {section}{\numberline {2.5}Coding and Code Rate}{7}
+\contentsline {chapter}{\numberline {3}The Analysis Tool}{8}
+\contentsline {section}{\numberline {3.1}Motivation for choosing Logtool}{8}
+\contentsline {section}{\numberline {3.2}Logtool Plugin}{9}
+\contentsline {section}{\numberline {3.3}Description of the Tool}{9}
+\contentsline {subsection}{\numberline {3.3.1}Basic Graph View}{10}
+\contentsline {subsection}{\numberline {3.3.2}Multiple Graph View}{10}
+\contentsline {subsection}{\numberline {3.3.3}Advanced Graph View}{10}
+\contentsline {chapter}{\numberline {4}The Physical Layer of the LTE System}{11}
+\contentsline {chapter}{\numberline {5}Analysis of Link Adaptation and HARQ}{12}
+\contentsline {section}{\numberline {5.1}The Analysis of Link Adaptation}{12}
+\contentsline {subsection}{\numberline {5.1.1}expected result}{13}
+\contentsline {subsection}{\numberline {5.1.2}Simulated results}{13}
+\contentsline {subsection}{\numberline {5.1.3}Summary}{13}
+\contentsline {section}{\numberline {5.2}The Analysis of HARQ}{13}
+\contentsline {subsection}{\numberline {5.2.1}Results}{13}
+\contentsline {subsection}{\numberline {5.2.2}Summary}{13}
+\contentsline {section}{\numberline {5.3}optional analysis}{13}
+\contentsline {chapter}{\numberline {6}Closing}{14}
