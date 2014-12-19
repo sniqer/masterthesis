@@ -51,10 +51,9 @@ public class CorruptedParameter extends Calculate{
 	}
 	
 	private static void felmeddelande(int wrong, String header_vector){
-		     if(wrong>100000) System.out.println("There seems to be a lot of errors in "+header_vector+", check your csv file");
+		     if(wrong>100000) System.out.println("there seems to be a lot of errors in "+header_vector+", check your csv file");
 		else if(wrong>1000) System.out.println("there seems to be some errors in "+header_vector+", check your csv file");
-		else if(wrong>10) System.out.println("There seems to be a few errors in "+header_vector+", check your csv file");
-		else System.out.println("There is "+wrong+" errors in "+header_vector);
+		else if(wrong>10) System.out.println("there seems to be a few errors in "+header_vector+", check your csv file");
 	}
 	
 	private static String firstIdSeen(String[] bbUeRef){

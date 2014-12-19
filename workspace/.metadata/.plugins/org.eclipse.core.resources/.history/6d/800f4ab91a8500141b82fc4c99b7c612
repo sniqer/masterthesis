@@ -160,8 +160,8 @@ public class Main {
 	calculate.setSIB(SIB);
 //		basicCalc.removePotentialErrorsInSINR(SINR);
 	int smallestXValue = (int) basicCalc.getSmallest(timeStampInDigits);
-	double[] realThroughputPerMs = basicCalc.tbs2throughput(ulTbsSum,ndf,timeStampInDigits,1000);
-	double[][] test2 = getValuesOverTime(realThroughputPerMs,timeStampInDigits,1000);
+	double[] realThroughputPerMs = basicCalc.tbs2throughput(ulTbsSum,ndf,timeStampInDigits,10);
+	double[][] test2 = getValuesOverTime(realThroughputPerMs,timeStampInDigits,10);
 //		double[] test  = calculate.avgYValPerXVal(timeStampInDigits,realThroughputPerMs,1,0);
 //		Print.array(realThroughputPerMs);
 	

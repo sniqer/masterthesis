@@ -1,0 +1,45 @@
+\select@language {english}
+\contentsline {chapter}{\numberline {1}Introduction}{3}
+\contentsline {section}{\numberline {1.1}Background}{3}
+\contentsline {section}{\numberline {1.2}Problem Formation}{4}
+\contentsline {section}{\numberline {1.3}Our task}{4}
+\contentsline {section}{\numberline {1.4}Related Work}{5}
+\contentsline {section}{\numberline {1.5}Thesis Outline}{5}
+\contentsline {chapter}{\numberline {2}Theoretical Background}{6}
+\contentsline {section}{\numberline {2.1}Basic Overview of LTE air interface}{6}
+\contentsline {section}{\numberline {2.2}LTE and e-UTRA}{6}
+\contentsline {section}{\numberline {2.3}The Physical Layer of the LTE System}{6}
+\contentsline {section}{\numberline {2.4}Layer1}{7}
+\contentsline {section}{\numberline {2.5}Layer2}{7}
+\contentsline {section}{\numberline {2.6}Link Adaptation}{7}
+\contentsline {section}{\numberline {2.7}HARQ Algorithm}{7}
+\contentsline {section}{\numberline {2.8}Modulation}{8}
+\contentsline {section}{\numberline {2.9}Coding and Code Rate}{8}
+\contentsline {section}{\numberline {2.10}MCS}{9}
+\contentsline {section}{\numberline {2.11}BLER target}{9}
+\contentsline {section}{\numberline {2.12}SINR}{9}
+\contentsline {section}{\numberline {2.13}CQI}{9}
+\contentsline {section}{\numberline {2.14}MAC layer}{9}
+\contentsline {chapter}{\numberline {3}The Analysis Tool}{10}
+\contentsline {section}{\numberline {3.1}Motivation for choosing Logtool}{10}
+\contentsline {section}{\numberline {3.2}Logtool Plugin}{11}
+\contentsline {section}{\numberline {3.3}Description of the Tool}{11}
+\contentsline {subsection}{\numberline {3.3.1}Basic Graph View}{12}
+\contentsline {subsection}{\numberline {3.3.2}Multiple Graph View}{12}
+\contentsline {subsection}{\numberline {3.3.3}Advanced Graph View}{12}
+\contentsline {chapter}{\numberline {4}The Analysis of BLER target}{13}
+\contentsline {section}{\numberline {4.1}The reason for the analysis}{13}
+\contentsline {section}{\numberline {4.2}explanation the analysis}{13}
+\contentsline {section}{\numberline {4.3}How we collected data}{14}
+\contentsline {subsection}{\numberline {4.3.1}expected result}{14}
+\contentsline {subsubsection}{Thoughput over time}{14}
+\contentsline {subsubsection}{Throughput over SINR}{14}
+\contentsline {subsection}{\numberline {4.3.2}Simulated results}{14}
+\contentsline {subsection}{\numberline {4.3.3}Summary}{15}
+\contentsline {section}{\numberline {4.4}Testing of our tool}{15}
+\contentsline {subsection}{\numberline {4.4.1}selection of measurements}{15}
+\contentsline {subsection}{\numberline {4.4.2}measurements result}{15}
+\contentsline {chapter}{\numberline {5}Result}{16}
+\contentsline {chapter}{\numberline {6}Conclusion}{17}
+\contentsline {section}{\numberline {6.1}Things we didn't had time to do...}{17}
+\contentsline {section}{\numberline {6.2}Future work}{17}
