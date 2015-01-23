@@ -1,45 +1,69 @@
 \select@language {english}
 \contentsline {chapter}{\numberline {1}Introduction}{3}
 \contentsline {section}{\numberline {1.1}Background}{3}
-\contentsline {section}{\numberline {1.2}Problem Formation}{4}
-\contentsline {section}{\numberline {1.3}Our task}{4}
-\contentsline {section}{\numberline {1.4}Related Work}{5}
-\contentsline {section}{\numberline {1.5}Thesis Outline}{5}
+\contentsline {section}{\numberline {1.2}Problem Formulation}{4}
+\contentsline {section}{\numberline {1.3}Related Work}{4}
+\contentsline {section}{\numberline {1.4}Thesis Outline}{4}
 \contentsline {chapter}{\numberline {2}Theoretical Background}{6}
-\contentsline {section}{\numberline {2.1}Basic Overview of LTE air interface}{6}
-\contentsline {section}{\numberline {2.2}LTE and e-UTRA}{6}
-\contentsline {section}{\numberline {2.3}The Physical Layer of the LTE System}{6}
-\contentsline {section}{\numberline {2.4}Layer1}{7}
-\contentsline {section}{\numberline {2.5}Layer2}{7}
-\contentsline {section}{\numberline {2.6}Link Adaptation}{7}
-\contentsline {section}{\numberline {2.7}HARQ Algorithm}{7}
-\contentsline {section}{\numberline {2.8}Modulation}{8}
-\contentsline {section}{\numberline {2.9}Coding and Code Rate}{8}
-\contentsline {section}{\numberline {2.10}MCS}{9}
-\contentsline {section}{\numberline {2.11}BLER target}{9}
-\contentsline {section}{\numberline {2.12}SINR}{9}
-\contentsline {section}{\numberline {2.13}CQI}{9}
-\contentsline {section}{\numberline {2.14}MAC layer}{9}
-\contentsline {chapter}{\numberline {3}The Analysis Tool}{10}
-\contentsline {section}{\numberline {3.1}Motivation for choosing Logtool}{10}
-\contentsline {section}{\numberline {3.2}Logtool Plugin}{11}
-\contentsline {section}{\numberline {3.3}Description of the Tool}{11}
-\contentsline {subsection}{\numberline {3.3.1}Basic Graph View}{12}
-\contentsline {subsection}{\numberline {3.3.2}Multiple Graph View}{12}
-\contentsline {subsection}{\numberline {3.3.3}Advanced Graph View}{12}
-\contentsline {chapter}{\numberline {4}The Analysis of BLER target}{13}
-\contentsline {section}{\numberline {4.1}The reason for the analysis}{13}
-\contentsline {section}{\numberline {4.2}explanation the analysis}{13}
-\contentsline {section}{\numberline {4.3}How we collected data}{14}
-\contentsline {subsection}{\numberline {4.3.1}expected result}{14}
-\contentsline {subsubsection}{Thoughput over time}{14}
-\contentsline {subsubsection}{Throughput over SINR}{14}
-\contentsline {subsection}{\numberline {4.3.2}Simulated results}{14}
-\contentsline {subsection}{\numberline {4.3.3}Summary}{15}
-\contentsline {section}{\numberline {4.4}Testing of our tool}{15}
-\contentsline {subsection}{\numberline {4.4.1}selection of measurements}{15}
-\contentsline {subsection}{\numberline {4.4.2}measurements result}{15}
-\contentsline {chapter}{\numberline {5}Result}{16}
-\contentsline {chapter}{\numberline {6}Conclusion}{17}
-\contentsline {section}{\numberline {6.1}Things we didn't had time to do...}{17}
-\contentsline {section}{\numberline {6.2}Future work}{17}
+\contentsline {section}{\numberline {2.1}LTE and eUTRAN}{6}
+\contentsline {section}{\numberline {2.2}The physical layer of the LTE System}{7}
+\contentsline {section}{\numberline {2.3}Link Adaptation}{7}
+\contentsline {subsection}{\numberline {2.3.1}How it works}{8}
+\contentsline {subsection}{\numberline {2.3.2}Modulation}{8}
+\contentsline {subsection}{\numberline {2.3.3}Coding and Code Rate and FEC}{9}
+\contentsline {subsection}{\numberline {2.3.4}MCS}{9}
+\contentsline {subsection}{\numberline {2.3.5}BLER and BLER target}{9}
+\contentsline {section}{\numberline {2.4}HARQ Algorithm}{10}
+\contentsline {section}{\numberline {2.5}Forward error correction}{10}
+\contentsline {section}{\numberline {2.6}SINR}{11}
+\contentsline {section}{\numberline {2.7}CQI}{11}
+\contentsline {section}{\numberline {2.8}OFDMA}{11}
+\contentsline {section}{\numberline {2.9}TBS}{11}
+\contentsline {chapter}{\numberline {3}Method}{12}
+\contentsline {section}{\numberline {3.1}Our suggested solution}{12}
+\contentsline {section}{\numberline {3.2}How we collected information}{13}
+\contentsline {section}{\numberline {3.3}Literature}{13}
+\contentsline {section}{\numberline {3.4}testing and validating our tool}{14}
+\contentsline {subsection}{\numberline {3.4.1}Test analysis on BLER target}{14}
+\contentsline {section}{\numberline {3.5}Validating the tool}{14}
+\contentsline {subsection}{\numberline {3.5.1}Survey}{15}
+\contentsline {section}{\numberline {3.6}measurements result}{15}
+\contentsline {chapter}{\numberline {4}The Analysis Tool}{16}
+\contentsline {section}{\numberline {4.1}Motivation for choosing Logtool}{16}
+\contentsline {section}{\numberline {4.2}Logtool Plugin}{17}
+\contentsline {section}{\numberline {4.3}Description of the Tool}{18}
+\contentsline {subsection}{\numberline {4.3.1}BasicView}{18}
+\contentsline {subsection}{\numberline {4.3.2}Multiple Graph View}{19}
+\contentsline {subsection}{\numberline {4.3.3}AdvancedView}{20}
+\contentsline {subsubsection}{1 - Load / Save}{21}
+\contentsline {subsubsection}{2 - Files In Use}{21}
+\contentsline {subsubsection}{3 - Axis Parameters}{21}
+\contentsline {subsubsection}{4 - Graph Generator}{22}
+\contentsline {subsubsection}{5 - Graph Remover}{22}
+\contentsline {subsubsection}{Time Axis Compresser}{23}
+\contentsline {chapter}{\numberline {5}The test analysis of BLER target}{25}
+\contentsline {section}{\numberline {5.1}Motivation}{25}
+\contentsline {section}{\numberline {5.2}explanation the BLER analysis}{25}
+\contentsline {section}{\numberline {5.3}The simulated channel and channel model}{26}
+\contentsline {section}{\numberline {5.4}How we collected data}{26}
+\contentsline {section}{\numberline {5.5}How we read the data}{27}
+\contentsline {section}{\numberline {5.6}The parameter data the ought to be analyzed}{27}
+\contentsline {subsection}{\numberline {5.6.1}Thoughput over time}{27}
+\contentsline {subsection}{\numberline {5.6.2}Throughput over SINR}{27}
+\contentsline {section}{\numberline {5.7}Parameters that could validate the graph data}{27}
+\contentsline {subsection}{\numberline {5.7.1}BLER and MCS over time}{28}
+\contentsline {subsection}{\numberline {5.7.2}Bler over SINR}{28}
+\contentsline {subsection}{\numberline {5.7.3}MCS over time}{28}
+\contentsline {subsection}{\numberline {5.7.4}MCS over SINR}{28}
+\contentsline {section}{\numberline {5.8}Simulated results}{29}
+\contentsline {subsection}{\numberline {5.8.1}Throughput over time}{29}
+\contentsline {subsection}{\numberline {5.8.2}Throughput over SINR}{30}
+\contentsline {subsection}{\numberline {5.8.3}BLER and MCS over time}{31}
+\contentsline {subsection}{\numberline {5.8.4}BLER over SINR}{32}
+\contentsline {subsection}{\numberline {5.8.5}MCS over time}{33}
+\contentsline {subsection}{\numberline {5.8.6}MCS over SINR}{34}
+\contentsline {section}{\numberline {5.9}Conclusion}{34}
+\contentsline {chapter}{\numberline {6}Future work}{36}
+\contentsline {section}{\numberline {6.1}Unimplemented Work}{36}
+\contentsline {subsection}{\numberline {6.1.1}Potential new features}{37}
+\contentsline {chapter}{\numberline {7}Conclusion}{38}

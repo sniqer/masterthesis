@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.9.19)  19 DEC 2014 09:22
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.10.17)  23 JAN 2015 15:11
 entering extended mode
 **master*thesis.tex
-("C:\Users\epauned\Documents\GitHub\masterthesis\endreport\master thesis.tex"
+("C:\Users\erazlin\git\masterthesis\endreport\master thesis.tex"
 LaTeX2e <2011/06/27>
 Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, ar
 abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
@@ -13,9 +13,9 @@ german-x-2013-05-26, nynorsk, oriya, panjabi, pinyin, polish, portuguese, roman
 ian, russian, sanskrit, serbian, slovak, slovenian, spanish, swedish, swissgerm
 an, tamil, telugu, turkish, turkmen, ukenglish, ukrainian, uppersorbian, usengl
 ishmax, welsh, loaded.
-(C:\Users\epauned\Documents\GitHub\masterthesis\endreport\idamasterthesis.cls
+(C:\Users\erazlin\git\masterthesis\endreport\idamasterthesis.cls
 Document Class: idamasterthesis 2011/04/19 LaTeX idamasterthesis class
-(C:\Users\epauned\Documents\GitHub\masterthesis\endreport\idathesis.cls
+(C:\Users\erazlin\git\masterthesis\endreport\idathesis.cls
 Document Class: idathesis 2005/11/10 LaTeX idathesis class
 ("C:\Program Files (x86)\MikTex\tex\latex\base\inputenc.sty"
 Package: inputenc 2008/03/30 v1.1d Input encoding file
@@ -25,12 +25,12 @@ Package: inputenc 2008/03/30 v1.1d Input encoding file
 ("C:\Program Files (x86)\MikTex\tex\latex\base\latin1.def"
 File: latin1.def 2008/03/30 v1.1d Input encoding file
 ))
-(C:\Users\epauned\Documents\GitHub\masterthesis\endreport\chngpage.sty
+(C:\Users\erazlin\git\masterthesis\endreport\chngpage.sty
 Package: chngpage 2003/08/10 v1.2 change page layout
 \c@cp@cnt=\count79
 \c@cp@tempcnt=\count80
 )
-(C:\Users\epauned\Documents\GitHub\masterthesis\endreport\fancyhdr.sty
+(C:\Users\erazlin\git\masterthesis\endreport\fancyhdr.sty
 \fancy@headwidth=\skip41
 \f@ncyO@elh=\skip42
 \f@ncyO@erh=\skip43
@@ -150,7 +150,7 @@ Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 \Gm@dimlist=\toks18
 
 ("C:\Program Files (x86)\MikTex\tex\latex\geometry\geometry.cfg"))
-(C:\Users\epauned\Documents\GitHub\masterthesis\endreport\crop.sty
+(C:\Users\erazlin\git\masterthesis\endreport\crop.sty
 Package: crop 2002/05/14 v1.7 cropmarks (mf)
 \stockwidth=\dimen114
 \stockheight=\dimen115
@@ -219,33 +219,28 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 567.
 LaTeX Info: Redefining \[ on input line 2665.
 LaTeX Info: Redefining \] on input line 2666.
 )
-No file master*thesis.aux.
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 35.
-LaTeX Font Info:    ... okay on input line 35.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 35.
-LaTeX Font Info:    ... okay on input line 35.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 35.
-LaTeX Font Info:    ... okay on input line 35.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 35.
-LaTeX Font Info:    ... okay on input line 35.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 35.
-LaTeX Font Info:    ... okay on input line 35.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 35.
-LaTeX Font Info:    ... okay on input line 35.
-("C:\Program Files (x86)\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
-[Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count110
-\scratchdimen=\dimen125
-\scratchbox=\box28
-\nofMPsegments=\count111
-\nofMParguments=\count112
-\everyMPshowfont=\toks24
-\MPscratchCnt=\count113
-\MPscratchDim=\dimen126
-\MPnumerator=\count114
-\makeMPintoPDFobject=\count115
-\everyMPtoPDFconversion=\toks25
+("C:\Program Files (x86)\MikTex\tex\latex\float\float.sty"
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count110
+\float@exts=\toks24
+\float@box=\box28
+\@float@everytoks=\toks25
+\@floatcapt=\box29
 )
+("C:\Users\erazlin\git\masterthesis\endreport\master thesis.aux")
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -280,7 +275,7 @@ LaTeX Font Info:    ... okay on input line 35.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-[-1{C:/Users/epauned/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}
+[-1{C:/Users/erazlin/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}
 
 ]
 [0
@@ -288,247 +283,457 @@ LaTeX Font Info:    ... okay on input line 35.
 ] [1] [2
 
 ]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 36.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 35.
  ("C:\Program Files (x86)\MikTex\tex\latex\base\omscmr.fd"
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 36.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 35.
  [3
 
 ]
 [4
 
-]
-No file master*thesis.toc.
+] ("C:\Users\erazlin\git\masterthesis\endreport\master thesis.toc"
+LaTeX Font Info:    Try loading font information for U+msa on input line 3.
+
+("C:\Program Files (x86)\MikTex\tex\latex\amsfonts\umsa.fd"
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 3.
+
+("C:\Program Files (x86)\MikTex\tex\latex\amsfonts\umsb.fd"
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+) [5
+
+
+])
 \tf@toc=\write3
-[5
+ [6] [1
 
 
-] [6
-
-] [1
-
-] [2
+]
+[2
 
 ]
 Chapter 1.
 [3
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 74--75
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 77--79
+Underfull \hbox (badness 10000) in paragraph at lines 91--92
 
  []
 
 [4] [5]
 Chapter 2.
-[6
+<eUtran_[36300-c20].png, id=49, 259.7203pt x 210.7875pt>
+File: eUtran_[36300-c20].png Graphic file (type png)
 
-]
-Overfull \hbox (17.9282pt too wide) in paragraph at lines 168--173
-[]\OT1/cmr/m/n/10 Since there will be a de-lay be-tween when data is trans-mit-
-ted and an ACK/NACK
- []
+<use eUtran_[36300-c20].png>
+Package pdftex.def Info: eUtran_[36300-c20].png used on input line 149.
+(pdftex.def)             Requested size: 328.62788pt x 266.71295pt.
+ [6
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 168--173
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 168--173
+] [7 <C:/Users/erazlin/git/masterthesis/endreport/eUtran_[36300-c20].png>]
+Underfull \hbox (badness 10000) in paragraph at lines 177--183
 
  []
 
-[7]
-LaTeX Font Info:    Try loading font information for U+msa on input line 190.
- ("C:\Program Files (x86)\MikTex\tex\latex\amsfonts\umsa.fd"
-File: umsa.fd 2013/01/14 v3.01 AMS symbols A
-)
-LaTeX Font Info:    Try loading font information for U+msb on input line 190.
-
-("C:\Program Files (x86)\MikTex\tex\latex\amsfonts\umsb.fd"
-File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
+[8]
 Underfull \hbox (badness 10000) in paragraph at lines 190--193
 
  []
 
-[8] [9]
+
+Overfull \hbox (0.28746pt too wide) in paragraph at lines 202--203
+\OT1/cmr/m/n/10 [source]. It is de-fined as $[]$ [source]. 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 202--203
+
+ []
+
+[9]
+Underfull \hbox (badness 10000) in paragraph at lines 222--227
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 222--227
+
+ []
+
+[10] [11]
 Chapter 3.
-[10
+
+Underfull \hbox (badness 10000) in paragraph at lines 267--270
+
+ []
+
+[12
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 263--270
+Underfull \hbox (badness 10000) in paragraph at lines 291--292
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 263--270
+Underfull \hbox (badness 10000) in paragraph at lines 297--298
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 263--270
+Underfull \hbox (badness 10000) in paragraph at lines 299--300
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 263--270
-
- []
-
-[11]
-Underfull \hbox (badness 10000) in paragraph at lines 272--279
+[13]
+Underfull \hbox (badness 10000) in paragraph at lines 329--330
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 272--279
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 272--279
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 272--279
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 281--288
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 281--288
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 281--288
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 281--288
-
- []
-
-[12]
+[14] [15]
 Chapter 4.
-[13
 
-] [14] [15]
-Chapter 5.
+Underfull \hbox (badness 10000) in paragraph at lines 359--360
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 362--363
+
+ []
+
 [16
 
-]
-Chapter 6.
-[17
+] [17] <BasicView.png, id=89, 1008.76875pt x 728.7225pt>
+File: BasicView.png Graphic file (type png)
+
+<use BasicView.png>
+Package pdftex.def Info: BasicView.png used on input line 397.
+(pdftex.def)             Requested size: 328.62788pt x 237.3991pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 402--403
+
+ []
+
+[18 <C:/Users/erazlin/git/masterthesis/endreport/BasicView.png>]
+Overfull \hbox (10.73392pt too wide) in paragraph at lines 404--405
+[]\OT1/cmr/m/n/10 The graphs you can look at is Through-put/SINR, Through-put/C
+QI, PRB/CQI
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 404--405
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 406--407
+
+ []
+
+<CombinedGraphsView.png, id=93, 1445.4pt x 813.0375pt>
+File: CombinedGraphsView.png Graphic file (type png)
+
+<use CombinedGraphsView.png>
+Package pdftex.def Info: CombinedGraphsView.png used on input line 414.
+(pdftex.def)             Requested size: 328.62788pt x 184.84846pt.
+ [19 <C:/Users/erazlin/git/masterthesis/endreport/CombinedGraphsView.png>] <Adv
+ancedView.png, id=97, 1007.26312pt x 763.35187pt>
+File: AdvancedView.png Graphic file (type png)
+
+<use AdvancedView.png>
+Package pdftex.def Info: AdvancedView.png used on input line 427.
+(pdftex.def)             Requested size: 328.62788pt x 249.04153pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 432--433
+
+ []
+
+[20 <C:/Users/erazlin/git/masterthesis/endreport/AdvancedView.png>]
+<AdvancedView_LoadedFiles.png, id=103, 155.83218pt x 225.84375pt>
+File: AdvancedView_LoadedFiles.png Graphic file (type png)
+
+<use AdvancedView_LoadedFiles.png>
+Package pdftex.def Info: AdvancedView_LoadedFiles.png used on input line 444.
+(pdftex.def)             Requested size: 109.08177pt x 158.08954pt.
+
+<Axis_Parameters.png, id=104, 277.78781pt x 300.3722pt>
+File: Axis_Parameters.png Graphic file (type png)
+
+<use Axis_Parameters.png>
+Package pdftex.def Info: Axis_Parameters.png used on input line 453.
+(pdftex.def)             Requested size: 194.45012pt x 210.2591pt.
+ [21 <C:/Users/erazlin/git/masterthesis/endreport/AdvancedView_LoadedFiles.png>
+] <Generate_Graph.png, id=108, 84.315pt x 32.37094pt>
+File: Generate_Graph.png Graphic file (type png)
+
+<use Generate_Graph.png>
+Package pdftex.def Info: Generate_Graph.png used on input line 462.
+(pdftex.def)             Requested size: 59.02008pt x 22.65948pt.
+ <Clear_Graph.png, id=109, 60.225pt x 25.59563pt>
+File: Clear_Graph.png Graphic file (type png)
+
+<use Clear_Graph.png>
+Package pdftex.def Info: Clear_Graph.png used on input line 471.
+(pdftex.def)             Requested size: 42.1572pt x 17.9168pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 477--478
+
+ []
+
+[22 <C:/Users/erazlin/git/masterthesis/endreport/Axis_Parameters.png> <C:/Users
+/erazlin/git/masterthesis/endreport/Generate_Graph.png> <C:/Users/erazlin/git/m
+asterthesis/endreport/Clear_Graph.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 479--480
+
+ []
+
+<AdvancedView_TimeConstant_Marked.png, id=113, 423.83344pt x 36.88782pt>
+File: AdvancedView_TimeConstant_Marked.png Graphic file (type png)
+
+<use AdvancedView_TimeConstant_Marked.png>
+Package pdftex.def Info: AdvancedView_TimeConstant_Marked.png used on input lin
+e 483.
+(pdftex.def)             Requested size: 296.68137pt x 25.82127pt.
+ [23 <C:/Users/erazlin/git/masterthesis/endreport/AdvancedView_TimeConstant_Mar
+ked.png>]
+<AdvancedView_bler_over_100.png, id=118, 1097.09875pt x 811.03pt>
+File: AdvancedView_bler_over_100.png Graphic file (type png)
+
+<use AdvancedView_bler_over_100.png>
+Package pdftex.def Info: AdvancedView_bler_over_100.png used on input line 493.
+
+(pdftex.def)             Requested size: 274.27402pt x 202.757pt.
+
+<AdvancedView_bler_over_2000.png, id=119, 1097.09875pt x 811.03pt>
+File: AdvancedView_bler_over_2000.png Graphic file (type png)
+
+<use AdvancedView_bler_over_2000.png>
+Package pdftex.def Info: AdvancedView_bler_over_2000.png used on input line 500
+.
+(pdftex.def)             Requested size: 274.27402pt x 202.757pt.
+ [24 <C:/Users/erazlin/git/masterthesis/endreport/AdvancedView_bler_over_100.pn
+g> <C:/Users/erazlin/git/masterthesis/endreport/AdvancedView_bler_over_2000.png
+>]
+Chapter 5.
+
+Underfull \hbox (badness 10000) in paragraph at lines 540--544
+
+ []
+
+[25
 
 ]
+Underfull \hbox (badness 10000) in paragraph at lines 568--570
+
+ []
+
+[26]
+Underfull \hbox (badness 10000) in paragraph at lines 574--575
+
+ []
+
+[27] [28] <ulThroughputOverTime.png, id=138, 1097.09875pt x 811.03pt>
+File: ulThroughputOverTime.png Graphic file (type png)
+
+<use ulThroughputOverTime.png>
+Package pdftex.def Info: ulThroughputOverTime.png used on input line 625.
+(pdftex.def)             Requested size: 328.62788pt x 242.92723pt.
+ [29 <C:/Users/erazlin/git/masterthesis/endreport/ulThroughputOverTime.png>]
+<ulThroughputOverSINR.png, id=144, 1097.09875pt x 811.03pt>
+File: ulThroughputOverSINR.png Graphic file (type png)
+
+<use ulThroughputOverSINR.png>
+Package pdftex.def Info: ulThroughputOverSINR.png used on input line 636.
+(pdftex.def)             Requested size: 328.62788pt x 242.92723pt.
+ [30 <C:/Users/erazlin/git/masterthesis/endreport/ulThroughputOverSINR.png>]
+<ulBLER_And_MCS_OverTime.png, id=149, 1097.09875pt x 811.03pt>
+File: ulBLER_And_MCS_OverTime.png Graphic file (type png)
+
+<use ulBLER_And_MCS_OverTime.png>
+Package pdftex.def Info: ulBLER_And_MCS_OverTime.png used on input line 650.
+(pdftex.def)             Requested size: 328.62788pt x 242.92723pt.
+ [31 <C:/Users/erazlin/git/masterthesis/endreport/ulBLER_And_MCS_OverTime.png>]
+
+<ulBLEROverSINR.png, id=154, 1097.09875pt x 811.03pt>
+File: ulBLEROverSINR.png Graphic file (type png)
+ <use ulBLEROverSINR.png>
+Package pdftex.def Info: ulBLEROverSINR.png used on input line 660.
+(pdftex.def)             Requested size: 328.62788pt x 242.92723pt.
+
+[32 <C:/Users/erazlin/git/masterthesis/endreport/ulBLEROverSINR.png>]
+<ulMCSOverTime.png, id=159, 1097.09875pt x 811.03pt>
+File: ulMCSOverTime.png Graphic file (type png)
+ <use ulMCSOverTime.png>
+Package pdftex.def Info: ulMCSOverTime.png used on input line 670.
+(pdftex.def)             Requested size: 328.62788pt x 242.92723pt.
+
+[33 <C:/Users/erazlin/git/masterthesis/endreport/ulMCSOverTime.png>]
+<ulMCSOverSINR.png, id=164, 1097.09875pt x 811.03pt>
+File: ulMCSOverSINR.png Graphic file (type png)
+ <use ulMCSOverSINR.png>
+Package pdftex.def Info: ulMCSOverSINR.png used on input line 682.
+(pdftex.def)             Requested size: 328.62788pt x 242.92723pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 691--692
+
+ []
+
+[34 <C:/Users/erazlin/git/masterthesis/endreport/ulMCSOverSINR.png>] [35]
+Chapter 6.
+
+Underfull \hbox (badness 10000) in paragraph at lines 711--712
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 713--714
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 715--716
+
+ []
+
+[36
+
+] [37]
+Chapter 7.
+[38
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 751--752
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 753--754
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 755--756
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 757--758
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 759--760
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 761--762
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 763--764
+
+ []
+
 \@filenumb=\write4
- [18] <linkuniv_en_vert_blk.pdf, id=91, 240.60088pt x 172.5386pt>
+[39
+
+] [40
+
+] <linkuniv_en_vert_blk.pdf, id=188, 240.60088pt x 172.5386pt>
 File: linkuniv_en_vert_blk.pdf Graphic file (type pdf)
 
 <use linkuniv_en_vert_blk.pdf>
-Package pdftex.def Info: linkuniv_en_vert_blk.pdf used on input line 417.
+Package pdftex.def Info: linkuniv_en_vert_blk.pdf used on input line 767.
 (pdftex.def)             Requested size: 56.9055pt x 40.8072pt.
 
-Overfull \hbox (261.76398pt too wide) detected at line 417
+Overfull \hbox (261.76398pt too wide) detected at line 767
 []
  []
 
 
-Overfull \hbox (358.50284pt too wide) detected at line 417
+Overfull \hbox (358.50284pt too wide) detected at line 767
 []
  []
 
 
-Overfull \hbox (91.04834pt too wide) detected at line 417
+Overfull \hbox (91.04834pt too wide) detected at line 767
 []
  []
 
 
-Overfull \hbox (187.7872pt too wide) detected at line 417
+Overfull \hbox (187.7872pt too wide) detected at line 767
 []
  []
 
 
-Overfull \hbox (358.50284pt too wide) detected at line 417
+Overfull \hbox (358.50284pt too wide) detected at line 767
 []
  []
 
 
-Overfull \hbox (187.7872pt too wide) detected at line 417
+Overfull \hbox (187.7872pt too wide) detected at line 767
 []
  []
 
 
-Overfull \hbox (358.50284pt too wide) detected at line 417
+Overfull \hbox (358.50284pt too wide) detected at line 767
 []
  []
 
 
-Overfull \hbox (358.50284pt too wide) detected at line 417
+Overfull \hbox (358.50284pt too wide) detected at line 767
 []
  []
 
 
-Overfull \hbox (358.50284pt too wide) detected at line 417
+Overfull \hbox (358.50284pt too wide) detected at line 767
 []
  []
 
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <9> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 417.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 767.
 
-Overfull \hbox (29.87495pt too wide) in paragraph at lines 417--417
+Overfull \hbox (29.87495pt too wide) in paragraph at lines 767--767
 [][]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 417--417
+Underfull \hbox (badness 10000) in paragraph at lines 767--767
 
  []
 
-[19
-
- <C:/Users/epauned/Documents/GitHub/masterthesis/endreport/linkuniv_en_vert_blk
-.pdf>]
-("C:\Users\epauned\Documents\GitHub\masterthesis\endreport\master thesis.aux") 
-) 
+[41 <C:/Users/erazlin/git/masterthesis/endreport/linkuniv_en_vert_blk.pdf>]
+("C:\Users\erazlin\git\masterthesis\endreport\master thesis.aux") ) 
 Here is how much of TeX's memory you used:
- 3113 strings out of 493921
- 40788 string characters out of 3146474
- 115502 words of memory out of 3000000
- 6357 multiletter control sequences out of 15000+200000
+ 2964 strings out of 493921
+ 39858 string characters out of 3146473
+ 114220 words of memory out of 3000000
+ 6185 multiletter control sequences out of 15000+200000
  12440 words of font info for 47 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 40i,10n,47p,1307b,263s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program Files (x86)/MikTex/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/P
-rogram Files (x86)/MikTex/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program
- Files (x86)/MikTex/fonts/type1/public/amsfonts/cm/cmbx7.pfb><C:/Program Files 
-(x86)/MikTex/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files (x86)/
-MikTex/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files (x86)/MikTex/
-fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files (x86)/MikTex/fonts/t
-ype1/public/amsfonts/cm/cmr7.pfb><C:/Program Files (x86)/MikTex/fonts/type1/pub
-lic/amsfonts/cm/cmr9.pfb><C:/Program Files (x86)/MikTex/fonts/type1/public/amsf
-onts/cm/cmsl10.pfb><C:/Program Files (x86)/MikTex/fonts/type1/public/amsfonts/c
-m/cmsy10.pfb><C:/Program Files (x86)/MikTex/fonts/type1/public/amsfonts/cm/cmsy
-7.pfb><C:/Program Files (x86)/MikTex/fonts/type1/public/amsfonts/cm/cmsy9.pfb><
-C:/Program Files (x86)/MikTex/fonts/type1/public/amsfonts/symbols/msam7.pfb>
-Output written on "master thesis.pdf" (27 pages, 3364629 bytes).
+ 40i,11n,47p,1330b,309s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Program 
+Files (x86)/MikTex/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Program Files 
+(x86)/MikTex/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Files (x86)/
+MikTex/fonts/type1/public/amsfonts/cm/cmbx7.pfb><C:/Program Files (x86)/MikTex/
+fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files (x86)/MikTex/fonts/
+type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files (x86)/MikTex/fonts/type1/p
+ublic/amsfonts/cm/cmr12.pfb><C:/Program Files (x86)/MikTex/fonts/type1/public/a
+msfonts/cm/cmr7.pfb><C:/Program Files (x86)/MikTex/fonts/type1/public/amsfonts/
+cm/cmr9.pfb><C:/Program Files (x86)/MikTex/fonts/type1/public/amsfonts/cm/cmsl1
+0.pfb><C:/Program Files (x86)/MikTex/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+<C:/Program Files (x86)/MikTex/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Pro
+gram Files (x86)/MikTex/fonts/type1/public/amsfonts/cm/cmsy9.pfb><C:/Program Fi
+les (x86)/MikTex/fonts/type1/public/amsfonts/symbols/msam7.pfb>
+Output written on "master thesis.pdf" (49 pages, 4772081 bytes).
 PDF statistics:
- 188 PDF objects out of 1000 (max. 8388607)
+ 287 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 91 words of extra memory for PDF output out of 10000 (max. 10000000)
 
